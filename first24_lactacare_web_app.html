@@ -581,111 +581,50 @@
           <span class="text-[10px] px-2 py-0.5 bg-rose-100 text-rose-700 font-semibold rounded-full">แนะนำใน 24 ชม. แรก</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
-          <!-- Step 1 -->
-          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row gap-3 items-start justify-between">
-            <div class="flex gap-3 items-start flex-1">
-              <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">1</span>
-              <div class="space-y-1">
-                <p class="font-bold text-slate-800">วางนิ้วรูปตัว C (ห่างลานนม 2.5 - 3 ซม.)</p>
-                <p class="text-[11px] text-slate-600 leading-relaxed">ล้างมือให้สะอาด ใช้นิ้วโป้งอยู่ด้านบน นิ้วชี้และนิ้วกลางรองรับด้านล่าง ห่างจากฐานหัวนมประมาณ 1 นิ้วมือ</p>
-                <div class="pt-1 flex items-center gap-1.5 text-[10px] text-rose-600 font-semibold">
-                  <span>✨</span>
-                  <span>กดเข้าหาอกเบาๆ แล้วบีบเป็นจังหวะรูปตัว C</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- กรอบแสดงภาพการวางนิ้วรูปตัว C พร้อมภาพประกอบ SVG เวกเตอร์ชัดเจน ไม่หลุด 100% -->
-            <div class="shrink-0 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-rose-200/90 bg-gradient-to-b from-rose-50/70 to-amber-50/70 shadow-2xs self-center sm:self-start flex flex-col items-center justify-center p-1.5 relative group">
-              <!-- รูปภาพที่ผู้ใช้อัปโหลด (ถ้ามี) หรือแสดง SVG อัตโนมัติ -->
-              <div id="cShapeImageWrapper" class="w-full h-full flex flex-col items-center justify-center">
-                <svg class="w-full h-full drop-shadow-xs" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- พื้นหลังนุ่มนวล -->
-                  <rect width="160" height="160" rx="14" fill="#FFF5F5"/>
-                  
-                  <!-- เงาและโครงเต้านม -->
-                  <path d="M24 20C48 20 85 45 106 70C118 85 116 98 106 112C85 136 48 145 24 145" fill="#FED7AA" opacity="0.6"/>
-                  <path d="M20 25C44 25 80 48 98 72C108 85 108 96 98 108C80 132 44 138 20 138" fill="#FDE68A" opacity="0.4"/>
-                  <path d="M20 30C40 30 75 52 92 74C102 87 102 96 92 108C75 128 40 132 20 132" fill="#FCE7F3"/>
-                  
-                  <!-- ลานนม (Areola) -->
-                  <ellipse cx="94" cy="90" rx="16" ry="18" fill="#FDA4AF"/>
-                  <ellipse cx="94" cy="90" rx="13" ry="15" fill="#FB7185"/>
-                  
-                  <!-- หัวนม (Nipple) -->
-                  <ellipse cx="102" cy="90" rx="5" ry="6" fill="#E11D48"/>
-                  <ellipse cx="103" cy="89" rx="2" ry="2.5" fill="#FFE4E6"/>
-
-                  <!-- นิ้วหัวแม่มือ (Thumb ด้านบน วางห่าง 2.5-3 ซม.) -->
-                  <!-- ฝ่ามือและข้อมือบน -->
-                  <path d="M12 40C25 45 42 46 54 44L72 40C82 38 90 44 92 52C94 60 88 66 78 68L56 70C46 71 36 68 28 65" fill="#E2A17E"/>
-                  <path d="M72 42C80 40 87 45 88 52C89 57 85 62 78 63L60 65" fill="#F3BA9B"/>
-                  <!-- เล็บนิ้วโป้ง -->
-                  <ellipse cx="84" cy="52" rx="3.5" ry="4.5" transform="rotate(-15 84 52)" fill="#FEE2E2"/>
-
-                  <!-- นิ้วชี้และนิ้วกลาง (Fingers ด้านล่าง รองรับเต้า) -->
-                  <!-- นิ้วชี้ -->
-                  <path d="M16 130C28 126 44 124 56 126L74 128C84 130 92 124 93 116C94 108 86 102 76 102L58 103C48 103 36 108 26 114" fill="#E2A17E"/>
-                  <path d="M72 126C80 127 86 122 87 116C88 110 83 106 76 106L60 106" fill="#F3BA9B"/>
-                  <!-- เล็บนิ้วชี้ -->
-                  <ellipse cx="83" cy="116" rx="3.5" ry="4.5" transform="rotate(20 83 116)" fill="#FEE2E2"/>
-                  
-                  <!-- นิ้วกลางเสริมรองรับด้านล่าง -->
-                  <path d="M30 140C44 138 60 137 72 136C80 135 86 131 87 125C83 125 76 127 68 129L35 142" fill="#CF8864"/>
-
-                  <!-- เส้นแนวโค้งเน้นสัญลักษณ์รูปตัว C (Highlight C-Shape) -->
-                  <path d="M82 46C96 52 104 68 104 88C104 106 96 122 82 126" stroke="#E11D48" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 3"/>
-                  
-                  <!-- ลูกศรชี้แนวแรงเข้าหาอก -->
-                  <path d="M78 54L68 56M68 56L72 51M68 56L73 60" stroke="#BE123C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M78 112L68 110M68 110L72 115M68 110L73 106" stroke="#BE123C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-                  <!-- ป้ายกำกับตัว C -->
-                  <rect x="110" y="44" width="44" height="18" rx="9" fill="#BE123C"/>
-                  <text x="132" y="56.5" font-family="'Prompt', sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">รูปตัว C</text>
-                  
-                  <!-- ป้ายระยะห่าง 2.5 - 3 ซม. -->
-                  <rect x="7" y="6" width="76" height="16" rx="8" fill="white" stroke="#FDA4AF" stroke-width="1"/>
-                  <text x="45" y="17.5" font-family="'Sarabun', sans-serif" font-size="8.5" font-weight="bold" fill="#BE123C" text-anchor="middle">ห่าง 2.5 - 3 ซม.</text>
-                </svg>
-              </div>
-
-              <!-- ปุ่มเลือกรูปถ่ายจริงจากเครื่อง (พะพะ.jpg) หากต้องการ -->
-              <label class="absolute inset-0 bg-black/0 hover:bg-black/30 transition-all rounded-2xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer text-white text-center p-1">
-                <span class="text-sm">📷</span>
-                <span class="text-[9px] font-bold bg-black/70 px-1.5 py-0.5 rounded-md mt-0.5">เปลี่ยนเป็นรูปจริง</span>
-                <input type="file" accept="image/*" class="hidden" onchange="previewCShapePhoto(event)">
-              </label>
+        <!-- 4 ขั้นตอนบีบมือเก็บใส่ Syringe (กล่องข้อความเดิม) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-800">วางนิ้วรูปตัว C (ห่างลานนม 2.5 - 3 ซม.)</h4>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">ล้างมือให้สะอาด ใช้นิ้วโป้งอยู่ด้านบน นิ้วชี้และนิ้วกลางรองรับด้านล่าง ห่างจากฐานหัวนมประมาณ 1 นิ้วมือ</p>
             </div>
           </div>
-
-          <!-- Step 2 -->
-          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
-            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">2</span>
-            <div class="space-y-0.5">
-              <p class="font-bold text-slate-800">กดเข้าหาอก แล้วบีบนิ้วเข้าหากัน (Press & Compress)</p>
-              <p class="text-[11px] text-slate-600 leading-relaxed">กดเต้าลึกเข้าหาผนังทรวงอกเบาๆ แล้วบีบปลายนิ้วเข้าหากันเป็นจังหวะสม่ำเสมอ <span class="text-rose-600 font-medium">ห้ามรูดหรือเสียดสีผิวหนัง</span></p>
+          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-800">กดเข้าหาอก แล้วบีบนิ้วเข้าหากัน (Press & Compress)</h4>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">กดเต้าลึกเข้าหาผนังทรวงอกเบาๆ แล้วบีบปลายนิ้วเข้าหากันเป็นจังหวะสม่ำเสมอ <span class="text-rose-600 font-semibold">ห้ามรูดหรือเสียดสีผิวหนัง</span></p>
             </div>
           </div>
-
-          <!-- Step 3 -->
-          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
-            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">3</span>
-            <div class="space-y-0.5">
-              <p class="font-bold text-slate-800">ใช้ปลาย Syringe จ่อดูดหยดน้ำนมโดยตรง</p>
-              <p class="text-[11px] text-slate-600 leading-relaxed">เมื่อหัวน้ำนมสีเหลืองทองผุดขึ้นมา ให้ใช้ปลายกระบอกฉีดยา 1-3 มล. จ่อดูดทันที เพื่อไม่ให้ติดค้างบนช้อนหรือกรวยปั๊ม</p>
+          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-800">ใช้ปลาย Syringe จ่อดูดหยดน้ำนมโดยตรง</h4>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">เมื่อหัวน้ำนมสีเหลืองทองผุดขึ้นมา ให้ใช้ปลายกระบอกฉีดยา 1-3 มล. จ่อดูดทันที เพื่อไม่ให้ติดค้างบนช้อนหรือกรวยปั๊ม</p>
             </div>
           </div>
-
-          <!-- Step 4 -->
-          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
-            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">4</span>
-            <div class="space-y-0.5">
-              <p class="font-bold text-slate-800">ปิดจุก ติดป้ายชื่อ-เวลา และแช่เย็น</p>
-              <p class="text-[11px] text-slate-600 leading-relaxed">สวมปลอกปิดปลาย Syringe ติดสติกเกอร์ระบุชื่อคุณแม่ ตึก เลขเตียง วันที่และเวลา ส่งต่อให้พยาบาลดูแลทารก</p>
+          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">4</div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-800">ปิดจุก ติดป้ายชื่อ-เวลา และแช่เย็น</h4>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">สวมปลอกปิดปลาย Syringe ติดสติกเกอร์ระบุชื่อคุณแม่ ตึก เลขเตียง วันที่และเวลา ส่งต่อให้พยาบาลดูแลทารก</p>
             </div>
           </div>
+        </div>
+
+        <!-- รูปภาพประกอบขั้นตอนบีบมือเก็บใส่ Syringe -->
+        <div class="rounded-2xl overflow-hidden border border-rose-200/80 bg-rose-50/20 shadow-xs flex flex-col justify-center">
+          <a href="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" target="_blank" title="คลิกเพื่อดูรูปขนาดเต็ม" class="block group relative overflow-hidden h-full flex items-center justify-center">
+            <img src="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" 
+                 alt="4 ขั้นตอนบีบมือเก็บใส่ Syringe" 
+                 class="w-full h-auto object-contain max-h-[500px] mx-auto rounded-xl transition duration-300 group-hover:scale-[1.01]"
+                 loading="lazy">
+            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/75 hover:bg-slate-900 text-white text-[10px] md:text-xs px-2.5 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1 opacity-0 group-hover:opacity-100 transition shadow-sm pointer-events-none">
+              <span>🔍</span>
+              <span>คลิกดูภาพขยาย</span>
+            </div>
+          </a>
         </div>
 
         <div class="p-3 md:p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 space-y-1">
@@ -1066,6 +1005,15 @@
           <div class="space-y-0.5">
             <p class="text-xs font-bold text-slate-800 group-hover:text-amber-900">การนวดแก้เต้านมคัด</p>
             <p class="text-[10px] text-slate-500 leading-relaxed">การเตรียมตัวก่อนนวดและวิธีนวดลดการคัดตึงเต้านม</p>
+          </div>
+        </button>
+
+        <!-- ตัวเลือก 3: กรณีน้ำนมไหลดี -->
+        <button onclick="confirmAdviceSelection('กรณีน้ำนมไหลดี')" class="w-full p-3 rounded-2xl border-2 border-emerald-200 hover:border-emerald-500 hover:bg-emerald-50/70 text-left transition flex items-start gap-3 group active:scale-[0.98]">
+          <span class="text-2xl p-2 rounded-xl bg-emerald-100 group-hover:bg-emerald-200 transition shrink-0">🍼</span>
+          <div class="space-y-0.5">
+            <p class="text-xs font-bold text-slate-800 group-hover:text-emerald-900">กรณีน้ำนมไหลดี</p>
+            <p class="text-[10px] text-slate-500 leading-relaxed">แนวทางการเก็บรักษาน้ำนม การระบายน้ำนมอย่างสม่ำเสมอ และการป้องกันเต้านมคัดตึง</p>
           </div>
         </button>
       </div>
@@ -2491,7 +2439,13 @@
       if (!banner || !textEl || !timeEl) return;
 
       if (appState.lastActionMessage) {
-        textEl.innerText = appState.lastActionMessage;
+        if (appState.lastActionMessage === 'กรณีน้ำนมไหลดี') {
+          textEl.innerText = '';
+          textEl.classList.add('hidden');
+        } else {
+          textEl.innerText = appState.lastActionMessage;
+          textEl.classList.remove('hidden');
+        }
         timeEl.innerText = `${appState.lastActionTime || ''} น.`;
 
         if (appState.lastActionMessage === 'การนวดกระตุ้นน้ำนม') {
@@ -2567,6 +2521,42 @@
                     &nbsp;Line <a href="https://line.me/R/ti/p/@106nlmqm" target="_blank" class="font-bold underline text-[#06C755]">@106nlmqm</a> 
                     &nbsp;หรือ รพ.สต/โรงพยาบาลใกล้บ้าน
                   </p>
+                </div>
+              </div>
+            `;
+          }
+        } else if (appState.lastActionMessage === 'กรณีน้ำนมไหลดี') {
+          if (iconEl) iconEl.innerText = '🍼';
+          if (detailEl) {
+            detailEl.innerHTML = `
+              <div class="space-y-2 text-slate-700 leading-relaxed">
+                <div>
+                  <p class="font-bold text-emerald-900 text-xs">การดูแลเมื่อน้ำนมไหลดี</p>
+                  <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-700 mt-0.5">
+                    <li><strong>ระบายน้ำนมสม่ำเสมอ:</strong> บีบเก็บหรือให้ลูกดูดทุก 2-3 ชั่วโมง (8-10 ครั้ง/วัน) เพื่อป้องกันเต้านมคัดตึงหรือท่อน้ำนมอุดตัน</li>
+                    <li><strong>การบีบเคลียร์เต้า:</strong> บีบระบายจนเต้านิ่มเบาสบายตัว ไม่จำเป็นต้องเค้นหรือบีบแรงจนเจ็บเนื้อเยื่อเต้า</li>
+                    <li><strong>การจัดเก็บหัวน้ำนมและน้ำนมแม่:</strong> บรรจุใส่ Syringe หรือถุงเก็บน้ำนมที่สะอาด ระบุชื่อคุณแม่ วันที่ และเวลาอย่างชัดเจน</li>
+                    <li><strong>การแช่เย็น:</strong> เก็บในช่องแช่เย็นหรือกระเป๋าเก็บความเย็นพร้อม Ice Pack เพื่อนำส่งทำ Colostrum Oral Care ให้ลูกน้อยตามรอบ</li>
+                  </ul>
+                </div>
+
+                <div class="pt-1.5 border-t border-emerald-200/60 bg-emerald-50/70 p-2 rounded-xl text-[11px] text-emerald-950">
+                  <p class="font-semibold">สามารถติดต่อสอบถามเพิ่มเติม</p>
+                  <p class="mt-0.5">
+                    โทร <a href="tel:073510673" class="font-bold underline text-rose-600">073510673</a> 
+                    &nbsp;line <a href="https://line.me/R/ti/p/@106nlmqm" target="_blank" class="font-bold underline text-[#06C755]">@106nlmqm</a> 
+                    &nbsp;หรือ รพ.สต/โรงพยาบาลใกล้บ้าน
+                  </p>
+                  <div class="flex items-center gap-1.5 pt-1.5">
+                    <a href="tel:073510673" class="flex-1 py-1.5 px-2 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded-lg flex items-center justify-center gap-1 shadow-2xs transition active:scale-95">
+                      <span>📞</span>
+                      <span>โทร 073510673</span>
+                    </a>
+                    <a href="https://line.me/R/ti/p/@106nlmqm" target="_blank" class="flex-1 py-1.5 px-2 bg-[#06C755] hover:bg-[#05b34c] text-white text-[10px] font-bold rounded-lg flex items-center justify-center gap-1 shadow-2xs transition active:scale-95">
+                      <span>💬</span>
+                      <span>Line @106nlmqm</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             `;
@@ -2718,24 +2708,6 @@
 
     function closeBabyPhotoModal() {
       document.getElementById('babyModal')?.classList.add('hidden');
-    }
-
-    /* พรีวิวรูปภาพท่าทางการวางนิ้วรูปตัว C (เมื่อผู้ใช้เลือกไฟล์ภาพจริงจากเครื่อง) */
-    function previewCShapePhoto(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const wrapper = document.getElementById('cShapeImageWrapper');
-          if (wrapper) {
-            wrapper.innerHTML = `
-              <img src="${e.target.result}" alt="การวางนิ้วรูปตัว C" class="w-full h-full object-cover rounded-xl shadow-2xs">
-            `;
-            showToast('อัปเดตรูปภาพการวางนิ้วรูปตัว C เรียบร้อย');
-          }
-        };
-        reader.readAsDataURL(file);
-      }
     }
 
     function handleBabyPhotoUpload(event) {

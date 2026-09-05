@@ -581,60 +581,147 @@
           <span class="text-[10px] px-2 py-0.5 bg-rose-100 text-rose-700 font-semibold rounded-full">แนะนำใน 24 ชม. แรก</span>
         </div>
 
-        <!-- 4 ขั้นตอนบีบมือเก็บใส่ Syringe (กล่องข้อความเดิม) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
-            <div>
-              <h4 class="text-xs font-bold text-slate-800">วางนิ้วรูปตัว C (ห่างลานนม 2.5 - 3 ซม.)</h4>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">ล้างมือให้สะอาด ใช้นิ้วโป้งอยู่ด้านบน นิ้วชี้และนิ้วกลางรองรับด้านล่าง ห่างจากฐานหัวนมประมาณ 1 นิ้วมือ</p>
+        <!-- 4 ขั้นตอนบีบมือเก็บใส่ Syringe: รูปภาพอยู่ด้านบน ข้อความอยู่ใต้รูป สไตล์การ์ดอินโฟกราฟิกสวยงาม -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <!-- ขั้นตอนที่ 1 -->
+          <div class="bg-white rounded-2xl border-2 border-rose-100 hover:border-rose-300 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden group">
+            <!-- รูปภาพด้านบน (Picture on Top) -->
+            <a href="https://i.postimg.cc/K8pZDrGz/1.jpg" target="_blank" title="คลิกเพื่อดูรูปภาพขนาดเต็ม" 
+               class="relative w-full aspect-[4/3] bg-gradient-to-b from-rose-50/50 via-pink-50/30 to-amber-50/20 border-b border-rose-100 overflow-hidden flex items-center justify-center p-2">
+              <img src="https://i.postimg.cc/K8pZDrGz/1.jpg" 
+                   onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='https://i.postimg.cc/K8pZDrGz/1.jp';}" 
+                   alt="ขั้นตอนที่ 1: วางนิ้วรูปตัว C" 
+                   class="w-full h-full object-contain pointer-events-none select-none transition-transform duration-300 group-hover:scale-105">
+              <div class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">1</div>
+              <span class="absolute bottom-2 right-2 bg-slate-900/75 text-white text-[9px] px-2 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition backdrop-blur-xs flex items-center gap-1">
+                <span>🔍</span>
+                <span>ดูภาพเต็ม</span>
+              </span>
+            </a>
+            <!-- ข้อความอยู่ใต้รูป (Text Underneath Image) -->
+            <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between bg-white">
+              <div class="space-y-1">
+                <h4 class="text-xs md:text-sm font-bold text-slate-800 leading-snug">วางนิ้วรูปตัว C (ห่างลานนม 2.5 - 3 ซม.)</h4>
+                <p class="text-[11px] text-slate-600 leading-relaxed">ล้างมือให้สะอาด ใช้นิ้วโป้งอยู่ด้านบน นิ้วชี้และนิ้วกลางรองรับด้านล่าง ห่างจากฐานหัวนมประมาณ 1 นิ้วมือ</p>
+              </div>
+              <div class="pt-1">
+                <span class="inline-flex items-center gap-1 text-[10px] text-rose-700 font-semibold bg-rose-50/90 px-2 py-1 rounded-lg border border-rose-200/70 w-full">
+                  <span>✨</span>
+                  <span class="truncate">กดเข้าหาอกเบาๆ แล้วบีบเป็นจังหวะ</span>
+                </span>
+              </div>
             </div>
           </div>
-          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
-            <div>
-              <h4 class="text-xs font-bold text-slate-800">กดเข้าหาอก แล้วบีบนิ้วเข้าหากัน (Press & Compress)</h4>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">กดเต้าลึกเข้าหาผนังทรวงอกเบาๆ แล้วบีบปลายนิ้วเข้าหากันเป็นจังหวะสม่ำเสมอ <span class="text-rose-600 font-semibold">ห้ามรูดหรือเสียดสีผิวหนัง</span></p>
+
+          <!-- ขั้นตอนที่ 2 -->
+          <div class="bg-white rounded-2xl border-2 border-rose-100 hover:border-rose-300 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden group">
+            <!-- รูปภาพด้านบน (Picture on Top) -->
+            <a href="https://i.postimg.cc/65QgfsyH/2.jpg" target="_blank" title="คลิกเพื่อดูรูปภาพขนาดเต็ม" 
+               class="relative w-full aspect-[4/3] bg-gradient-to-b from-rose-50/50 via-pink-50/30 to-amber-50/20 border-b border-rose-100 overflow-hidden flex items-center justify-center p-2">
+              <img src="https://i.postimg.cc/65QgfsyH/2.jpg" 
+                   alt="ขั้นตอนที่ 2: กดเข้าหาอก แล้วบีบนิ้วเข้าหากัน" 
+                   class="w-full h-full object-contain pointer-events-none select-none transition-transform duration-300 group-hover:scale-105">
+              <div class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">2</div>
+              <span class="absolute bottom-2 right-2 bg-slate-900/75 text-white text-[9px] px-2 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition backdrop-blur-xs flex items-center gap-1">
+                <span>🔍</span>
+                <span>ดูภาพเต็ม</span>
+              </span>
+            </a>
+            <!-- ข้อความอยู่ใต้รูป (Text Underneath Image) -->
+            <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between bg-white">
+              <div class="space-y-1">
+                <h4 class="text-xs md:text-sm font-bold text-slate-800 leading-snug">กดเข้าหาอก แล้วบีบนิ้วเข้าหากัน</h4>
+                <p class="text-[11px] text-slate-600 leading-relaxed">กดเต้าลึกเข้าหาผนังทรวงอกเบาๆ แล้วบีบปลายนิ้วเข้าหากันเป็นจังหวะสม่ำเสมอ <span class="text-rose-600 font-semibold">ห้ามรูดหรือเสียดสีผิวหนัง</span></p>
+              </div>
+              <div class="pt-1">
+                <span class="inline-flex items-center gap-1 text-[10px] text-rose-700 font-semibold bg-rose-50/90 px-2 py-1 rounded-lg border border-rose-200/70 w-full">
+                  <span>🚫</span>
+                  <span class="truncate">ห้ามรูดหัวนมเด็ดขาด</span>
+                </span>
+              </div>
             </div>
           </div>
-          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
-            <div>
-              <h4 class="text-xs font-bold text-slate-800">ใช้ปลาย Syringe จ่อดูดหยดน้ำนมโดยตรง</h4>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">เมื่อหัวน้ำนมสีเหลืองทองผุดขึ้นมา ให้ใช้ปลายกระบอกฉีดยา 1-3 มล. จ่อดูดทันที เพื่อไม่ให้ติดค้างบนช้อนหรือกรวยปั๊ม</p>
+
+          <!-- ขั้นตอนที่ 3 -->
+          <div class="bg-white rounded-2xl border-2 border-rose-100 hover:border-rose-300 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden group">
+            <!-- รูปภาพด้านบน (Picture on Top) -->
+            <a href="https://i.postimg.cc/G3gqr4mN/4.jpg" target="_blank" title="คลิกเพื่อดูรูปภาพขนาดเต็ม" 
+               class="relative w-full aspect-[4/3] bg-gradient-to-b from-rose-50/50 via-pink-50/30 to-amber-50/20 border-b border-rose-100 overflow-hidden flex items-center justify-center p-2">
+              <img src="https://i.postimg.cc/G3gqr4mN/4.jpg" 
+                   alt="ขั้นตอนที่ 3: ใช้ปลาย Syringe จ่อดูดหยดน้ำนมโดยตรง" 
+                   class="w-full h-full object-contain pointer-events-none select-none transition-transform duration-300 group-hover:scale-105">
+              <div class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">3</div>
+              <span class="absolute bottom-2 right-2 bg-slate-900/75 text-white text-[9px] px-2 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition backdrop-blur-xs flex items-center gap-1">
+                <span>🔍</span>
+                <span>ดูภาพเต็ม</span>
+              </span>
+            </a>
+            <!-- ข้อความอยู่ใต้รูป (Text Underneath Image) -->
+            <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between bg-white">
+              <div class="space-y-1">
+                <h4 class="text-xs md:text-sm font-bold text-slate-800 leading-snug">ใช้ปลาย Syringe จ่อดูดหยดน้ำนมโดยตรง</h4>
+                <p class="text-[11px] text-slate-600 leading-relaxed">เมื่อหัวน้ำนมสีเหลืองทองผุดขึ้นมา ให้ใช้ปลายกระบอกฉีดยา 1-3 มล. จ่อดูดทันที เพื่อไม่ให้ติดค้างบนช้อนหรือกรวยปั๊ม</p>
+              </div>
+              <div class="pt-1">
+                <span class="inline-flex items-center gap-1 text-[10px] text-amber-800 font-semibold bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80 w-full">
+                  <span>🍯</span>
+                  <span class="truncate">หยดทองคำมีค่าทุกหยด</span>
+                </span>
+              </div>
             </div>
           </div>
-          <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200 flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">4</div>
-            <div>
-              <h4 class="text-xs font-bold text-slate-800">ปิดจุก ติดป้ายชื่อ-เวลา และแช่เย็น</h4>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">สวมปลอกปิดปลาย Syringe ติดสติกเกอร์ระบุชื่อคุณแม่ ตึก เลขเตียง วันที่และเวลา ส่งต่อให้พยาบาลดูแลทารก</p>
+
+          <!-- ขั้นตอนที่ 4 -->
+          <div class="bg-white rounded-2xl border-2 border-rose-100 hover:border-rose-300 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden group">
+            <!-- รูปภาพด้านบน (Picture on Top) -->
+            <a href="https://i.postimg.cc/Pr8zjKcL/5.jpg" target="_blank" title="คลิกเพื่อดูรูปภาพขนาดเต็ม" 
+               class="relative w-full aspect-[4/3] bg-gradient-to-b from-rose-50/50 via-pink-50/30 to-amber-50/20 border-b border-rose-100 overflow-hidden flex items-center justify-center p-2">
+              <img src="https://i.postimg.cc/Pr8zjKcL/5.jpg" 
+                   alt="ขั้นตอนที่ 4: ปิดจุก ติดป้ายชื่อ-เวลา และแช่เย็น" 
+                   class="w-full h-full object-contain pointer-events-none select-none transition-transform duration-300 group-hover:scale-105">
+              <div class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">4</div>
+              <span class="absolute bottom-2 right-2 bg-slate-900/75 text-white text-[9px] px-2 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition backdrop-blur-xs flex items-center gap-1">
+                <span>🔍</span>
+                <span>ดูภาพเต็ม</span>
+              </span>
+            </a>
+            <!-- ข้อความอยู่ใต้รูป (Text Underneath Image) -->
+            <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between bg-white">
+              <div class="space-y-1">
+                <h4 class="text-xs md:text-sm font-bold text-slate-800 leading-snug">ปิดจุก ติดป้ายชื่อ-เวลา และแช่เย็น</h4>
+                <p class="text-[11px] text-slate-600 leading-relaxed">สวมปลอกปิดปลาย Syringe ติดสติกเกอร์ระบุชื่อคุณแม่ ตึก เลขเตียง วันที่และเวลา ส่งต่อให้พยาบาลดูแลทารก</p>
+              </div>
+              <div class="pt-1">
+                <span class="inline-flex items-center gap-1 text-[10px] text-blue-700 font-semibold bg-blue-50 px-2 py-1 rounded-lg border border-blue-200/80 w-full">
+                  <span>❄️</span>
+                  <span class="truncate">แช่เย็นพร้อมส่งต่อทำ Oral Care</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- รูปภาพประกอบขั้นตอนบีบมือเก็บใส่ Syringe -->
-        <div class="rounded-2xl overflow-hidden border border-rose-200/80 bg-rose-50/20 shadow-xs flex flex-col justify-center">
-          <a href="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" target="_blank" title="คลิกเพื่อดูรูปขนาดเต็ม" class="block group relative overflow-hidden h-full flex items-center justify-center">
-            <img src="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" 
-                 alt="4 ขั้นตอนบีบมือเก็บใส่ Syringe" 
-                 class="w-full h-auto object-contain max-h-[500px] mx-auto rounded-xl transition duration-300 group-hover:scale-[1.01]"
-                 loading="lazy">
-            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/75 hover:bg-slate-900 text-white text-[10px] md:text-xs px-2.5 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1 opacity-0 group-hover:opacity-100 transition shadow-sm pointer-events-none">
-              <span>🔍</span>
-              <span>คลิกดูภาพขยาย</span>
+        <!-- กล่องทำไมเพียง 0.1 มล. ก็มีค่ามหาศาล พร้อมภาพประกอบ Colostrum Oral Care จากอินโฟกราฟิก -->
+        <div class="p-3.5 md:p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-xs text-blue-900 space-y-2.5 shadow-2xs">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div class="space-y-1 flex-1">
+              <p class="font-bold flex items-center gap-1.5 md:text-sm text-blue-950">
+                <span class="text-base">🛡️</span>
+                <span>ทำไมเพียง 0.1 มล. ก็มีค่ามหาศาล?</span>
+              </p>
+              <p class="text-[11px] md:text-xs text-blue-800 leading-relaxed">
+                พยาบาลจะนำหัวน้ำนมไปทำ <strong>Colostrum Oral Care</strong> โดยใช้ก้านสำลีป้ายเคลือบกระพุ้งแก้มลูก สารภูมิคุ้มกัน Secretory IgA จะถูกดูดซึมตรงเข้าสู่กระแสเลือด ป้องกันการติดเชื้อในกระแสเลือดและลำไส้เน่าเปื่อยได้โดยตรง
+              </p>
             </div>
-          </a>
-        </div>
-
-        <div class="p-3 md:p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 space-y-1">
-          <p class="font-bold flex items-center gap-1 md:text-sm">
-            <span>🛡️</span>
-            <span>ทำไมเพียง 0.1 มล. ก็มีค่ามหาศาล?</span>
-          </p>
-          <p class="text-[11px] md:text-xs text-blue-800 leading-relaxed">
-            พยาบาลจะนำหัวน้ำนมไปทำ <strong>Colostrum Oral Care</strong> โดยใช้ก้านสำลีป้ายเคลือบกระพุ้งแก้มลูก สารภูมิคุ้มกัน Secretory IgA จะถูกดูดซึมตรงเข้าสู่กระแสเลือด ป้องกันการติดเชื้อในกระแสเลือดและลำไส้เน่าเปื่อยได้โดยตรง
-          </p>
+            <!-- ภาพประกอบ Colostrum Oral Care & Secretory IgA จากส่วนล่างของรูปภาพ -->
+            <a href="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" target="_blank" title="คลิกเพื่อดูรูปภาพขนาดเต็ม" 
+               class="shrink-0 w-full sm:w-56 h-20 rounded-xl overflow-hidden border border-blue-200 bg-white shadow-2xs group/oral hover:border-blue-400 transition flex items-center justify-center relative">
+              <svg viewBox="519 438 476 135" class="w-full h-full object-contain pointer-events-none select-none transition duration-300 group-hover/oral:scale-105" preserveAspectRatio="xMidYMid meet">
+                <image href="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" width="1000" height="575" preserveAspectRatio="none" />
+              </svg>
+              <span class="absolute bottom-1 right-1 bg-slate-900/70 text-white text-[8px] px-1 py-0.2 rounded opacity-0 group-hover/oral:opacity-100 transition backdrop-blur-2xs">🔍 ขยาย</span>
+            </a>
+          </div>
         </div>
       </div>
 

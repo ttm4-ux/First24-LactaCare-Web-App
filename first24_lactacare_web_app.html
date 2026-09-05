@@ -79,9 +79,15 @@
           <span>👶</span>
           <span>คิดถึงลูก</span>
         </button>
-        <button onclick="openAdminModal()" class="px-2.5 py-1.5 md:px-3 md:py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-[11px] md:text-xs font-semibold flex items-center gap-1 shadow-xs transition active:scale-95">
+        <!-- ปุ่ม Admin: ซ่อนเป็นค่าเริ่มต้นสำหรับคุณแม่ และจะแสดงเมื่อเข้าสู่โหมดเจ้าหน้าที่เท่านั้น -->
+        <button id="headerAdminBtn" onclick="openAdminModal()" class="hidden px-2.5 py-1.5 md:px-3 md:py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-[11px] md:text-xs font-semibold items-center gap-1 shadow-xs transition active:scale-95">
           <span>👩‍⚕️</span>
           <span>Admin</span>
+        </button>
+        <!-- ปุ่มสลับกลับโหมดคุณแม่ สำหรับเจ้าหน้าที่ -->
+        <button id="headerExitAdminBtn" onclick="switchToMotherMode()" class="hidden px-2 py-1.5 md:px-2.5 md:py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] md:text-xs font-semibold items-center gap-1 border border-rose-200 transition active:scale-95">
+          <span>🚪</span>
+          <span class="hidden sm:inline">โหมดคุณแม่</span>
         </button>
       </div>
     </div>
@@ -95,19 +101,24 @@
         
         <!-- Left Column on PC: Banner & Form Questions -->
         <div class="md:col-span-7 space-y-4">
-          <!-- Banner ความรู้ขนาดกระเพาะ -->
-          <div class="bg-gradient-to-br from-amber-500 to-rose-500 rounded-2xl p-4 md:p-5 text-white shadow-md relative overflow-hidden">
-            <div class="relative z-10 space-y-1.5 max-w-md">
-              <div class="inline-flex items-center gap-1 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] md:text-[11px] font-semibold">
+          <!-- Banner ความรู้ขนาดกระเพาะ สไตล์พาสเทลน่ารักอบอุ่น -->
+          <div class="bg-gradient-to-br from-rose-100 via-pink-50 to-amber-100 border-2 border-rose-200/80 rounded-3xl p-4 md:p-5 shadow-xs relative overflow-hidden">
+            <div class="relative z-10 space-y-2 max-w-md">
+              <div class="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] md:text-[11px] font-bold text-rose-700 shadow-2xs border border-rose-200/70">
                 <span>🍒</span>
                 <span>ความลับ 24 ชั่วโมงแรก</span>
+                <span class="text-rose-400">✨</span>
               </div>
-              <h2 class="text-base md:text-lg font-bold leading-snug">กระเพาะลูกวันแรกเท่า "ลูกเชอร์รี่"</h2>
-              <p class="text-xs md:text-sm text-rose-50 leading-relaxed opacity-95">
-                จุได้เพียง 5-7 มล. (~1 ช้อนชา) หัวน้ำนม (Colostrum) จึงมาเป็นหยดเล็กๆ สีเหลืองทองเพื่อลูก ไม่ต้องกังวลว่าน้ำนมยังไม่พุ่งนะครับ
+              <h2 class="text-base md:text-lg font-bold text-rose-900 leading-snug">
+                กระเพาะลูกวันแรกเท่า <span class="text-rose-600 underline decoration-rose-300 decoration-wavy underline-offset-4">"ลูกเชอร์รี่"</span> 🍒
+              </h2>
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                จุได้เพียง <strong class="text-rose-700 font-bold">5-7 มล.</strong> (~1 ช้อนชา) หัวน้ำนม (Colostrum) จึงมาเป็นหยดเล็กๆ สีเหลืองทองเพื่อลูก ไม่ต้องกังวลว่าน้ำนมยังไม่พุ่งนะคะคุณแม่คนเก่ง 🍼💕
               </p>
             </div>
-            <div class="absolute -right-4 -bottom-4 text-7xl md:text-8xl opacity-20 select-none">🍒</div>
+            <div class="absolute -right-3 -bottom-3 w-24 h-24 md:w-28 md:h-28 bg-rose-200/40 rounded-full blur-xl pointer-events-none"></div>
+            <div class="absolute -right-2 -bottom-2 text-6xl md:text-7xl opacity-30 select-none transform rotate-12">🍒</div>
+            <div class="absolute right-14 top-3 text-lg opacity-40 select-none animate-pulse">✨</div>
           </div>
 
           <!-- ฟอร์มระบุข้อมูลคุณแม่ -->
@@ -125,7 +136,7 @@
                          class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-slate-50/50">
                 </div>
                 <div>
-                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">HN <span class="text-rose-500">*</span></label>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">HN <span class="text-[10px] text-slate-400 font-normal">(สามารถดูได้ที่สายรัดข้อมือ)</span> <span class="text-rose-500">*</span></label>
                   <input type="text" id="patientHn" oninput="savePatientInfo()" placeholder="เช่น 67xxxxx" 
                          class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-slate-50/50">
                 </div>
@@ -187,7 +198,7 @@
             <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <h3 class="text-xs md:text-sm font-bold text-slate-800 flex items-center gap-1.5">
                 <span>🩺</span>
-                <span>แบบประเมินการไหลของน้ำนม (24 ชม. แรก)</span>
+                <span>แบบประเมินการไหลของน้ำนมหลัง 24 ชั่วโมง</span>
               </h3>
               <span class="text-[10px] text-slate-400">4 ข้อคำถาม</span>
             </div>
@@ -215,6 +226,13 @@
             <div class="space-y-1.5 pt-1">
               <label class="block text-xs font-semibold text-slate-700">2. ลักษณะและปริมาณน้ำนมที่สังเกตเห็น</label>
               <div class="space-y-1.5 text-xs">
+                <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
+                  <input type="radio" name="q2" value="well_flow" class="accent-rose-500 mr-2.5">
+                  <div>
+                    <p class="font-medium text-emerald-700 font-semibold">น้ำนมไหลดี</p>
+                    <p class="text-[10px] text-slate-500">น้ำนมไหลพุ่ง หรือไหลต่อเนื่องเป็นสาย บีบได้ปริมาณดี</p>
+                  </div>
+                </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q2" value="good_flow" class="accent-rose-500 mr-2.5" checked>
                   <div>
@@ -347,7 +365,13 @@
             <span>💉</span>
             <span>บันทึกรอบการบีบและติดตามการไหลของน้ำนม</span>
           </h2>
-          <button onclick="confirmResetTracker()" class="text-[10px] md:text-xs text-slate-400 hover:text-rose-500 font-medium transition">ล้างข้อมูลวันนี้</button>
+          <div class="flex items-center gap-2">
+            <button onclick="returnToAdminHome()" class="px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 active:bg-black text-white text-[11px] md:text-xs font-bold flex items-center gap-1.5 shadow-xs transition active:scale-95">
+              <span>🏠</span>
+              <span>กลับบ้าน</span>
+            </button>
+            <button onclick="confirmResetTracker()" class="text-[10px] md:text-xs text-slate-400 hover:text-rose-500 font-medium transition">ล้างข้อมูลวันนี้</button>
+          </div>
         </div>
 
         <!-- แถบแสดงสถานะการดูแลล่าสุด เช่น ให้คำแนะนำ -->
@@ -559,11 +583,80 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
           <!-- Step 1 -->
-          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
-            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">1</span>
-            <div class="space-y-0.5">
-              <p class="font-bold text-slate-800">วางนิ้วรูปตัว C (ห่างลานนม 2.5 - 3 ซม.)</p>
-              <p class="text-[11px] text-slate-600 leading-relaxed">ล้างมือให้สะอาด ใช้นิ้วโป้งอยู่ด้านบน นิ้วชี้และนิ้วกลางรองรับด้านล่าง ห่างจากฐานหัวนมประมาณ 1 นิ้วมือ</p>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row gap-3 items-start justify-between">
+            <div class="flex gap-3 items-start flex-1">
+              <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center shrink-0 text-xs mt-0.5">1</span>
+              <div class="space-y-1">
+                <p class="font-bold text-slate-800">วางนิ้วรูปตัว C (ห่างลานนม 2.5 - 3 ซม.)</p>
+                <p class="text-[11px] text-slate-600 leading-relaxed">ล้างมือให้สะอาด ใช้นิ้วโป้งอยู่ด้านบน นิ้วชี้และนิ้วกลางรองรับด้านล่าง ห่างจากฐานหัวนมประมาณ 1 นิ้วมือ</p>
+                <div class="pt-1 flex items-center gap-1.5 text-[10px] text-rose-600 font-semibold">
+                  <span>✨</span>
+                  <span>กดเข้าหาอกเบาๆ แล้วบีบเป็นจังหวะรูปตัว C</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- กรอบแสดงภาพการวางนิ้วรูปตัว C พร้อมภาพประกอบ SVG เวกเตอร์ชัดเจน ไม่หลุด 100% -->
+            <div class="shrink-0 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-rose-200/90 bg-gradient-to-b from-rose-50/70 to-amber-50/70 shadow-2xs self-center sm:self-start flex flex-col items-center justify-center p-1.5 relative group">
+              <!-- รูปภาพที่ผู้ใช้อัปโหลด (ถ้ามี) หรือแสดง SVG อัตโนมัติ -->
+              <div id="cShapeImageWrapper" class="w-full h-full flex flex-col items-center justify-center">
+                <svg class="w-full h-full drop-shadow-xs" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- พื้นหลังนุ่มนวล -->
+                  <rect width="160" height="160" rx="14" fill="#FFF5F5"/>
+                  
+                  <!-- เงาและโครงเต้านม -->
+                  <path d="M24 20C48 20 85 45 106 70C118 85 116 98 106 112C85 136 48 145 24 145" fill="#FED7AA" opacity="0.6"/>
+                  <path d="M20 25C44 25 80 48 98 72C108 85 108 96 98 108C80 132 44 138 20 138" fill="#FDE68A" opacity="0.4"/>
+                  <path d="M20 30C40 30 75 52 92 74C102 87 102 96 92 108C75 128 40 132 20 132" fill="#FCE7F3"/>
+                  
+                  <!-- ลานนม (Areola) -->
+                  <ellipse cx="94" cy="90" rx="16" ry="18" fill="#FDA4AF"/>
+                  <ellipse cx="94" cy="90" rx="13" ry="15" fill="#FB7185"/>
+                  
+                  <!-- หัวนม (Nipple) -->
+                  <ellipse cx="102" cy="90" rx="5" ry="6" fill="#E11D48"/>
+                  <ellipse cx="103" cy="89" rx="2" ry="2.5" fill="#FFE4E6"/>
+
+                  <!-- นิ้วหัวแม่มือ (Thumb ด้านบน วางห่าง 2.5-3 ซม.) -->
+                  <!-- ฝ่ามือและข้อมือบน -->
+                  <path d="M12 40C25 45 42 46 54 44L72 40C82 38 90 44 92 52C94 60 88 66 78 68L56 70C46 71 36 68 28 65" fill="#E2A17E"/>
+                  <path d="M72 42C80 40 87 45 88 52C89 57 85 62 78 63L60 65" fill="#F3BA9B"/>
+                  <!-- เล็บนิ้วโป้ง -->
+                  <ellipse cx="84" cy="52" rx="3.5" ry="4.5" transform="rotate(-15 84 52)" fill="#FEE2E2"/>
+
+                  <!-- นิ้วชี้และนิ้วกลาง (Fingers ด้านล่าง รองรับเต้า) -->
+                  <!-- นิ้วชี้ -->
+                  <path d="M16 130C28 126 44 124 56 126L74 128C84 130 92 124 93 116C94 108 86 102 76 102L58 103C48 103 36 108 26 114" fill="#E2A17E"/>
+                  <path d="M72 126C80 127 86 122 87 116C88 110 83 106 76 106L60 106" fill="#F3BA9B"/>
+                  <!-- เล็บนิ้วชี้ -->
+                  <ellipse cx="83" cy="116" rx="3.5" ry="4.5" transform="rotate(20 83 116)" fill="#FEE2E2"/>
+                  
+                  <!-- นิ้วกลางเสริมรองรับด้านล่าง -->
+                  <path d="M30 140C44 138 60 137 72 136C80 135 86 131 87 125C83 125 76 127 68 129L35 142" fill="#CF8864"/>
+
+                  <!-- เส้นแนวโค้งเน้นสัญลักษณ์รูปตัว C (Highlight C-Shape) -->
+                  <path d="M82 46C96 52 104 68 104 88C104 106 96 122 82 126" stroke="#E11D48" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 3"/>
+                  
+                  <!-- ลูกศรชี้แนวแรงเข้าหาอก -->
+                  <path d="M78 54L68 56M68 56L72 51M68 56L73 60" stroke="#BE123C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M78 112L68 110M68 110L72 115M68 110L73 106" stroke="#BE123C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+                  <!-- ป้ายกำกับตัว C -->
+                  <rect x="110" y="44" width="44" height="18" rx="9" fill="#BE123C"/>
+                  <text x="132" y="56.5" font-family="'Prompt', sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">รูปตัว C</text>
+                  
+                  <!-- ป้ายระยะห่าง 2.5 - 3 ซม. -->
+                  <rect x="7" y="6" width="76" height="16" rx="8" fill="white" stroke="#FDA4AF" stroke-width="1"/>
+                  <text x="45" y="17.5" font-family="'Sarabun', sans-serif" font-size="8.5" font-weight="bold" fill="#BE123C" text-anchor="middle">ห่าง 2.5 - 3 ซม.</text>
+                </svg>
+              </div>
+
+              <!-- ปุ่มเลือกรูปถ่ายจริงจากเครื่อง (พะพะ.jpg) หากต้องการ -->
+              <label class="absolute inset-0 bg-black/0 hover:bg-black/30 transition-all rounded-2xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer text-white text-center p-1">
+                <span class="text-sm">📷</span>
+                <span class="text-[9px] font-bold bg-black/70 px-1.5 py-0.5 rounded-md mt-0.5">เปลี่ยนเป็นรูปจริง</span>
+                <input type="file" accept="image/*" class="hidden" onchange="previewCShapePhoto(event)">
+              </label>
             </div>
           </div>
 
@@ -605,7 +698,166 @@
           </p>
         </div>
       </div>
+
+      <!-- หัวข้อสมุนไพรบำรุงน้ำนม (ตามศาสตร์การแพทย์แผนไทย) -->
+      <div class="bg-white rounded-2xl p-4 md:p-5 shadow-xs border border-rose-100 space-y-3.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <h3 class="text-xs md:text-sm font-bold text-slate-800 flex items-center gap-1.5">
+            <span>🌿</span>
+            <span>สมุนไพรบำรุงน้ำนม (ภูมิปัญญาแพทย์แผนไทย)</span>
+          </h3>
+          <span class="text-[10px] px-2 py-0.5 bg-emerald-100 text-emerald-800 font-semibold rounded-full">กระตุ้นน้ำนมธรรมชาติ</span>
+        </div>
+
+        <p class="text-[11px] md:text-xs text-slate-600 leading-relaxed">
+          สมุนไพรที่มีรสเผ็ดร้อนและให้ความอบอุ่นแก่ร่างกาย จะช่วยกระตุ้นการไหลเวียนโลหิต ขับน้ำคาวปลา ช่วยให้มดลูกเข้าอู่ และเพิ่มการหลั่งน้ำนมแม่ได้อย่างมีประสิทธิภาพ
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+          <!-- 1. หัวปลี -->
+          <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-1.5 hover:shadow-2xs transition">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center shrink-0">
+                <svg class="w-8 h-8 md:w-9 md:h-9 drop-shadow-xs" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- ก้านขั้วหัวปลี -->
+                  <path d="M22 2C22 2 21 7.5 20.5 10C23 10.5 25 10.5 27.5 10C27 7.5 26 2 26 2L22 2Z" fill="#4D6B18"/>
+                  <!-- รอยต่อขั้วกับกาบปลี -->
+                  <path d="M18.5 9.5C18.5 9.5 23.5 11.5 29.5 9.5C30.5 12 29.5 14 29.5 14L18.5 14C18.5 14 17.5 12 18.5 9.5Z" fill="#658A24"/>
+                  <!-- กาบหัวปลีชั้นนอก สีแดงอมม่วงเข้ม -->
+                  <path d="M24 46C24 46 11 31 11 20C11 13 17 12 24 12C31 12 37 13 37 20C37 31 24 46 24 46Z" fill="#881337"/>
+                  <!-- กาบหัวปลีชั้นกลาง -->
+                  <path d="M24 44C24 44 13.5 30 13.5 21C13.5 15 18.5 14 24 14C29.5 14 34.5 15 34.5 21C34.5 30 24 44 24 44Z" fill="#9F1239"/>
+                  <!-- กาบหัวปลีชั้นใน สีแดงกุหลาบสด -->
+                  <path d="M24 42C24 42 16.5 28 16.5 21C16.5 16 19.5 15 24 15C28.5 15 31.5 16 31.5 21C31.5 28 24 42 24 42Z" fill="#BE123C"/>
+                  <!-- สันนูนและเงากาบปลีตรงกลาง -->
+                  <path d="M24 15C22 22 21.2 31 24 41.5C26.8 31 26 22 24 15Z" fill="#E11D48" opacity="0.65"/>
+                  <!-- ประกายแสงสะท้อนบนกาบปลี -->
+                  <path d="M20 18C17 23 17 28.5 19 32.5" stroke="#FDA4AF" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-bold text-amber-950 text-xs md:text-sm">หัวปลี</h4>
+                <span class="text-[10px] text-amber-700 font-semibold bg-white px-1.5 py-0.2 rounded border border-amber-200">อันดับ 1 บำรุงน้ำนม</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              อุดมด้วยธาตุเหล็ก แคลเซียม และฟอสฟอรัส ช่วยบำรุงเลือด สร้างเม็ดเลือดแดง และช่วยให้ต่อมน้ำนมทำงานได้เต็มที่
+            </p>
+            <div class="text-[10px] text-amber-900 bg-white/80 p-1.5 rounded-lg border border-amber-100">
+              🍲 <strong>เมนูแนะนำ:</strong> ต้มยำหัวปลี, แกงเลียงหัวปลี, ยำหัวปลีกุ้งสด, หัวปลีต้มจิ้มน้ำพริก
+            </div>
+          </div>
+
+          <!-- 2. ขิง -->
+          <div class="p-3 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-1.5 hover:shadow-2xs transition">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl md:text-3xl">🫚</span>
+              <div>
+                <h4 class="font-bold text-rose-950 text-xs md:text-sm">ขิง</h4>
+                <span class="text-[10px] text-rose-700 font-semibold bg-white px-1.5 py-0.2 rounded border border-rose-200">รสร้อน ขับลม คลายหนาว</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              มีสารจินเจอรอลช่วยเพิ่มการไหลเวียนเลือด คลายความตึงเครียด ขับเหงื่อ ขับลม และช่วยให้น้ำนมไหลสะดวกขึ้น
+            </p>
+            <div class="text-[10px] text-rose-900 bg-white/80 p-1.5 rounded-lg border border-rose-100">
+              🍲 <strong>เมนูแนะนำ:</strong> น้ำขิงอุ่น (ไม่ใส่น้ำตาลจัด), ไก่ผัดขิง, ปลานึ่งขิง, โจ๊กใส่ขิงซอย
+            </div>
+          </div>
+
+          <!-- 3. ใบกะเพรา -->
+          <div class="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-1.5 hover:shadow-2xs transition">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl md:text-3xl">🌱</span>
+              <div>
+                <h4 class="font-bold text-emerald-950 text-xs md:text-sm">ใบกะเพรา</h4>
+                <span class="text-[10px] text-emerald-700 font-semibold bg-white px-1.5 py-0.2 rounded border border-emerald-200">ขับลม ลดท้องอืดทารก</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              กลิ่นหอมระเหยและรสเผ็ดร้อนช่วยขับลม ละลายไขมันในร่างกาย สารสำคัญซึมผ่านน้ำนมช่วยให้ลูกไม่อืดท้อง
+            </p>
+            <div class="text-[10px] text-emerald-900 bg-white/80 p-1.5 rounded-lg border border-emerald-100">
+              🍲 <strong>เมนูแนะนำ:</strong> ผัดกะเพราเนื้อสัตว์ไม่ติดมัน, แกงเลียงกะเพรา, ต้มยำน้ำใสใส่กะเพรา
+            </div>
+          </div>
+
+          <!-- 4. ฟักทอง -->
+          <div class="p-3 rounded-2xl bg-orange-50/70 border border-orange-200 space-y-1.5 hover:shadow-2xs transition">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl md:text-3xl">🎃</span>
+              <div>
+                <h4 class="font-bold text-orange-950 text-xs md:text-sm">ฟักทอง</h4>
+                <span class="text-[10px] text-orange-700 font-semibold bg-white px-1.5 py-0.2 rounded border border-orange-200">เบต้าแคโรทีนสูง</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              อุดมด้วยวิตามินเอ วิตามินซี และฟอสฟอรัส บำรุงน้ำนม เสริมสร้างภูมิคุ้มกันให้ทั้งแม่และทารก พร้อมช่วยสมานแผล
+            </p>
+            <div class="text-[10px] text-orange-900 bg-white/80 p-1.5 rounded-lg border border-orange-100">
+              🍲 <strong>เมนูแนะนำ:</strong> ฟักทองนึ่ง, แกงบวดฟักทองหวานน้อย, ผัดฟักทองใส่ไข่, แกงเลียงฟักทอง
+            </div>
+          </div>
+
+          <!-- 5. กุยช่าย -->
+          <div class="p-3 rounded-2xl bg-teal-50/70 border border-teal-200 space-y-1.5 hover:shadow-2xs transition">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl md:text-3xl">🥬</span>
+              <div>
+                <h4 class="font-bold text-teal-950 text-xs md:text-sm">ใบกุยช่าย</h4>
+                <span class="text-[10px] text-teal-700 font-semibold bg-white px-1.5 py-0.2 rounded border border-teal-200">แคลเซียมและธาตุเหล็ก</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              มีรสเผ็ดอุ่น ช่วยบำรุงกระดูกและฟัน มีธาตุเหล็กช่วยกระตุ้นการผลิตน้ำนม แก้อาการเต้านมอักเสบคัดตึง
+            </p>
+            <div class="text-[10px] text-teal-900 bg-white/80 p-1.5 rounded-lg border border-teal-100">
+              🍲 <strong>เมนูแนะนำ:</strong> ผัดกุยช่ายตับหมู, ผัดไทยใส่กุยช่าย, ต้มจืดหมูสับใส่กุยช่าย
+            </div>
+          </div>
+
+          <!-- 6. ใบแมงลัก -->
+          <div class="p-3 rounded-2xl bg-sky-50/70 border border-sky-200 space-y-1.5 hover:shadow-2xs transition">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl md:text-3xl">🌿</span>
+              <div>
+                <h4 class="font-bold text-sky-950 text-xs md:text-sm">ใบแมงลัก</h4>
+                <span class="text-[10px] text-sky-700 font-semibold bg-white px-1.5 py-0.2 rounded border border-sky-200">ขับเหงื่อ ช่วยให้นมไหลคล่อง</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              รสเผ็ดร้อน หอมสดชื่น ช่วยขับเหงื่อ ขับลมในลำไส้ ทำให้คุณแม่รู้สึกสดชื่น ผ่อนคลาย และส่งเสริมการหลั่งน้ำนม
+            </p>
+            <div class="text-[10px] text-sky-900 bg-white/80 p-1.5 rounded-lg border border-sky-100">
+              🍲 <strong>เมนูแนะนำ:</strong> แกงเลียงปลาย่างใส่ใบแมงลัก, ต้มส้มปลาทูใส่ใบแมงลัก, ใส่ในต้มยำปลา
+            </div>
+          </div>
+        </div>
+
+        <!-- กล่องข้อแนะนำเพิ่มเติมตามหลักแพทย์แผนไทย -->
+        <div class="p-3.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 text-xs text-emerald-950 space-y-1.5">
+          <div class="flex items-center gap-1.5 font-bold text-emerald-900">
+            <span class="text-base">💡</span>
+            <span>ข้อแนะนำแพทย์แผนไทยในการรับประทานอาหารหลังคลอด</span>
+          </div>
+          <ul class="list-disc list-inside space-y-1 text-[11px] text-emerald-900/90 leading-relaxed">
+            <li><strong>ดื่มน้ำอุ่นบ่อยๆ</strong> อย่างน้อย 2.5 - 3 ลิตรต่อวัน เพื่อให้ร่างกายมีน้ำเพียงพอในการสังเคราะห์น้ำนม</li>
+            <li><strong>รับประทานอาหารปรุงสุก รสอุ่น-ร้อน</strong> เพื่อรักษาสมดุลธาตุไฟและธาตุลมในร่างกาย ช่วยให้มดลูกเข้าอู่เร็ว</li>
+            <li><strong>หลีกเลี่ยงน้ำแข็ง น้ำเย็นจัด อาหารดิบ และของหมักดอง</strong> ในช่วงสัปดาห์แรกหลังคลอด เพื่อป้องกันน้ำคาวปลาคั่งและเลือดลมเดินไม่สะดวก</li>
+          </ul>
+        </div>
+      </div>
     </section>
+
+    <!-- Footer สำหรับแสดงเครดิต และช่องทางเข้าสู่ระบบเจ้าหน้าที่แบบเรียบหรู ไม่รบกวนคุณแม่ -->
+    <footer class="mt-8 pt-4 pb-6 border-t border-slate-200/60 text-center text-[11px] text-slate-400 space-y-1.5">
+      <p>อุ่นไอรัก นมแม่ 24 ชม. • First24 LactaCare</p>
+      <div id="footerStaffGateway">
+        <button onclick="promptStaffLogin()" class="text-slate-400 hover:text-slate-600 underline text-[10px] transition cursor-pointer">
+          🔒 สำหรับเจ้าหน้าที่
+        </button>
+      </div>
+    </footer>
   </main>
 
   <!-- Bottom Navigation (Mobile Only, hidden on PC) -->
@@ -667,14 +919,10 @@
       <div id="adminAuthSection" class="max-w-md mx-auto space-y-3 py-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <div class="flex items-center gap-1.5">
-            <span class="text-lg">👩‍⚕️</span>
-            <h3 class="text-xs md:text-sm font-bold text-slate-800">เข้าสู่ระบบพยาบาล (Admin Portal)</h3>
+            <span class="text-lg">🌿</span>
+            <h3 class="text-xs md:text-sm font-bold text-slate-800">เข้าสู่ระบบเจ้าหน้าที่แพทย์แผนไทย</h3>
           </div>
           <button onclick="closeAdminModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">✕</button>
-        </div>
-
-        <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900">
-          สำหรับเจ้าหน้าที่พยาบาลประจำตึกและ NICU เพื่อติดตามและบันทึกการนวดเต้านมของคุณแม่
         </div>
 
         <div class="space-y-1.5">
@@ -849,6 +1097,7 @@
   <script>
     /* Application State */
     const appState = {
+      userRole: 'mother', // 'mother' (ค่าเริ่มต้นสำหรับคุณแม่) หรือ 'admin' (สำหรับเจ้าหน้าที่)
       activeTab: 'assess',
       name: '',
       hn: '',
@@ -869,6 +1118,8 @@
       lastActionMessage: null,
       lastActionTime: null,
       thaiMedAppt: null,
+      isDischarged: false,
+      dischargedTime: null,
       pumps: 0,
       totalVolume: 0.0,
       logs: [],
@@ -884,6 +1135,65 @@
     let confirmCallback = null;
     let currentThaiMedTargetPatientId = null;
     let currentAdviceTargetPatientId = null;
+
+    /* จัดการการแสดงผลตามสิทธิ์ผู้ใช้งาน (Role-based UI) */
+    function updateRoleUI() {
+      const headerAdminBtn = document.getElementById('headerAdminBtn');
+      const headerExitAdminBtn = document.getElementById('headerExitAdminBtn');
+      const footerGateway = document.getElementById('footerStaffGateway');
+
+      if (appState.userRole === 'admin' && appState.isAdminLoggedIn) {
+        if (headerAdminBtn) {
+          headerAdminBtn.classList.remove('hidden');
+          headerAdminBtn.classList.add('flex');
+        }
+        if (headerExitAdminBtn) {
+          headerExitAdminBtn.classList.remove('hidden');
+          headerExitAdminBtn.classList.add('flex');
+        }
+        if (footerGateway) {
+          footerGateway.innerHTML = `
+            <span class="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+              ✓ กำลังใช้งานในโหมดเจ้าหน้าที่
+            </span>
+            <button onclick="switchToMotherMode()" class="ml-2 text-rose-600 hover:text-rose-700 underline">ออกจากโหมดเจ้าหน้าที่</button>
+          `;
+        }
+      } else {
+        // โหมดคุณแม่: ซ่อนปุ่มและหน้าต่าง Admin ทั้งหมด
+        if (headerAdminBtn) {
+          headerAdminBtn.classList.add('hidden');
+          headerAdminBtn.classList.remove('flex');
+        }
+        if (headerExitAdminBtn) {
+          headerExitAdminBtn.classList.add('hidden');
+          headerExitAdminBtn.classList.remove('flex');
+        }
+        if (footerGateway) {
+          footerGateway.innerHTML = `
+            <button onclick="promptStaffLogin()" class="text-slate-400 hover:text-slate-600 underline text-[10px] transition cursor-pointer">
+              🔒 สำหรับเจ้าหน้าที่
+            </button>
+          `;
+        }
+        closeAdminModal();
+      }
+    }
+
+    /* เข้าสู่ระบบเจ้าหน้าที่จาก Footer หรือ URL */
+    function promptStaffLogin() {
+      openAdminModal();
+    }
+
+    /* สลับกลับเป็นมุมมองคุณแม่ (ออกจากโหมดเจ้าหน้าที่) */
+    function switchToMotherMode() {
+      appState.userRole = 'mother';
+      appState.isAdminLoggedIn = false;
+      closeAdminModal();
+      saveState();
+      updateRoleUI();
+      showToast('สลับเข้าสู่โหมดคุณแม่เรียบร้อย');
+    }
 
     /* Tab Switcher */
     function switchTab(tabId) {
@@ -999,7 +1309,20 @@
       if (q3 === 'frequent') score += 3; else if (q3 === 'average') score += 2; else score += 1;
       if (q4 === 'relaxed') score += 3; else if (q4 === 'mild_anxiety') score += 2; else score += 1;
 
-      if (q2 === 'good_flow') {
+      if (q2 === 'well_flow') {
+        symptomsText = 'น้ำนมไหลดี';
+        score += 4;
+        title = 'ยอดเยี่ยมมาก! น้ำนมไหลดีและต่อเนื่อง';
+        desc = 'ต่อมน้ำนมของคุณแม่ตอบสนองได้ดีเยี่ยม มีน้ำนมไหลพุ่งหรือไหลต่อเนื่องเป็นสาย แสดงว่าท่อน้ำนมเปิดกว้างและฮอร์โมนหลั่งสมบูรณ์';
+        adviceHtml = `
+          <p class="font-bold text-emerald-800">คำแนะนำ:</p>
+          <ul class="list-disc list-inside space-y-0.5 text-[11px] text-emerald-900">
+            <li>เก็บน้ำนมใส่ Syringe หรือภาชนะสะอาดแช่เย็นอย่างถูกสุขอนามัย</li>
+            <li>คงความถี่การบีบระบายน้ำนมทุก 2-3 ชม. เพื่อรักษาระดับการผลิตน้ำนมอย่างต่อเนื่อง</li>
+            <li>ดื่มน้ำอุ่นบ่อยๆ และพักผ่อนให้เพียงพอ</li>
+          </ul>
+        `;
+      } else if (q2 === 'good_flow') {
         symptomsText = 'หยดสีเหลืองทอง 0.1-2 มล.';
         score += 3;
         title = 'ยอดเยี่ยมมาก! การสร้างหัวน้ำนมสมบูรณ์แบบ';
@@ -1082,6 +1405,9 @@
         } else if (q2 === 'no_milk') {
           resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800';
           resBadge.innerText = 'รอการกระตุ้น';
+        } else if (q2 === 'well_flow') {
+          resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white';
+          resBadge.innerText = 'น้ำนมไหลดี';
         } else {
           resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800';
           resBadge.innerText = 'ปกติ';
@@ -1303,13 +1629,10 @@
     function openAdminModal() {
       const modal = document.getElementById('adminModal');
       if (!modal) return;
-      modal.classList.remove('hidden');
 
-      if (appState.isAdminLoggedIn) {
-        document.getElementById('adminAuthSection')?.classList.add('hidden');
-        document.getElementById('adminDashboardSection')?.classList.remove('hidden');
-        renderAdminDashboard();
-      } else {
+      // หากอยู่ในโหมดคุณแม่ และยังไม่ได้ยืนยันตัวตน ให้แสดงเฉพาะหน้ากรอก PIN
+      if (!appState.isAdminLoggedIn) {
+        modal.classList.remove('hidden');
         document.getElementById('adminAuthSection')?.classList.remove('hidden');
         document.getElementById('adminDashboardSection')?.classList.add('hidden');
         const pinInput = document.getElementById('adminPinInput');
@@ -1317,6 +1640,11 @@
           pinInput.value = '';
           pinInput.focus();
         }
+      } else {
+        modal.classList.remove('hidden');
+        document.getElementById('adminAuthSection')?.classList.add('hidden');
+        document.getElementById('adminDashboardSection')?.classList.remove('hidden');
+        renderAdminDashboard();
       }
     }
 
@@ -1324,24 +1652,65 @@
       document.getElementById('adminModal')?.classList.add('hidden');
     }
 
+    /* ปุ่มกลับบ้าน: ปรับปรุงให้แยกการทำงานตามสิทธิ์ (คุณแม่ vs เจ้าหน้าที่) */
+    function returnToAdminHome() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+      // บันทึกสถานะว่าคนไข้กลับบ้านแล้ว
+      appState.isDischarged = true;
+      appState.dischargedTime = timeStr;
+
+      if (appState.name && appState.ward) {
+        const existingIdx = appState.adminPatients.findIndex(p => p.name === appState.name && p.ward === appState.ward);
+        if (existingIdx !== -1) {
+          appState.adminPatients[existingIdx].isDischarged = true;
+          appState.adminPatients[existingIdx].dischargedTime = timeStr;
+          if (!appState.adminPatients[existingIdx].nurseNotes) {
+            appState.adminPatients[existingIdx].nurseNotes = [];
+          }
+          appState.adminPatients[existingIdx].nurseNotes.push({
+            time: timeStr,
+            text: 'คนไข้กลับบ้านแล้ว (Discharge)'
+          });
+        }
+        syncCurrentPatientToAdminList();
+      }
+
+      saveState();
+
+      // หากเป็นโหมดเจ้าหน้าที่ ให้เปิดหน้าต่าง Admin
+      if (appState.userRole === 'admin' && appState.isAdminLoggedIn) {
+        openAdminModal();
+        showToast('บันทึกสถานะ: คนไข้กลับบ้านแล้ว');
+      } else {
+        // หากเป็นโหมดคุณแม่ ไม่เปิดหน้า Admin แต่แสดงกล่องข้อความขอบคุณและอวยพร
+        showConfirmModal(
+          'ขอแสดงความยินดีด้วยนะคะ 🌸',
+          `ระบบได้บันทึกสถานะกลับบ้านของคุณแม่เรียบร้อยแล้ว ขอให้คุณแม่และลูกน้อยมีสุขภาพแข็งแรง มีน้ำนมแม่เพียงพอ และมีความสุขในทุกๆ วันนะคะ 💕`,
+          () => {}
+        );
+      }
+    }
+
     function verifyAdminPin() {
       const pin = document.getElementById('adminPinInput')?.value;
       if (pin === ADMIN_PIN_DEFAULT) {
         appState.isAdminLoggedIn = true;
+        appState.userRole = 'admin';
         document.getElementById('adminAuthSection')?.classList.add('hidden');
         document.getElementById('adminDashboardSection')?.classList.remove('hidden');
+        saveState();
+        updateRoleUI();
         renderAdminDashboard();
-        showToast('เข้าสู่ระบบพยาบาลสำเร็จ');
+        showToast('เข้าสู่ระบบเจ้าหน้าที่แพทย์แผนไทยสำเร็จ');
       } else {
         showToast('รหัส PIN ไม่ถูกต้อง (ค่าเริ่มต้น 1234)');
       }
     }
 
     function logoutAdmin() {
-      appState.isAdminLoggedIn = false;
-      document.getElementById('adminAuthSection')?.classList.remove('hidden');
-      document.getElementById('adminDashboardSection')?.classList.add('hidden');
-      showToast('ออกจากระบบแล้ว');
+      switchToMotherMode();
     }
 
     function filterAdminWard() {
@@ -1391,6 +1760,8 @@
         lastActionMessage: appState.lastActionMessage || (existingPatient ? existingPatient.lastActionMessage : null),
         lastActionTime: appState.lastActionTime || (existingPatient ? existingPatient.lastActionTime : null),
         thaiMedAppt: appState.thaiMedAppt || (existingPatient ? existingPatient.thaiMedAppt : null),
+        isDischarged: appState.isDischarged !== undefined ? appState.isDischarged : (existingPatient ? !!existingPatient.isDischarged : false),
+        dischargedTime: appState.dischargedTime || (existingPatient ? existingPatient.dischargedTime : null),
         pumps: appState.pumps,
         totalVolume: appState.totalVolume,
         logs: appState.logs,
@@ -1577,6 +1948,8 @@
           symptomBadgeClass = 'bg-amber-100 text-amber-800 font-bold border border-amber-300';
         } else if (patient.symptoms === 'ไม่มีน้ำนม') {
           symptomBadgeClass = 'bg-blue-100 text-blue-800';
+        } else if (patient.symptoms === 'น้ำนมไหลดี') {
+          symptomBadgeClass = 'bg-emerald-600 text-white font-bold shadow-2xs';
         }
 
         const isStimulated = !!patient.massagedStimulate;
@@ -1599,6 +1972,12 @@
                   <span class="text-[10px] px-2 py-0.5 rounded-full ${symptomBadgeClass}">
                     อาการ: ${patient.symptoms || 'รอประเมิน'}
                   </span>
+                  ${patient.isDischarged ? `
+                    <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-rose-600 text-white font-bold shadow-xs flex items-center gap-1 animate-pulse border border-rose-700">
+                      <span>🏠</span>
+                      <span>คนไข้กลับบ้านแล้ว ${patient.dischargedTime ? `(${patient.dischargedTime} น.)` : ''}</span>
+                    </span>
+                  ` : ''}
                 </div>
                 <p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 flex-wrap">
                   <span>ตึก: <strong class="text-slate-800">${patient.ward}</strong></span>
@@ -1610,6 +1989,10 @@
                   <span class="text-slate-600 font-medium">🏠 <strong class="text-slate-800">${patient.district || 'ไม่ระบุอำเภอ'}</strong></span>
                   <span class="text-slate-300">|</span>
                   <span class="text-slate-600 font-medium">📅 บันทึก: <strong class="text-slate-800">${formatDateThai(patient.recordDate) || 'วันนี้'}</strong></span>
+                  ${patient.isDischarged ? `
+                    <span class="text-slate-300">|</span>
+                    <span class="text-rose-600 font-bold">🏠 คนไข้กลับบ้านแล้ว</span>
+                  ` : ''}
                 </p>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
@@ -2261,6 +2644,8 @@
       appState.lastActionMessage = null;
       appState.lastActionTime = null;
       appState.thaiMedAppt = null;
+      appState.isDischarged = false;
+      appState.dischargedTime = null;
       appState.pumps = 0;
       appState.totalVolume = 0.0;
       appState.logs = [];
@@ -2300,7 +2685,7 @@
       }
 
       let csv = "\uFEFF"; // UTF-8 BOM
-      csv += "วันที่บันทึก,HN,ชื่อ-นามสกุล,ที่อยู่(อำเภอ),ตึก,เตียง,วิธีการคลอด,แพทย์แผนไทย,อาการ,นวดกระตุ้นน้ำนม,นวดเปิดท่อน้ำนม,รอบบีบสะสม,ปริมาณรวม(มล.),ติดตามทันที,ติดตาม 2 ชม.,ติดตาม 4 ชม.,เวลาประเมินล่าสุด\n";
+      csv += "วันที่บันทึก,สถานะ,HN,ชื่อ-นามสกุล,ที่อยู่(อำเภอ),ตึก,เตียง,วิธีการคลอด,แพทย์แผนไทย,อาการ,นวดกระตุ้นน้ำนม,นวดเปิดท่อน้ำนม,รอบบีบสะสม,ปริมาณรวม(มล.),ติดตามทันที,ติดตาม 2 ชม.,ติดตาม 4 ชม.,เวลาประเมินล่าสุด\n";
 
       filtered.forEach(p => {
         const imm = p.flowFollowUps?.find(f => f.stage === 'หลังนวดทันที');
@@ -2310,8 +2695,9 @@
         const immText = imm ? `${imm.result} (${imm.volume} มล. เวลา ${imm.time})` : 'ยังไม่บันทึก';
         const h2Text = h2 ? `${h2.result} (${h2.volume} มล. เวลา ${h2.time})` : 'ยังไม่บันทึก';
         const h4Text = h4 ? `${h4.result} (${h4.volume} มล. เวลา ${h4.time})` : 'ยังไม่บันทึก';
+        const statusText = p.isDischarged ? `คนไข้กลับบ้านแล้ว (${p.dischargedTime || ''})` : 'อยู่ระหว่างการดูแล';
 
-        csv += `"${formatDateThai(p.recordDate) || '-'}","${p.hn || '-'}","${p.name}","${p.district || '-'}","${p.ward}","${p.bed || '-'}","${p.deliveryType || '-'}","${p.provider || '-'}","${p.symptoms || '-'}","${p.massagedStimulate || 'ยังไม่ได้นวด'}","${p.massagedUnclog || 'ยังไม่ได้นวด'}",${p.pumps || 0},${(p.totalVolume || 0).toFixed(1)},"${immText}","${h2Text}","${h4Text}","${p.lastAssessedTime || '-'}"\n`;
+        csv += `"${formatDateThai(p.recordDate) || '-'}","${statusText}","${p.hn || '-'}","${p.name}","${p.district || '-'}","${p.ward}","${p.bed || '-'}","${p.deliveryType || '-'}","${p.provider || '-'}","${p.symptoms || '-'}","${p.massagedStimulate || 'ยังไม่ได้นวด'}","${p.massagedUnclog || 'ยังไม่ได้นวด'}",${p.pumps || 0},${(p.totalVolume || 0).toFixed(1)},"${immText}","${h2Text}","${h4Text}","${p.lastAssessedTime || '-'}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -2332,6 +2718,24 @@
 
     function closeBabyPhotoModal() {
       document.getElementById('babyModal')?.classList.add('hidden');
+    }
+
+    /* พรีวิวรูปภาพท่าทางการวางนิ้วรูปตัว C (เมื่อผู้ใช้เลือกไฟล์ภาพจริงจากเครื่อง) */
+    function previewCShapePhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const wrapper = document.getElementById('cShapeImageWrapper');
+          if (wrapper) {
+            wrapper.innerHTML = `
+              <img src="${e.target.result}" alt="การวางนิ้วรูปตัว C" class="w-full h-full object-cover rounded-xl shadow-2xs">
+            `;
+            showToast('อัปเดตรูปภาพการวางนิ้วรูปตัว C เรียบร้อย');
+          }
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     function handleBabyPhotoUpload(event) {
@@ -2399,6 +2803,7 @@
     function saveState() {
       try {
         localStorage.setItem('lacta_first24_state_v2', JSON.stringify({
+          userRole: appState.userRole,
           name: appState.name,
           hn: appState.hn || '',
           ward: appState.ward,
@@ -2418,6 +2823,8 @@
           lastActionMessage: appState.lastActionMessage || null,
           lastActionTime: appState.lastActionTime || null,
           thaiMedAppt: appState.thaiMedAppt || null,
+          isDischarged: appState.isDischarged || false,
+          dischargedTime: appState.dischargedTime || null,
           pumps: appState.pumps,
           totalVolume: appState.totalVolume,
           logs: appState.logs,
@@ -2435,6 +2842,8 @@
         const saved = localStorage.getItem('lacta_first24_state_v2');
         if (saved) {
           const parsed = JSON.parse(saved);
+          appState.userRole = parsed.userRole || 'mother';
+          appState.isAdminLoggedIn = parsed.userRole === 'admin';
           appState.name = parsed.name || '';
           appState.hn = parsed.hn || '';
           appState.ward = parsed.ward || '';
@@ -2454,6 +2863,8 @@
           appState.lastActionMessage = parsed.lastActionMessage || null;
           appState.lastActionTime = parsed.lastActionTime || null;
           appState.thaiMedAppt = parsed.thaiMedAppt || null;
+          appState.isDischarged = parsed.isDischarged || false;
+          appState.dischargedTime = parsed.dischargedTime || null;
           appState.pumps = parsed.pumps || 0;
           appState.totalVolume = parsed.totalVolume || 0.0;
           appState.logs = parsed.logs || [];
@@ -2484,6 +2895,12 @@
             if (preview) preview.src = appState.babyPhoto;
           }
         }
+
+        // ตรวจสอบ URL query param หากมี ?admin=1 หรือ ?role=admin ให้เปิดหน้าต่างล็อกอินเจ้าหน้าที่
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('admin') === '1' || urlParams.get('role') === 'admin') {
+          openAdminModal();
+        }
       } catch (e) {
         console.error('Storage load error:', e);
       }
@@ -2491,6 +2908,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
+      updateRoleUI();
       updateTrackerUI();
       updateFlowMonitoringUI();
       updateCareStatusUI();

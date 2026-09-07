@@ -41,6 +41,33 @@
     .highlight-ring {
       animation: pulse-ring 1.8s infinite;
     }
+
+    /* สไตล์ปุ่มเลือกระยะเวลาติดตามผลเมื่อถูกเลือก (Active Selected State) */
+    .stage-card:has(input:checked) {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      border-color: #b45309 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px -1px rgba(217, 119, 6, 0.45) !important;
+      transform: translateY(-1px);
+    }
+    .stage-card:has(input:checked) span {
+      color: #ffffff !important;
+    }
+    .stage-card:has(input:checked) [id^="badgeStage"] {
+      background-color: rgba(255, 255, 255, 0.28) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.5) !important;
+      font-weight: 600 !important;
+    }
+
+    /* สไตล์ตัวเลือกลักษณะการไหลเมื่อถูกเลือก */
+    .flow-result-card:has(input:checked) {
+      background-color: #fef3c7 !important;
+      border-color: #f59e0b !important;
+      box-shadow: 0 2px 8px -1px rgba(245, 158, 11, 0.25) !important;
+      color: #78350f !important;
+      font-weight: 600 !important;
+    }
   </style>
 </head>
 
@@ -423,21 +450,42 @@
                   <span class="text-[10px] text-amber-700 font-normal">เป้าหมายประเมิน 3 ช่วงเวลา</span>
                 </label>
                 <div class="grid grid-cols-3 gap-1.5 text-xs">
-                  <label class="flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-500 has-checked:text-white transition cursor-pointer text-center group">
+                  <label class="stage-card flex flex-col items-center justify-center p-2 rounded-xl bg-white border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-amber-500 has-[:checked]:to-amber-600 has-[:checked]:border-amber-600 has-[:checked]:text-white has-[:checked]:shadow-md transition-all cursor-pointer text-center group">
                     <input type="radio" name="flowStage" value="หลังนวดทันที" class="sr-only" checked onchange="updateStageSelectionUI()">
-                    <span class="text-[10px] md:text-xs font-bold">หลังนวดทันที</span>
-                    <span id="badgeStageImmediate" class="text-[9px] mt-0.5 px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 group-has-checked:bg-white/20 group-has-checked:text-white">ยังไม่บันทึก</span>
+                    <span class="text-[10px] md:text-xs font-bold text-slate-700 transition">หลังนวดทันที</span>
+                    <span id="badgeStageImmediate" class="text-[9px] mt-0.5 px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 transition">ยังไม่บันทึก</span>
                   </label>
-                  <label class="flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-500 has-checked:text-white transition cursor-pointer text-center group">
+                  <label class="stage-card flex flex-col items-center justify-center p-2 rounded-xl bg-white border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-amber-500 has-[:checked]:to-amber-600 has-[:checked]:border-amber-600 has-[:checked]:text-white has-[:checked]:shadow-md transition-all cursor-pointer text-center group">
                     <input type="radio" name="flowStage" value="2 ชั่วโมงหลังนวด" class="sr-only" onchange="updateStageSelectionUI()">
-                    <span class="text-[10px] md:text-xs font-bold">2 ชม. หลังนวด</span>
-                    <span id="badgeStage2Hr" class="text-[9px] mt-0.5 px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 group-has-checked:bg-white/20 group-has-checked:text-white">ยังไม่บันทึก</span>
+                    <span class="text-[10px] md:text-xs font-bold text-slate-700 transition">2 ชม. หลังนวด</span>
+                    <span id="badgeStage2Hr" class="text-[9px] mt-0.5 px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 transition">ยังไม่บันทึก</span>
                   </label>
-                  <label class="flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-500 has-checked:text-white transition cursor-pointer text-center group">
+                  <label class="stage-card flex flex-col items-center justify-center p-2 rounded-xl bg-white border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-amber-500 has-[:checked]:to-amber-600 has-[:checked]:border-amber-600 has-[:checked]:text-white has-[:checked]:shadow-md transition-all cursor-pointer text-center group">
                     <input type="radio" name="flowStage" value="4 ชั่วโมงหลังนวด" class="sr-only" onchange="updateStageSelectionUI()">
-                    <span class="text-[10px] md:text-xs font-bold">4 ชม. หลังนวด</span>
-                    <span id="badgeStage4Hr" class="text-[9px] mt-0.5 px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 group-has-checked:bg-white/20 group-has-checked:text-white">ยังไม่บันทึก</span>
+                    <span class="text-[10px] md:text-xs font-bold text-slate-700 transition">4 ชม. หลังนวด</span>
+                    <span id="badgeStage4Hr" class="text-[9px] mt-0.5 px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 transition">ยังไม่บันทึก</span>
                   </label>
+                </div>
+              </div>
+
+              <!-- แถบตั้งเตือนในนาฬิกามือถือของคุณแม่ -->
+              <div class="p-2.5 rounded-xl bg-amber-100/70 border border-amber-200 space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-amber-950 flex items-center gap-1">
+                    <span>⏰</span>
+                    <span>ตั้งเตือนในนาฬิกามือถือคุณแม่:</span>
+                  </span>
+                  <span id="activeCountdownBadge" class="hidden text-[10px] text-amber-800 font-bold bg-white px-2 py-0.5 rounded-full border border-amber-300"></span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" onclick="openAlarmModal(2)" class="py-2 px-2.5 bg-white hover:bg-amber-50 active:bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1 shadow-2xs transition">
+                    <span>⏰</span>
+                    <span id="alarmBtn2HrText">เตือน 2 ชม. หลังนวด</span>
+                  </button>
+                  <button type="button" onclick="openAlarmModal(4)" class="py-2 px-2.5 bg-white hover:bg-amber-50 active:bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1 shadow-2xs transition">
+                    <span>⏰</span>
+                    <span id="alarmBtn4HrText">เตือน 4 ชม. หลังนวด</span>
+                  </button>
                 </div>
               </div>
 
@@ -445,19 +493,19 @@
               <div class="space-y-1.5">
                 <label class="block text-[11px] font-bold text-slate-700">ลักษณะการไหลของน้ำนมที่สังเกตได้: <span class="text-amber-700">*</span></label>
                 <div class="grid grid-cols-2 gap-1.5 text-xs">
-                  <label class="flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
+                  <label class="flow-result-card flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-100/90 has-[:checked]:font-semibold transition cursor-pointer text-[11px]">
                     <input type="radio" name="flowResult" value="หยดต่อเนื่อง 0.5-2+ มล." class="accent-amber-600 mr-1.5">
                     <span>หยดต่อเนื่อง (0.5-2+ มล.)</span>
                   </label>
-                  <label class="flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
+                  <label class="flow-result-card flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-100/90 has-[:checked]:font-semibold transition cursor-pointer text-[11px]">
                     <input type="radio" name="flowResult" value="ซึมเป็นหยด 0.1-0.4 มล." class="accent-amber-600 mr-1.5">
                     <span>ซึมเป็นหยด (0.1-0.4 มล.)</span>
                   </label>
-                  <label class="flex items-center p-2 rounded-xl border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
+                  <label class="flow-result-card flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-100/90 has-[:checked]:font-semibold transition cursor-pointer text-[11px]">
                     <input type="radio" name="flowResult" value="เคลือบปลายหัวนม/ละออง" class="accent-amber-600 mr-1.5">
                     <span>เคลือบปลายหัวนม/ละออง</span>
                   </label>
-                  <label class="flex items-center p-2 rounded-xl border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
+                  <label class="flow-result-card flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-100/90 has-[:checked]:font-semibold transition cursor-pointer text-[11px]">
                     <input type="radio" name="flowResult" value="เต้านิ่มลงแต่ยังไม่ไหล" class="accent-amber-600 mr-1.5">
                     <span>เต้านิ่มลงแต่ยังไม่ไหล</span>
                   </label>
@@ -1201,6 +1249,60 @@
     </div>
   </div>
 
+  <!-- Modal: ตั้งนาฬิกาปลุก / เตือนความจำมือถือ -->
+  <div id="alarmReminderModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-4 md:p-5 space-y-3.5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">⏰</span>
+          <h4 class="text-xs md:text-sm font-bold text-slate-800">ตั้งนาฬิกาเตือนในมือถือ</h4>
+        </div>
+        <button onclick="closeAlarmModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">✕</button>
+      </div>
+
+      <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200 text-xs text-amber-950 space-y-1">
+        <p class="font-bold flex items-center gap-1">
+          <span>🎯</span>
+          <span id="alarmModalTitle">เตือนติดตามการไหลของน้ำนม</span>
+        </p>
+        <p class="text-[11px] text-amber-800" id="alarmModalTargetTime">เป้าหมายเวลา: -</p>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <!-- ตัวเลือก 1: บันทึกลงปฏิทิน/เตือนความจำมือถือพร้อมเสียงปลุก (iOS & Android) -->
+        <button onclick="downloadCalendarReminder()" class="w-full p-3 rounded-2xl border-2 border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-left transition flex items-center gap-3 group">
+          <span class="text-2xl p-2 rounded-xl bg-amber-100 group-hover:bg-amber-200 transition">📅</span>
+          <div>
+            <p class="text-xs font-bold text-amber-950">บันทึกลงปฏิทินมือถือ (มีเสียงปลุก)</p>
+            <p class="text-[10px] text-slate-500">รองรับทั้ง iPhone (Apple Calendar) และ Android</p>
+          </div>
+        </button>
+
+        <!-- ตัวเลือก 2: เปิดนาฬิกาปลุก / ตัวจับเวลาในเครื่อง -->
+        <button onclick="setNativeMobileAlarm()" class="w-full p-3 rounded-2xl border-2 border-slate-200 hover:bg-slate-50 active:bg-slate-100 text-left transition flex items-center gap-3 group">
+          <span class="text-2xl p-2 rounded-xl bg-slate-100 group-hover:bg-slate-200 transition">⏱️</span>
+          <div>
+            <p class="text-xs font-bold text-slate-800">เปิดแอปนาฬิกา / ตั้งเวลาในเครื่อง</p>
+            <p class="text-[10px] text-slate-500">เรียกแอป Clock หรือตัวนับเวลาของโทรศัพท์</p>
+          </div>
+        </button>
+
+        <!-- ตัวเลือก 3: เปิดนับถอยหลังพร้อมเสียงเตือนในเว็บ -->
+        <button onclick="startInAppCountdown()" class="w-full p-3 rounded-2xl border-2 border-rose-200 hover:bg-rose-50 active:bg-rose-100 text-left transition flex items-center gap-3 group">
+          <span class="text-2xl p-2 rounded-xl bg-rose-100 group-hover:bg-rose-200 transition">🔔</span>
+          <div>
+            <p class="text-xs font-bold text-rose-950">นับถอยหลังสดในหน้านี้</p>
+            <p class="text-[10px] text-slate-500">มีตัวนับเวลาสดพร้อมส่งเสียงเตือนเมื่อครบกำหนด</p>
+          </div>
+        </button>
+      </div>
+
+      <button onclick="closeAlarmModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition">
+        ปิดหน้าต่าง
+      </button>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toastNotification" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 text-white text-xs px-4 py-2 rounded-full shadow-lg pointer-events-none transition-all duration-300 opacity-0 transform -translate-y-2">
     บันทึกข้อมูลเรียบร้อย
@@ -1255,6 +1357,169 @@
     let confirmCallback = null;
     let currentThaiMedTargetPatientId = null;
     let currentAdviceTargetPatientId = null;
+    let currentAlarmTargetHours = 2;
+    let inAppCountdownTimer = null;
+
+    function updateAlarmHintsUI() {
+      const btn2 = document.getElementById('alarmBtn2HrText');
+      const btn4 = document.getElementById('alarmBtn4HrText');
+      if (!btn2 || !btn4) return;
+
+      const baseDate = new Date();
+      if (appState.lastMassageTime) {
+        const parts = appState.lastMassageTime.split(':');
+        if (parts.length >= 2) {
+          baseDate.setHours(parseInt(parts[0], 10), parseInt(parts[1], 10), 0, 0);
+        }
+      }
+
+      const target2 = new Date(baseDate.getTime() + 2 * 60 * 60 * 1000);
+      const target4 = new Date(baseDate.getTime() + 4 * 60 * 60 * 1000);
+
+      const str2 = target2.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+      const str4 = target4.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+      btn2.innerText = `เตือน 2 ชม. (${str2} น.)`;
+      btn4.innerText = `เตือน 4 ชม. (${str4} น.)`;
+    }
+
+    function openAlarmModal(hours) {
+      currentAlarmTargetHours = hours;
+      const modal = document.getElementById('alarmReminderModal');
+      const titleEl = document.getElementById('alarmModalTitle');
+      const targetEl = document.getElementById('alarmModalTargetTime');
+
+      const targetTime = new Date(Date.now() + hours * 60 * 60 * 1000);
+      const timeStr = targetTime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+      if (titleEl) titleEl.innerText = `เตือนติดตามการไหลของน้ำนม (${hours} ชั่วโมง)`;
+      if (targetEl) targetEl.innerText = `เป้าหมายเวลา: ${timeStr} น. (${hours} ชั่วโมงนับจากนี้)`;
+
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeAlarmModal() {
+      document.getElementById('alarmReminderModal')?.classList.add('hidden');
+    }
+
+    /* เปิดแอปนาฬิกาหรือ Timer ของมือถือ */
+    function setNativeMobileAlarm() {
+      const seconds = currentAlarmTargetHours * 3600;
+      const targetDate = new Date(Date.now() + seconds * 1000);
+      const hour = targetDate.getHours();
+      const minutes = targetDate.getMinutes();
+
+      // พยายามเปิดผ่าน Intent ของ Android หรือ Web Intent
+      const isAndroid = /android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        window.location.href = `intent:#Intent;action=android.intent.action.SET_TIMER;i.android.intent.extra.LENGTH=${seconds};S.android.intent.extra.MESSAGE=First24%20%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%99%E0%B8%A1;end`;
+      } else {
+        // สำหรับ iOS / Desktop: แนะนำบันทึกลงปฏิทินพร้อมเสียงเตือน
+        downloadCalendarReminder();
+      }
+      showToast(`เปิดนาฬิกาตั้งเตือน ${currentAlarmTargetHours} ชม. (${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} น.)`);
+      closeAlarmModal();
+    }
+
+    /* สร้างไฟล์ .ics พร้อมเสียงปลุก (VALARM) สำหรับ iPhone และ Android */
+    function downloadCalendarReminder() {
+      const now = new Date();
+      const start = new Date(now.getTime() + currentAlarmTargetHours * 60 * 60 * 1000);
+      const end = new Date(start.getTime() + 15 * 60 * 1000);
+
+      function toICSDate(d) {
+        return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+      }
+
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//First24 LactaCare//Alarm Reminder//TH',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:lactacare-${Date.now()}@lactacare.local`,
+        `DTSTAMP:${toICSDate(now)}`,
+        `DTSTART:${toICSDate(start)}`,
+        `DTEND:${toICSDate(end)}`,
+        `SUMMARY:⏰ ถึงเวลาติดตามการไหลของน้ำนม (${currentAlarmTargetHours} ชม.)`,
+        'DESCRIPTION:ประเมินและบันทึกการไหลของหัวน้ำนมในแอป First24 LactaCare เพื่อบันทึกปริมาณและส่งต่อให้ลูกน้อย',
+        'STATUS:CONFIRMED',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT0M',
+        'ACTION:AUDIO',
+        'DESCRIPTION:Reminder',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `LactaCare_Alarm_${currentAlarmTargetHours}hr.ics`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showToast(`บันทึกการเตือน ${currentAlarmTargetHours} ชม. ลงปฏิทินมือถือเรียบร้อย`);
+      closeAlarmModal();
+    }
+
+    /* นับถอยหลังสดบนเว็บแอปพร้อมแจ้งเตือนด้วยเสียง */
+    function startInAppCountdown() {
+      if (inAppCountdownTimer) clearInterval(inAppCountdownTimer);
+      const targetTime = Date.now() + currentAlarmTargetHours * 60 * 60 * 1000;
+      const badge = document.getElementById('activeCountdownBadge');
+
+      if (badge) {
+        badge.classList.remove('hidden');
+      }
+
+      function tick() {
+        const remaining = targetTime - Date.now();
+        if (remaining <= 0) {
+          clearInterval(inAppCountdownTimer);
+          inAppCountdownTimer = null;
+          if (badge) badge.innerText = '⏰ ครบกำหนดเวลาแล้ว!';
+          playAlarmBeep();
+          showToast(`🔔 ครบกำหนด ${currentAlarmTargetHours} ชั่วโมงแล้ว! กรุณาบันทึกการไหลของน้ำนม`);
+          return;
+        }
+
+        const hrs = Math.floor(remaining / (1000 * 60 * 60));
+        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((remaining % (1000 * 60)) / 1000);
+        if (badge) {
+          badge.innerText = `⏳ เหลือ ${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+      }
+
+      tick();
+      inAppCountdownTimer = setInterval(tick, 1000);
+      showToast(`เริ่มนับถอยหลัง ${currentAlarmTargetHours} ชั่วโมงในหน้านี้แล้ว`);
+      closeAlarmModal();
+    }
+
+    /* เสียงสัญญาณเตือนด้วย Web Audio API */
+    function playAlarmBeep() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
+      } catch (e) {
+        console.log('Audio notification fallback');
+      }
+    }
 
     /* จัดการการแสดงผลตามสิทธิ์ผู้ใช้งาน (Role-based UI) */
     function updateRoleUI() {
@@ -1961,6 +2226,37 @@ function doGet(e) {
       if (bImm) bImm.innerText = imm ? `✓ ${imm.volume} มล.` : 'ยังไม่บันทึก';
       if (b2) b2.innerText = h2 ? `✓ ${h2.volume} มล.` : 'ยังไม่บันทึก';
       if (b4) b4.innerText = h4 ? `✓ ${h4.volume} มล.` : 'ยังไม่บันทึก';
+
+      // อัปเดตสีและสถานะของปุ่มที่ถูกเลือกให้เด่นชัด แตกต่างจากพื้นหลัง 100%
+      document.querySelectorAll('.stage-card').forEach(card => {
+        const radio = card.querySelector('input[name="flowStage"]');
+        const titleSpan = card.querySelector('span:first-of-type');
+        const badgeSpan = card.querySelector('[id^="badgeStage"]');
+
+        if (radio && radio.checked) {
+          card.classList.add('bg-gradient-to-r', 'from-amber-500', 'to-amber-600', 'border-amber-600', 'shadow-md');
+          card.classList.remove('bg-white', 'border-slate-200');
+          if (titleSpan) {
+            titleSpan.classList.add('text-white');
+            titleSpan.classList.remove('text-slate-700');
+          }
+          if (badgeSpan) {
+            badgeSpan.classList.add('bg-white/25', 'text-white', 'border-white/40');
+            badgeSpan.classList.remove('bg-slate-100', 'text-slate-600', 'border-slate-200');
+          }
+        } else {
+          card.classList.remove('bg-gradient-to-r', 'from-amber-500', 'to-amber-600', 'border-amber-600', 'shadow-md');
+          card.classList.add('bg-white', 'border-slate-200');
+          if (titleSpan) {
+            titleSpan.classList.remove('text-white');
+            titleSpan.classList.add('text-slate-700');
+          }
+          if (badgeSpan) {
+            badgeSpan.classList.remove('bg-white/25', 'text-white', 'border-white/40');
+            badgeSpan.classList.add('bg-slate-100', 'text-slate-600', 'border-slate-200');
+          }
+        }
+      });
     }
 
     function updateFlowMonitoringUI() {
@@ -3374,6 +3670,7 @@ function doGet(e) {
       updateFlowMonitoringUI();
       updateCareStatusUI();
       renderThaiMedApptUI();
+      updateAlarmHintsUI();
       loadDataFromGoogleSheets();
     });
   </script>

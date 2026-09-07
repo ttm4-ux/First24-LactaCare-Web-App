@@ -1073,9 +1073,9 @@
         </div>
 
         <!-- Metric Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-center">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-2.5 text-center">
           <div class="bg-slate-50 p-3 md:p-4 rounded-2xl border border-slate-200">
-            <p class="text-[11px] text-slate-500 font-semibold">คุณแม่ในระบบ</p>
+            <p class="text-[11px] text-slate-500 font-semibold">คุณแม่กำลังดูแล</p>
             <p class="text-xl md:text-2xl font-bold text-slate-800 mt-0.5"><span id="adminTotalPatients">0</span> <span class="text-xs font-normal">ท่าน</span></p>
           </div>
           <div class="bg-rose-50 p-3 md:p-4 rounded-2xl border border-rose-200">
@@ -1086,63 +1086,78 @@
             <p class="text-[11px] text-amber-700 font-semibold">ส่งนัดแพทย์แผนไทย</p>
             <p class="text-xl md:text-2xl font-bold text-amber-900 mt-0.5"><span id="adminThaiMedCount">0</span> <span class="text-xs font-normal">เคส</span></p>
           </div>
-          <div class="hidden md:block bg-emerald-50 p-3 md:p-4 rounded-2xl border border-emerald-200">
+          <div class="bg-emerald-50 p-3 md:p-4 rounded-2xl border border-emerald-200">
             <p class="text-[11px] text-emerald-700 font-semibold">บันทึกการนวดเต้า</p>
             <p class="text-xl md:text-2xl font-bold text-emerald-900 mt-0.5"><span id="adminMassageCount">0</span> <span class="text-xs font-normal">ครั้ง</span></p>
           </div>
+          <div class="bg-indigo-50 p-3 md:p-4 rounded-2xl border border-indigo-200">
+            <p class="text-[11px] text-indigo-700 font-semibold">ประวัติการดูแล</p>
+            <p class="text-xl md:text-2xl font-bold text-indigo-900 mt-0.5"><span id="adminHistoryPatients">0</span> <span class="text-xs font-normal">ท่าน</span></p>
+          </div>
         </div>
 
-        <!-- Filter Ward, Status, Search & Export -->
+        <!-- หน้าแสดงรายการ + View หลายรูปแบบ -->
+        <div class="flex flex-wrap items-center justify-between gap-2 bg-white p-2.5 rounded-2xl border border-slate-200 shadow-2xs">
+          <div class="flex items-center gap-1.5" role="tablist" aria-label="หน้ารายชื่อคุณแม่">
+            <button id="adminPageActiveBtn" onclick="setAdminPage('active')" class="px-3 py-1.5 rounded-xl bg-slate-800 text-white text-xs font-bold shadow-xs transition">
+              👩‍🍼 รายชื่อปัจจุบัน <span id="adminActiveBadge" class="ml-1 opacity-80">0</span>
+            </button>
+            <button id="adminPageHistoryBtn" onclick="setAdminPage('history')" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-indigo-50 hover:text-indigo-700 text-xs font-bold transition">
+              🗂️ ประวัติ <span id="adminHistoryBadge" class="ml-1 opacity-80">0</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5" role="group" aria-label="รูปแบบการแสดงผล">
+            <span class="text-[11px] text-slate-500 font-semibold">มุมมอง:</span>
+            <button id="adminViewCardBtn" onclick="setAdminView('card')" class="px-2.5 py-1.5 rounded-lg bg-rose-100 text-rose-700 text-[11px] font-bold transition">🗂️ การ์ด</button>
+            <button id="adminViewListBtn" onclick="setAdminView('list')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-[11px] font-bold transition">☷ รายการ</button>
+            <button id="adminViewTableBtn" onclick="setAdminView('table')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-[11px] font-bold transition">▦ ตาราง</button>
+          </div>
+        </div>
+
+        <!-- Filter สถานะเท่านั้น -->
         <div class="space-y-2 bg-slate-50 p-3 rounded-2xl border border-slate-200">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex-1 min-w-[200px] relative">
-              <input type="text" id="adminSearchInput" oninput="filterAdminWard()" placeholder="🔍 ค้นหาชื่อคุณแม่, HN, เตียง, อำเภอ..." 
-                     class="w-full text-xs px-3 py-2 pl-8 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-slate-400">
-              <span class="absolute left-2.5 top-2.5 text-xs text-slate-400">🔍</span>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-600 font-bold text-[11px]">ตัวกรองสถานะ</span>
+              <span id="adminFilterSummary" class="text-[10px] text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full">ทั้งหมด</span>
             </div>
-            <div class="flex items-center gap-1.5">
-              <button onclick="fetchPatientsFromGoogleSheets()" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition active:scale-95">
-                <span id="fetchLoadingSpinner">🔄</span>
-                <span>ดึงข้อมูลล่าสุดจาก Sheets</span>
-              </button>
-              <button onclick="exportAdminCSV()" class="px-3 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold flex items-center gap-1.5 border border-slate-300 shadow-2xs transition">
-                <span>📥</span>
-                <span>ส่งออก CSV</span>
-              </button>
+            <button onclick="clearAdminFilters()" class="px-2.5 py-1 bg-white hover:bg-rose-50 text-rose-600 rounded-lg border border-rose-200 text-[10px] font-bold transition">ล้างตัวกรอง</button>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-2">
+            <label class="block font-bold text-slate-600 mb-1 text-[11px]">สถานะการดูแล</label>
+            <div id="adminStatusFilter" class="grid grid-cols-2 gap-1.5 text-xs">
+              <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-rose-50">
+                <input type="checkbox" name="adminStatusFilter" value="alert" onchange="filterAdminWard()" class="accent-rose-500">
+                <span>⚠️ เฝ้าระวัง</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-rose-50">
+                <input type="checkbox" name="adminStatusFilter" value="massaged" onchange="filterAdminWard()" class="accent-rose-500">
+                <span>💆‍♀️ นวดแล้ว</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-rose-50">
+                <input type="checkbox" name="adminStatusFilter" value="appt" onchange="filterAdminWard()" class="accent-rose-500">
+                <span>🌿 มีนัด</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg_rose-50">
+                <input type="checkbox" name="adminStatusFilter" value="discharged" onchange="filterAdminWard()" class="accent-rose-500">
+                <span>🏠 กลับบ้านแล้ว</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-rose-50">
+                <input type="checkbox" name="adminStatusFilter" value="completed" onchange="filterAdminWard()" class="accent-rose-500">
+                <span>✅ เสร็จสิ้น</span>
+              </label>
             </div>
           </div>
-          <div class="flex flex-wrap items-center justify-between gap-2 text-xs pt-1 border-t border-slate-200/60">
-            <div class="flex items-center gap-2 flex-wrap">
-              <div class="flex items-center gap-1">
-                <span class="text-slate-500 font-semibold text-[11px]">ตึก:</span>
-                <select id="adminWardFilter" onchange="filterAdminWard()" class="text-xs px-2.5 py-1.5 bg-white rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-400">
-                  <option value="all">ทุกตึกผู้ป่วย</option>
-                  <option value="นวมินทร์ 3">นวมินทร์ 3</option>
-                  <option value="นวมินทร์ 4">นวมินทร์ 4</option>
-                  <option value="เปี่ยมสุข 2">เปี่ยมสุข 2</option>
-                  <option value="ประชารักษ์ 4">ประชารักษ์ 4</option>
-                </select>
-              </div>
-              <div class="flex items-center gap-1">
-                <span class="text-slate-500 font-semibold text-[11px]">สถานะ:</span>
-                <select id="adminStatusFilter" onchange="filterAdminWard()" class="text-xs px-2.5 py-1.5 bg-white rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-400">
-                  <option value="all">ทุกสถานะ</option>
-                  <option value="alert">⚠️ กลุ่มเฝ้าระวัง</option>
-                  <option value="massaged">💆‍♀️ ได้รับการนวดแล้ว</option>
-                  <option value="appt">🌿 มีนัดแพทย์แผนไทย</option>
-                  <option value="discharged">🏠 กลับบ้านแล้ว</option>
-                </select>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center justify-between gap-2 text-xs">
               <span id="adminDataOriginBadge" class="text-[10px] text-slate-500 font-medium">แสดง <strong id="adminFilteredCount" class="text-slate-800">0</strong> ท่าน</span>
+              <span class="text-[10px] text-slate-400">เลือกหลายตัวในกลุ่มเดียวกันได้ และระบบจะกรองร่วมกันทุกกลุ่ม</span>
             </div>
           </div>
         </div>
 
         <div class="space-y-2">
           <p class="text-xs md:text-sm font-bold text-slate-700">รายชื่อคุณแม่และการดูแลเต้านม:</p>
-          <!-- Grid responsive: 1 column on mobile, 2 columns on PC -->
+          <!-- รูปแบบรายการถูกสร้างโดย JavaScript ตามมุมมองที่เลือก -->
           <div id="adminPatientList" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-96 md:max-h-[500px] overflow-y-auto custom-scrollbar pr-1">
             <!-- Patient cards rendered by JS -->
           </div>
@@ -1409,7 +1424,16 @@
       babyPhoto: null,
       isAdminLoggedIn: false,
       adminWardFilter: 'all',
+      adminPage: 'active',
+      adminView: 'card',
+      adminFilters: {
+        ward: [],
+        status: [],
+        symptoms: [],
+        deliveryType: []
+      },
       adminPatients: [],
+      adminHistory: [],
       nurseNotes: []
     };
 
@@ -1878,7 +1902,11 @@
       const h2Text = h2 ? `${h2.result} (${h2.volume} มล. เวลา ${h2.time})` : 'ยังไม่บันทึก';
       const h4Text = h4 ? `${h4.result} (${h4.volume} มล. เวลา ${h4.time})` : 'ยังไม่บันทึก';
 
-      let status = customStatus || (patient.isDischarged ? `คนไข้กลับบ้านแล้ว (${patient.dischargedTime || ''} น.)` : 'กำลังดูแล');
+      let status = customStatus || (
+        patient.isCompleted
+          ? (patient.completionStatus || `เสร็จสิ้นการดูแล (${patient.completedTime || ''} น.)`)
+          : (patient.isDischarged ? `คนไข้กลับบ้านแล้ว (${patient.dischargedTime || ''} น.)` : 'กำลังดูแล')
+      );
 
       // รวบรวมข้อมูลทั้งหมดบนการ์ด Admin ของคุณแม่ท่านนี้
       const payload = {
@@ -2378,7 +2406,11 @@ function doGet(e) {
           logs: appState.logs,
           flowFollowUps: appState.flowFollowUps || [],
           babyPhoto: appState.babyPhoto,
-          adminPatients: appState.adminPatients
+          adminPatients: appState.adminPatients,
+          adminHistory: appState.adminHistory || [],
+          adminPage: appState.adminPage || 'active',
+          adminView: appState.adminView || 'card',
+          adminFilters: appState.adminFilters || { ward: [], status: [], symptoms: [], deliveryType: [] }
         }));
       } catch (e) {
         console.error('Storage save error:', e);
@@ -2440,6 +2472,7 @@ function doGet(e) {
         modal.classList.remove('hidden');
         document.getElementById('adminAuthSection')?.classList.add('hidden');
         document.getElementById('adminDashboardSection')?.classList.remove('hidden');
+        syncAdminFilterControlsFromState();
         renderAdminDashboard();
         startAdminLiveSync();
       }
@@ -2523,6 +2556,7 @@ function doGet(e) {
         document.getElementById('adminDashboardSection')?.classList.remove('hidden');
         saveState();
         updateRoleUI();
+        syncAdminFilterControlsFromState();
         renderAdminDashboard();
         updateDirectSyncStatus();
         startAdminLiveSync();
@@ -2557,13 +2591,149 @@ function doGet(e) {
       }
     }
 
+    function getCheckedAdminValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value);
+    }
+
+    function readAdminFilters() {
+      const status = Array.from(document.querySelectorAll('input[name="adminStatusFilter"]:checked'))
+        .map(input => input.value);
+      const filters = {
+        ward: [],
+        status: status,
+        symptoms: [],
+        deliveryType: []
+      };
+      appState.adminFilters = filters;
+      appState.adminWardFilter = 'all';
+
+      const summary = document.getElementById('adminFilterSummary');
+      if (summary) {
+        summary.innerText = status ? 'เลือก: ' + status : 'ทั้งหมด';
+      }
+      return filters;
+    }
+
     function filterAdminWard() {
-      const wardFilter = document.getElementById('adminWardFilter')?.value || 'all';
-      const statusFilter = document.getElementById('adminStatusFilter')?.value || 'all';
+      readAdminFilters();
+      saveState(true);
       const searchTerm = (document.getElementById('adminSearchInput')?.value || '').trim().toLowerCase();
-      
-      appState.adminWardFilter = wardFilter;
-      renderAdminDashboard(searchTerm, statusFilter);
+      renderAdminDashboard(searchTerm);
+    }
+
+    function setAdminPage(page) {
+      appState.adminPage = page === 'history' ? 'history' : 'active';
+      saveState(true);
+      renderAdminDashboard();
+    }
+
+    function setAdminView(view) {
+      appState.adminView = ['card', 'list', 'table'].includes(view) ? view : 'card';
+      saveState(true);
+      renderAdminDashboard();
+    }
+
+    function clearAdminFilters() {
+      document.querySelectorAll('input[name="adminStatusFilter"]').forEach(input => input.checked = false);
+      const searchInput = document.getElementById('adminSearchInput');
+      if (searchInput) searchInput.value = '';
+      appState.adminFilters = { ward: [], status: [], symptoms: [], deliveryType: [] };
+      appState.adminWardFilter = 'all';
+      saveState(true);
+      renderAdminDashboard();
+    }
+
+    function updateAdminNavigationUI() {
+      const activeBtn = document.getElementById('adminPageActiveBtn');
+      const historyBtn = document.getElementById('adminPageHistoryBtn');
+      const cardBtn = document.getElementById('adminViewCardBtn');
+      const listBtn = document.getElementById('adminViewListBtn');
+      const tableBtn = document.getElementById('adminViewTableBtn');
+      const activeBadge = document.getElementById('adminActiveBadge');
+      const historyBadge = document.getElementById('adminHistoryBadge');
+
+      const activeClasses = ['bg-slate-800', 'text-white', 'shadow-xs'];
+      const inactivePageClasses = ['bg-slate-100', 'text-slate-600'];
+      if (activeBtn) {
+        activeBtn.classList.remove(...inactivePageClasses);
+        activeBtn.classList.add(...activeClasses);
+      }
+      if (historyBtn) {
+        historyBtn.classList.remove(...activeClasses);
+        historyBtn.classList.add(...inactivePageClasses);
+      }
+      if (appState.adminPage === 'history') {
+        if (activeBtn) {
+          activeBtn.classList.remove(...activeClasses);
+          activeBtn.classList.add(...inactivePageClasses);
+        }
+        if (historyBtn) {
+          historyBtn.classList.remove(...inactivePageClasses);
+          historyBtn.classList.add(...activeClasses);
+        }
+      }
+
+      const allViewButtons = [cardBtn, listBtn, tableBtn].filter(Boolean);
+      allViewButtons.forEach(btn => {
+        btn.classList.remove('bg-rose-100', 'text-rose-700');
+        btn.classList.add('bg-slate-100', 'text-slate-600');
+      });
+      const selectedViewBtn = document.getElementById(`adminView${appState.adminView.charAt(0).toUpperCase() + appState.adminView.slice(1)}Btn`);
+      if (selectedViewBtn) {
+        selectedViewBtn.classList.remove('bg-slate-100', 'text-slate-600');
+        selectedViewBtn.classList.add('bg-rose-100', 'text-rose-700');
+      }
+
+      if (activeBadge) activeBadge.innerText = appState.adminPatients.length;
+      if (historyBadge) historyBadge.innerText = appState.adminHistory.length;
+    }
+
+    function syncAdminFilterControlsFromState() {
+      const filters = appState.adminFilters || { ward: [], status: [], symptoms: [], deliveryType: [] };
+      document.querySelectorAll('input[name="adminStatusFilter"]').forEach(input => {
+        input.checked = (filters.status || []).includes(input.value);
+      });
+    }
+
+    function getAdminFilteredPatients(searchTermOverride = null) {
+      const filters = appState.adminFilters || { ward: [], status: [], symptoms: [], deliveryType: [] };
+      const searchTerm = searchTermOverride !== null
+        ? String(searchTermOverride).trim().toLowerCase()
+        : (document.getElementById('adminSearchInput')?.value || '').trim().toLowerCase();
+      const source = appState.adminPage === 'history'
+        ? appState.adminHistory
+        : appState.adminPatients.filter(p => !p.isCompleted);
+
+      let filtered = source.slice();
+
+      if (filters.ward.length > 0) {
+        filtered = filtered.filter(p => filters.ward.includes(p.ward));
+      }
+      if (filters.status.length > 0) {
+        filtered = filtered.filter(p => filters.status.some(status => {
+          if (status === 'alert') return p.assessmentAlert || p.symptoms === 'เต้านมคัดตึง' || p.symptoms === 'ไม่มีน้ำนม';
+          if (status === 'massaged') return !!p.massagedStimulate || !!p.massagedUnclog;
+          if (status === 'appt') return !!p.thaiMedAppt;
+          if (status === 'discharged') return !!p.isDischarged;
+          return true;
+        }));
+      }
+      if (filters.symptoms.length > 0) {
+        filtered = filtered.filter(p => filters.symptoms.includes(p.symptoms));
+      }
+      if (filters.deliveryType.length > 0) {
+        filtered = filtered.filter(p => filters.deliveryType.includes(p.deliveryType));
+      }
+      if (searchTerm) {
+        filtered = filtered.filter(p =>
+          (p.name && p.name.toLowerCase().includes(searchTerm)) ||
+          (p.hn && p.hn.toLowerCase().includes(searchTerm)) ||
+          (p.bed && p.bed.toLowerCase().includes(searchTerm)) ||
+          (p.district && p.district.toLowerCase().includes(searchTerm)) ||
+          (p.ward && p.ward.toLowerCase().includes(searchTerm))
+        );
+      }
+      return filtered;
     }
 
     /* ดึงข้อมูลคุณแม่ทุกคนจาก Google Sheets ทั้งทาง Apps Script และ gviz API เพื่อให้อัปเดตข้ามเครื่อง 100% */
@@ -2692,29 +2862,41 @@ function doGet(e) {
               status: thaiMedRaw.includes('ยอมรับ') ? 'accepted' : (thaiMedRaw.includes('ปฏิเสธ') ? 'declined' : 'pending')
             } : null,
             isDischarged: statusStr.includes('กลับบ้านแล้ว'),
-            dischargedTime: statusStr.match(/\((.*?)\)/)?.[1] || null
+            dischargedTime: statusStr.match(/\((.*?)\)/)?.[1] || null,
+            isCompleted: statusStr.includes('เสร็จสิ้น'),
+            completedTime: statusStr.match(/\((.*?)\)/)?.[1] || null,
+            completionStatus: statusStr.includes('เสร็จสิ้น') ? statusStr : null
           });
         });
 
         if (fetchedPatients.length > 0) {
-          // รวมข้อมูลจาก Google Sheets เข้ากับข้อมูลปัจจุบัน โดยให้ Google Sheets เป็นข้อมูลหลัก
+          // รวมข้อมูลจาก Google Sheets เข้ากับข้อมูลปัจจุบัน โดยแยกเคสที่เสร็จสิ้นไปเก็บในประวัติ
           fetchedPatients.forEach(cloudP => {
-            const existIdx = appState.adminPatients.findIndex(lp => 
+            const targetList = cloudP.isCompleted ? appState.adminHistory : appState.adminPatients;
+            const existIdx = targetList.findIndex(lp => 
               (cloudP.hn && lp.hn && lp.hn === cloudP.hn) || 
               (cloudP.name && lp.name && lp.name === cloudP.name)
             );
 
             if (existIdx !== -1) {
-              appState.adminPatients[existIdx] = {
-                ...appState.adminPatients[existIdx],
+              targetList[existIdx] = {
+                ...targetList[existIdx],
                 ...cloudP,
                 // คง logs เดิมไว้ถ้ามี
-                logs: (appState.adminPatients[existIdx].logs && appState.adminPatients[existIdx].logs.length > 0)
-                  ? appState.adminPatients[existIdx].logs
+                logs: (targetList[existIdx].logs && targetList[existIdx].logs.length > 0)
+                  ? targetList[existIdx].logs
                   : cloudP.logs
               };
             } else {
-              appState.adminPatients.push(cloudP);
+              targetList.push(cloudP);
+            }
+
+            // ถ้าสถานะใน Sheets เปลี่ยนเป็นเสร็จสิ้น ให้เอารายการที่ยังค้างอยู่หน้าแรกออก
+            if (cloudP.isCompleted) {
+              appState.adminPatients = appState.adminPatients.filter(lp => !(
+                (cloudP.hn && lp.hn && lp.hn === cloudP.hn) ||
+                (cloudP.name && lp.name && lp.name === cloudP.name)
+              ));
             }
           });
 
@@ -2728,7 +2910,7 @@ function doGet(e) {
 
       if (spinner) spinner.classList.remove('animate-spin');
       if (originBadge) {
-        originBadge.innerText = `ซิงค์สด (${appState.adminPatients.length} ท่าน)`;
+        originBadge.innerText = `ซิงค์สด (${appState.adminPatients.length + appState.adminHistory.length} ท่าน)`;
         originBadge.className = 'text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-semibold';
       }
 
@@ -2771,7 +2953,7 @@ function doGet(e) {
               <p>🤰 วิธีการคลอด: <strong class="text-slate-800">${patient.deliveryType || 'ไม่ระบุ'}</strong></p>
               <p>🏠 อำเภอ: <strong class="text-slate-800">${patient.district || 'ไม่ระบุ'}</strong></p>
               <p>📅 วันที่บันทึก: <strong class="text-slate-800">${formatDateThai(patient.recordDate) || 'วันนี้'}</strong></p>
-              <p>สถานะ: <strong class="${patient.isDischarged ? 'text-rose-600' : 'text-emerald-700'}">${patient.isDischarged ? `กลับบ้านแล้ว (${patient.dischargedTime || ''})` : 'กำลังรับการดูแล'}</strong></p>
+              <p>สถานะ: <strong class="${patient.isCompleted ? 'text-indigo-700' : (patient.isDischarged ? 'text-rose-600' : 'text-emerald-700')}">${patient.isCompleted ? (patient.completionStatus || `เสร็จสิ้นการดูแล (${patient.completedTime || ''})`) : (patient.isDischarged ? `กลับบ้านแล้ว (${patient.dischargedTime || ''})` : 'กำลังรับการดูแล')}</strong></p>
             </div>
           </div>
 
@@ -3162,7 +3344,7 @@ function doGet(e) {
       }
     }
 
-    function renderAdminDashboard(searchTerm = '', statusFilter = 'all') {
+    function renderAdminDashboard(searchTerm = null) {
       syncCurrentPatientToAdminList();
 
       const totalPatientsEl = document.getElementById('adminTotalPatients');
@@ -3171,39 +3353,22 @@ function doGet(e) {
       const massageCountEl = document.getElementById('adminMassageCount');
       const patientListEl = document.getElementById('adminPatientList');
       const filteredCountEl = document.getElementById('adminFilteredCount');
+      const filtered = getAdminFilteredPatients(searchTerm);
+      const activePatients = appState.adminPatients.filter(p => !p.isCompleted);
 
-      let filtered = appState.adminPatients;
-
-      // กรองตามตึก
-      if (appState.adminWardFilter && appState.adminWardFilter !== 'all') {
-        filtered = filtered.filter(p => p.ward === appState.adminWardFilter);
-      }
-
-      // กรองตามสถานะ
-      if (statusFilter && statusFilter !== 'all') {
-        if (statusFilter === 'alert') {
-          filtered = filtered.filter(p => p.assessmentAlert || p.symptoms === 'เต้านมคัดตึง' || p.symptoms === 'ไม่มีน้ำนม');
-        } else if (statusFilter === 'massaged') {
-          filtered = filtered.filter(p => !!p.massagedStimulate || !!p.massagedUnclog);
-        } else if (statusFilter === 'appt') {
-          filtered = filtered.filter(p => !!p.thaiMedAppt);
-        } else if (statusFilter === 'discharged') {
-          filtered = filtered.filter(p => !!p.isDischarged);
-        }
-      }
-
-      // กรองตามคำค้นหา (ชื่อ, HN, เตียง, อำเภอ)
-      if (searchTerm) {
-        filtered = filtered.filter(p => 
-          (p.name && p.name.toLowerCase().includes(searchTerm)) || 
-          (p.hn && p.hn.toLowerCase().includes(searchTerm)) ||
-          (p.bed && p.bed.toLowerCase().includes(searchTerm)) ||
-          (p.district && p.district.toLowerCase().includes(searchTerm))
-        );
-      }
-
-      if (totalPatientsEl) totalPatientsEl.innerText = appState.adminPatients.length;
+      if (totalPatientsEl) totalPatientsEl.innerText = activePatients.length;
       if (filteredCountEl) filteredCountEl.innerText = filtered.length;
+      const historyPatientsEl = document.getElementById('adminHistoryPatients');
+      if (historyPatientsEl) historyPatientsEl.innerText = appState.adminHistory.length;
+
+      const selectedFilterCount = Object.values(appState.adminFilters || {}).reduce((sum, values) => sum + values.length, 0);
+      const filterSummaryEl = document.getElementById('adminFilterSummary');
+      if (filterSummaryEl) {
+        filterSummaryEl.innerText = selectedFilterCount > 0
+          ? `เลือกตัวกรองแล้ว ${selectedFilterCount} รายการ`
+          : 'ยังไม่ได้เลือกตัวกรอง';
+      }
+      updateAdminNavigationUI();
 
       if (alertPatientsEl) {
         const alertCount = appState.adminPatients.filter(p => p.assessmentAlert || p.symptoms === 'เต้านมคัดตึง' || p.symptoms === 'ไม่มีน้ำนม').length;
@@ -3220,6 +3385,14 @@ function doGet(e) {
 
       if (!patientListEl) return;
 
+      if (appState.adminView === 'card') {
+        patientListEl.className = 'grid grid-cols-1 md:grid-cols-2 gap-3 max-h-96 md:max-h-[500px] overflow-y-auto custom-scrollbar pr-1';
+      } else if (appState.adminView === 'list') {
+        patientListEl.className = 'space-y-2 max-h-96 md:max-h-[500px] overflow-y-auto custom-scrollbar pr-1';
+      } else {
+        patientListEl.className = 'block max-h-96 md:max-h-[500px] overflow-auto custom-scrollbar pr-1';
+      }
+
       if (filtered.length === 0) {
         patientListEl.innerHTML = `
           <div class="col-span-full text-center py-8 text-xs text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200 space-y-2">
@@ -3232,7 +3405,13 @@ function doGet(e) {
         return;
       }
 
-      patientListEl.innerHTML = filtered.map((patient, pIdx) => {
+      const tableHeader = appState.adminView === 'table' ? `
+        <div class="grid grid-cols-8 min-w-[900px] gap-2 px-3 py-2 bg-slate-800 text-white rounded-t-xl text-[10px] font-bold">
+          <div class="col-span-2">คุณแม่ / HN</div><div>ตึก / เตียง</div><div>วิธีคลอด</div><div>อาการ</div><div class="text-center">รอบบีบ</div><div class="text-center">ปริมาณรวม</div><div class="text-right">การทำงาน</div>
+        </div>
+      ` : '';
+
+      patientListEl.innerHTML = tableHeader + filtered.map((patient, pIdx) => {
         const theme = PATIENT_THEME_LIST[pIdx % PATIENT_THEME_LIST.length];
 
         let symptomBadgeClass = 'bg-emerald-100 text-emerald-800';
@@ -3247,8 +3426,61 @@ function doGet(e) {
         const isStimulated = !!patient.massagedStimulate;
         const isUnclogged = !!patient.massagedUnclog;
 
+        if (appState.adminView === 'list') {
+          return `
+            <div class="bg-white rounded-2xl border ${theme.border} shadow-xs p-3 flex flex-col lg:flex-row lg:items-center gap-3 transition-all hover:shadow-md">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${theme.badge}">${theme.icon} ${pIdx + 1}</span>
+                  <span class="text-sm font-bold text-slate-900 truncate">${patient.name || '-'}</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-50 text-slate-700 font-bold border border-slate-200">HN: ${patient.hn || '-'}</span>
+                  ${patient.isCompleted ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 font-bold">✓ เสร็จสิ้น</span>' : ''}
+                  ${patient.isDischarged ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-bold">🏠 กลับบ้านแล้ว</span>' : ''}
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1 flex flex-wrap gap-x-2 gap-y-0.5">
+                  <span>ตึก <strong class="text-slate-800">${patient.ward || '-'}</strong></span>
+                  <span>เตียง <strong class="text-slate-800">${patient.bed || '-'}</strong></span>
+                  <span>${patient.deliveryType || 'ไม่ระบุวิธีคลอด'}</span>
+                  <span>${patient.symptoms || 'รอประเมิน'}</span>
+                </p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0 text-center">
+                <div class="px-2 py-1 rounded-lg bg-slate-50 border border-slate-200">
+                  <p class="text-[9px] text-slate-500">รอบบีบ</p><p class="text-xs font-bold text-slate-800">${patient.pumps || 0}</p>
+                </div>
+                <div class="px-2 py-1 rounded-lg bg-amber-50 border border-amber-200">
+                  <p class="text-[9px] text-amber-700">รวม</p><p class="text-xs font-bold text-amber-700">${(patient.totalVolume || 0).toFixed(1)} มล.</p>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 shrink-0">
+                <button onclick="viewPatientFullDetails('${patient.id}')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-[11px] font-bold border border-slate-300 shadow-2xs transition">👁️ ดูข้อมูล</button>
+                ${appState.adminPage === 'active' ? `<button onclick="completePatient('${patient.id}')" class="px-2.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold shadow-xs transition">✓ เสร็จสิ้น</button>` : ''}
+                <button onclick="deleteAdminPatient('${patient.id}')" class="px-2 py-1.5 rounded-xl text-slate-300 hover:text-rose-500 hover:bg-rose-50 text-xs transition" title="ลบข้อมูล">✕</button>
+              </div>
+            </div>
+          `;
+        }
+
+        if (appState.adminView === 'table') {
+          return `
+            <div class="grid grid-cols-8 min-w-[900px] items-center gap-2 px-3 py-2.5 border-b border-slate-100 ${pIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50/70'} text-[11px] hover:bg-indigo-50/50 transition">
+              <div class="col-span-2 min-w-0"><p class="font-bold text-slate-900 truncate">${patient.name || '-'}</p><p class="text-[10px] text-slate-500">HN: ${patient.hn || '-'}</p></div>
+              <div><p class="font-semibold text-slate-800">${patient.ward || '-'}</p><p class="text-[10px] text-slate-500">เตียง ${patient.bed || '-'}</p></div>
+              <div class="text-slate-600">${patient.deliveryType || '-'}</div>
+              <div><span class="px-1.5 py-0.5 rounded ${symptomBadgeClass}">${patient.symptoms || 'รอประเมิน'}</span></div>
+              <div class="text-center font-bold text-slate-800">${patient.pumps || 0} รอบ</div>
+              <div class="text-center font-bold text-amber-700">${(patient.totalVolume || 0).toFixed(1)} มล.</div>
+              <div class="flex justify-end gap-1">
+                <button onclick="viewPatientFullDetails('${patient.id}')" class="px-2 py-1 rounded-lg bg-white text-slate-700 border border-slate-300 text-[10px] font-bold">ดู</button>
+                ${appState.adminPage === 'active' ? `<button onclick="completePatient('${patient.id}')" class="px-2 py-1 rounded-lg bg-emerald-600 text-white text-[10px] font-bold">เสร็จสิ้น</button>` : ''}
+                <button onclick="deleteAdminPatient('${patient.id}')" class="px-1.5 py-1 rounded-lg text-slate-300 hover:text-rose-500 text-[10px]">✕</button>
+              </div>
+            </div>
+          `;
+        }
+
         return `
-          <div class="p-3.5 ${theme.cardBg} rounded-2xl border-2 ${theme.border} shadow-xs space-y-2.5 transition-all">
+          <div class="relative p-3.5 ${theme.cardBg} rounded-2xl border-2 ${theme.border} shadow-xs space-y-2.5 transition-all">
             <!-- Header -->
             <div class="flex items-start justify-between gap-2">
               <div>
@@ -3288,12 +3520,12 @@ function doGet(e) {
                   <span>👁️</span>
                   <span>ดูข้อมูล</span>
                 </button>
-                <button onclick="completePatient('${patient.id}')" 
+                ${appState.adminPage === 'active' ? `<button onclick="completePatient('${patient.id}')" 
                         class="px-2.5 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-[11px] font-bold flex items-center gap-1 shadow-xs transition active:scale-95"
                         title="เสร็จสิ้นการดูแล">
                   <span>✓</span>
                   <span class="hidden sm:inline">เสร็จสิ้น</span>
-                </button>
+                </button>` : ''}
                 <button onclick="deleteAdminPatient('${patient.id}')" class="text-slate-300 hover:text-rose-500 text-xs transition p-1" title="ลบข้อมูล">✕</button>
               </div>
             </div>
@@ -3912,11 +4144,27 @@ function doGet(e) {
               clearActivePatientData();
             }
 
-            // นำออกจากรายการติดตามในระบบ Admin
+            // ย้ายออกจากรายการติดตามไปเก็บเป็นประวัติ แทนการลบทิ้ง
+            if (patient) {
+              const historyRecord = {
+                ...patient,
+                isCompleted: true,
+                completedTime: timeStr,
+                completionStatus: `เสร็จสิ้นการดูแล (${timeStr} น.)`
+              };
+              const historyIdx = appState.adminHistory.findIndex(p =>
+                (historyRecord.hn && p.hn && historyRecord.hn === p.hn) ||
+                (historyRecord.name && p.name && historyRecord.name === p.name)
+              );
+              if (historyIdx !== -1) appState.adminHistory[historyIdx] = historyRecord;
+              else appState.adminHistory.unshift(historyRecord);
+            }
+
+            // นำออกจากรายการติดตามในหน้าแรก แต่ยังคงข้อมูลไว้ในประวัติ
             appState.adminPatients = appState.adminPatients.filter(p => p.id !== patientId);
             saveState();
             renderAdminDashboard();
-            showToast(`✓ บันทึกข้อมูลทั้งหมดของ ${patientName} ลง Google Sheets และเสร็จสิ้นการดูแลเรียบร้อยแล้ว`);
+            showToast(`✓ ย้ายข้อมูลของ ${patientName} ไปหน้า “ประวัติ” เรียบร้อยแล้ว`);
           }
         }
       );
@@ -3972,10 +4220,7 @@ function doGet(e) {
     }
 
     function exportAdminCSV() {
-      let filtered = appState.adminPatients;
-      if (appState.adminWardFilter && appState.adminWardFilter !== 'all') {
-        filtered = filtered.filter(p => p.ward === appState.adminWardFilter);
-      }
+      const filtered = getAdminFilteredPatients();
 
       if (filtered.length === 0) {
         showToast('ไม่มีข้อมูลสำหรับส่งออก');
@@ -3993,7 +4238,9 @@ function doGet(e) {
         const immText = imm ? `${imm.result} (${imm.volume} มล. เวลา ${imm.time})` : 'ยังไม่บันทึก';
         const h2Text = h2 ? `${h2.result} (${h2.volume} มล. เวลา ${h2.time})` : 'ยังไม่บันทึก';
         const h4Text = h4 ? `${h4.result} (${h4.volume} มล. เวลา ${h4.time})` : 'ยังไม่บันทึก';
-        const statusText = p.isDischarged ? `คนไข้กลับบ้านแล้ว (${p.dischargedTime || ''})` : 'อยู่ระหว่างการดูแล';
+        const statusText = p.isCompleted
+          ? (p.completionStatus || `เสร็จสิ้นการดูแล (${p.completedTime || ''})`)
+          : (p.isDischarged ? `คนไข้กลับบ้านแล้ว (${p.dischargedTime || ''})` : 'อยู่ระหว่างการดูแล');
 
         csv += `"${formatDateThai(p.recordDate) || '-'}","${statusText}","${p.hn || '-'}","${p.name}","${p.district || '-'}","${p.ward}","${p.bed || '-'}","${p.deliveryType || '-'}","${p.provider || '-'}","${p.symptoms || '-'}","${p.massagedStimulate || 'ยังไม่ได้นวด'}","${p.massagedUnclog || 'ยังไม่ได้นวด'}",${p.pumps || 0},${(p.totalVolume || 0).toFixed(1)},"${immText}","${h2Text}","${h4Text}","${p.lastAssessedTime || '-'}"\n`;
       });
@@ -4114,6 +4361,15 @@ function doGet(e) {
           appState.flowFollowUps = parsed.flowFollowUps || [];
           appState.babyPhoto = parsed.babyPhoto || null;
           appState.adminPatients = parsed.adminPatients || [];
+          appState.adminHistory = parsed.adminHistory || [];
+          appState.adminPage = parsed.adminPage === 'history' ? 'history' : 'active';
+          appState.adminView = ['card', 'list', 'table'].includes(parsed.adminView) ? parsed.adminView : 'card';
+          appState.adminFilters = {
+            ward: parsed.adminFilters?.ward || [],
+            status: parsed.adminFilters?.status || [],
+            symptoms: parsed.adminFilters?.symptoms || [],
+            deliveryType: parsed.adminFilters?.deliveryType || []
+          };
 
           const nameInput = document.getElementById('patientName');
           if (nameInput && appState.name) nameInput.value = appState.name;

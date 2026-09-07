@@ -1419,6 +1419,7 @@
     let currentAdviceTargetPatientId = null;
     let currentAlarmTargetHours = 2;
     let inAppCountdownTimer = null;
+    let adminPollingTimer = null;
 
     function updateAlarmHintsUI() {
       const btn2 = document.getElementById('alarmBtn2HrText');
@@ -2440,11 +2441,36 @@ function doGet(e) {
         document.getElementById('adminAuthSection')?.classList.add('hidden');
         document.getElementById('adminDashboardSection')?.classList.remove('hidden');
         renderAdminDashboard();
+        startAdminLiveSync();
       }
     }
 
     function closeAdminModal() {
       document.getElementById('adminModal')?.classList.add('hidden');
+      stopAdminLiveSync();
+    }
+
+    /* เริ่มต้นระบบ Live Polling ดึงข้อมูลล่าสุดจาก Google Sheets ตลอดเวลาที่เปิดหน้า Admin */
+    function startAdminLiveSync() {
+      // ดึงข้อมูลสดทันที
+      fetchPatientsFromGoogleSheets(true);
+
+      // ตั้งเวลาเช็คข้อมูลใหม่อัตโนมัติทุกๆ 12 วินาที
+      if (adminPollingTimer) clearInterval(adminPollingTimer);
+      adminPollingTimer = setInterval(() => {
+        const modal = document.getElementById('adminModal');
+        if (appState.isAdminLoggedIn && modal && !modal.classList.contains('hidden')) {
+          fetchPatientsFromGoogleSheets(true);
+        }
+      }, 12000);
+    }
+
+    /* หยุดการ Polling เมื่อปิดหน้า Admin เพื่อประหยัดทรัพยากร */
+    function stopAdminLiveSync() {
+      if (adminPollingTimer) {
+        clearInterval(adminPollingTimer);
+        adminPollingTimer = null;
+      }
     }
 
     /* ปุ่มกลับบ้าน: ปรับปรุงให้แยกการทำงานตามสิทธิ์ (คุณแม่ vs เจ้าหน้าที่) */
@@ -2499,6 +2525,7 @@ function doGet(e) {
         updateRoleUI();
         renderAdminDashboard();
         updateDirectSyncStatus();
+        startAdminLiveSync();
         showToast('เข้าสู่ระบบเจ้าหน้าที่แพทย์แผนไทยสำเร็จ');
       } else {
         showToast('รหัส PIN ไม่ถูกต้อง');
@@ -2539,127 +2566,176 @@ function doGet(e) {
       renderAdminDashboard(searchTerm, statusFilter);
     }
 
-    /* ดึงข้อมูลคุณแม่ทุกคนจาก Google Sheets ทั้งทาง gviz API และ Apps Script */
-    async function fetchPatientsFromGoogleSheets() {
+    /* ดึงข้อมูลคุณแม่ทุกคนจาก Google Sheets ทั้งทาง Apps Script และ gviz API เพื่อให้อัปเดตข้ามเครื่อง 100% */
+    async function fetchPatientsFromGoogleSheets(silent = false) {
       const spinner = document.getElementById('fetchLoadingSpinner');
       const originBadge = document.getElementById('adminDataOriginBadge');
-      if (spinner) spinner.classList.add('animate-spin');
-      if (originBadge) {
+      const syncNotice = document.getElementById('adminLastSyncTimeNotice');
+      const targetUrl = gscriptWebappUrl || PERMANENT_GSCRIPT_URL;
+
+      if (!silent && spinner) spinner.classList.add('animate-spin');
+      if (!silent && originBadge) {
         originBadge.innerText = 'กำลังดึงข้อมูลจาก Sheets...';
         originBadge.className = 'text-[10px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200';
       }
 
-      let fetchedCount = 0;
-      let newPatients = [];
+      let rawRows = [];
 
-      try {
-        // 1. ลองดึงผ่าน Google Sheets Visualization JSON API
-        const gvizUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json`;
-        const res = await fetch(gvizUrl);
-        if (res.ok) {
-          const text = await res.text();
-          const jsonStart = text.indexOf('{');
-          const jsonEnd = text.lastIndexOf('}');
-          if (jsonStart !== -1 && jsonEnd !== -1) {
-            const rawJson = JSON.parse(text.substring(jsonStart, jsonEnd + 1));
-            const rows = rawJson?.table?.rows || [];
-            
-            rows.forEach((r, idx) => {
-              const c = r.c || [];
-              const getVal = (i) => (c[i]?.v !== null && c[i]?.v !== undefined) ? String(c[i].v).trim() : '';
-              
-              const hn = getVal(1);
-              const name = getVal(2);
-              if (!name && !hn) return; // ข้ามแถวว่าง
-
-              const pRecord = {
-                id: 'SHEET_' + (hn || idx) + '_' + Date.now(),
-                recordDate: getVal(0) ? getVal(0).split(' ')[0] : '',
-                hn: hn,
-                name: name,
-                ward: getVal(3) || 'ไม่ระบุตึก',
-                bed: getVal(4),
-                deliveryType: getVal(5),
-                district: getVal(6),
-                symptoms: getVal(7) || 'รอการประเมิน',
-                assessmentScore: getVal(8) ? parseInt(getVal(8), 10) || null : null,
-                provider: getVal(9) === '-' ? '' : getVal(9),
-                massagedStimulate: getVal(10).includes('นวดแล้ว') ? (getVal(10).match(/\((.*?)\)/)?.[1] || 'นวดแล้ว') : null,
-                massagedUnclog: getVal(11).includes('นวดแล้ว') ? (getVal(11).match(/\((.*?)\)/)?.[1] || 'นวดแล้ว') : null,
-                pumps: parseInt(getVal(12), 10) || 0,
-                totalVolume: parseFloat(getVal(13)) || 0.0,
-                logs: [],
-                flowFollowUps: [],
-                lastActionMessage: getVal(17) !== '-' ? getVal(17) : null,
-                thaiMedAppt: getVal(18) && getVal(18) !== 'ไม่มีนัด' && getVal(18) !== '-' ? {
-                  date: getVal(18),
-                  timeSlot: '09:00 น.',
-                  status: getVal(18).includes('ยอมรับ') ? 'accepted' : getVal(18).includes('ปฏิเสธ') ? 'declined' : 'pending'
-                } : null,
-                isDischarged: getVal(19).includes('กลับบ้านแล้ว'),
-                dischargedTime: getVal(19).match(/\((.*?)\)/)?.[1] || null
-              };
-
-              // เติมผลการติดตาม 3 ระยะ
-              const immStr = getVal(14);
-              const h2Str = getVal(15);
-              const h4Str = getVal(16);
-              if (immStr && immStr !== 'ยังไม่บันทึก' && immStr !== '-') {
-                pRecord.flowFollowUps.push({ stage: 'หลังนวดทันที', result: immStr, volume: 0, time: '' });
-              }
-              if (h2Str && h2Str !== 'ยังไม่บันทึก' && h2Str !== '-') {
-                pRecord.flowFollowUps.push({ stage: '2 ชั่วโมงหลังนวด', result: h2Str, volume: 0, time: '' });
-              }
-              if (h4Str && h4Str !== 'ยังไม่บันทึก' && h4Str !== '-') {
-                pRecord.flowFollowUps.push({ stage: '4 ชั่วโมงหลังนวด', result: h4Str, volume: 0, time: '' });
-              }
-
-              newPatients.push(pRecord);
-            });
+      // วิธีที่ 1: ดึงผ่าน Google Apps Script Web App doGet API
+      if (targetUrl) {
+        try {
+          const res = await fetch(targetUrl, { method: 'GET', cache: 'no-store' });
+          if (res.ok) {
+            const json = await res.json();
+            if (json && json.status === 'success' && Array.isArray(json.data) && json.data.length > 1) {
+              // ข้ามแถว Header (แถวที่ 0)
+              rawRows = json.data.slice(1);
+            }
           }
+        } catch (e) {
+          // ถ้าติดปัญหาให้ไปใช้วิธีที่ 2 ต่อเนื่อง
         }
-      } catch (err) {
-        console.log('Gviz fetch fallback:', err);
       }
 
-      // รวมข้อมูลจาก Google Sheets เข้ากับข้อมูลในเครื่อง (ไม่ให้เกิดข้อมูลซ้ำซ้อน)
-      if (newPatients.length > 0) {
-        newPatients.forEach(cloudP => {
-          const existingIdx = appState.adminPatients.findIndex(lp => 
-            (cloudP.hn && lp.hn && lp.hn === cloudP.hn) || 
-            (cloudP.name && lp.name && lp.name === cloudP.name)
-          );
-
-          if (existingIdx !== -1) {
-            // อัปเดตข้อมูลของคนไข้เดิมจากคลาวด์
-            appState.adminPatients[existingIdx] = {
-              ...appState.adminPatients[existingIdx],
-              ...cloudP,
-              // คงประวัติ logs ในเครื่องไว้ถ้ามี
-              logs: (appState.adminPatients[existingIdx].logs && appState.adminPatients[existingIdx].logs.length > 0) 
-                ? appState.adminPatients[existingIdx].logs 
-                : cloudP.logs,
-              flowFollowUps: (appState.adminPatients[existingIdx].flowFollowUps && appState.adminPatients[existingIdx].flowFollowUps.length > 0)
-                ? appState.adminPatients[existingIdx].flowFollowUps
-                : cloudP.flowFollowUps
-            };
-          } else {
-            appState.adminPatients.push(cloudP);
+      // วิธีที่ 2 (Fallback): ดึงผ่าน Google Sheets Visualization Query API
+      if (rawRows.length === 0) {
+        try {
+          const gvizUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&tq=&t=${Date.now()}`;
+          const res = await fetch(gvizUrl, { cache: 'no-store' });
+          if (res.ok) {
+            const text = await res.text();
+            const jsonStart = text.indexOf('{');
+            const jsonEnd = text.lastIndexOf('}');
+            if (jsonStart !== -1 && jsonEnd !== -1) {
+              const rawJson = JSON.parse(text.substring(jsonStart, jsonEnd + 1));
+              const gvizRows = rawJson?.table?.rows || [];
+              rawRows = gvizRows.map(r => (r.c || []).map(cell => (cell && cell.v !== null && cell.v !== undefined) ? cell.v : ''));
+            }
           }
+        } catch (err) {
+          console.warn('Gviz fetch fallback error:', err);
+        }
+      }
+
+      // หากดึงข้อมูลได้ ให้แปลงเป็นโครงสร้างข้อมูลคุณแม่
+      if (rawRows.length > 0) {
+        const fetchedPatients = [];
+
+        rawRows.forEach((vals, idx) => {
+          if (!Array.isArray(vals)) return;
+          const getVal = (colIdx) => (vals[colIdx] !== null && vals[colIdx] !== undefined) ? String(vals[colIdx]).trim() : '';
+
+          const hn = getVal(1);
+          const name = getVal(2);
+          // ข้ามแถวว่าง หรือแถวหัวตาราง
+          if ((!name && !hn) || name === 'ชื่อ-นามสกุล' || hn === 'HN') return;
+
+          const dateVal = getVal(0) ? getVal(0).split(' ')[0] : '';
+          const ward = getVal(3) || 'ไม่ระบุตึก';
+          const bed = getVal(4);
+          const deliveryType = getVal(5);
+          const district = getVal(6);
+          const symptoms = getVal(7) || 'รอการประเมิน';
+          const scoreRaw = getVal(8);
+          const score = scoreRaw ? parseInt(scoreRaw.replace(/[^\d]/g, ''), 10) || null : null;
+          const provider = (getVal(9) === '-' || !getVal(9)) ? '' : getVal(9);
+          const stimStr = getVal(10);
+          const unclogStr = getVal(11);
+          const pumps = parseInt(getVal(12), 10) || 0;
+          const totalVol = parseFloat(getVal(13)) || 0.0;
+          const immStr = getVal(14);
+          const h2Str = getVal(15);
+          const h4Str = getVal(16);
+          const adviceStr = (getVal(17) !== '-' && getVal(17)) ? getVal(17) : null;
+          const thaiMedRaw = getVal(18);
+          const statusStr = getVal(19);
+
+          const followUps = [];
+          if (immStr && immStr !== 'ยังไม่บันทึก' && immStr !== '-') {
+            const m = immStr.match(/([\d.]+)\s*มล/);
+            followUps.push({ stage: 'หลังนวดทันที', result: immStr, volume: m ? parseFloat(m[1]) : 0, time: '' });
+          }
+          if (h2Str && h2Str !== 'ยังไม่บันทึก' && h2Str !== '-') {
+            const m = h2Str.match(/([\d.]+)\s*มล/);
+            followUps.push({ stage: '2 ชั่วโมงหลังนวด', result: h2Str, volume: m ? parseFloat(m[1]) : 0, time: '' });
+          }
+          if (h4Str && h4Str !== 'ยังไม่บันทึก' && h4Str !== '-') {
+            const m = h4Str.match(/([\d.]+)\s*มล/);
+            followUps.push({ stage: '4 ชั่วโมงหลังนวด', result: h4Str, volume: m ? parseFloat(m[1]) : 0, time: '' });
+          }
+
+          fetchedPatients.push({
+            id: 'SHEET_' + (hn || name || idx),
+            recordDate: dateVal,
+            hn: hn,
+            name: name,
+            ward: ward,
+            bed: bed,
+            deliveryType: deliveryType,
+            district: district,
+            symptoms: symptoms,
+            assessmentScore: score,
+            assessmentAlert: (score !== null && score <= 6) || symptoms === 'เต้านมคัดตึง' || symptoms === 'ไม่มีน้ำนม',
+            provider: provider,
+            massagedStimulate: stimStr.includes('นวดแล้ว') ? (stimStr.match(/\((.*?)\)/)?.[1] || 'นวดแล้ว') : null,
+            massagedUnclog: unclogStr.includes('นวดแล้ว') ? (unclogStr.match(/\((.*?)\)/)?.[1] || 'นวดแล้ว') : null,
+            lastMassageType: stimStr.includes('นวดแล้ว') ? 'นวดกระตุ้นน้ำนม' : (unclogStr.includes('นวดแล้ว') ? 'นวดเปิดท่อน้ำนม' : null),
+            lastMassageTime: stimStr.match(/\((.*?)\)/)?.[1] || unclogStr.match(/\((.*?)\)/)?.[1] || null,
+            pumps: pumps,
+            totalVolume: totalVol,
+            logs: [],
+            flowFollowUps: followUps,
+            lastActionMessage: adviceStr,
+            thaiMedAppt: (thaiMedRaw && thaiMedRaw !== 'ไม่มีนัด' && thaiMedRaw !== '-') ? {
+              date: thaiMedRaw,
+              timeSlot: '09:00 น.',
+              status: thaiMedRaw.includes('ยอมรับ') ? 'accepted' : (thaiMedRaw.includes('ปฏิเสธ') ? 'declined' : 'pending')
+            } : null,
+            isDischarged: statusStr.includes('กลับบ้านแล้ว'),
+            dischargedTime: statusStr.match(/\((.*?)\)/)?.[1] || null
+          });
         });
 
-        fetchedCount = newPatients.length;
-        saveState(true);
+        if (fetchedPatients.length > 0) {
+          // รวมข้อมูลจาก Google Sheets เข้ากับข้อมูลปัจจุบัน โดยให้ Google Sheets เป็นข้อมูลหลัก
+          fetchedPatients.forEach(cloudP => {
+            const existIdx = appState.adminPatients.findIndex(lp => 
+              (cloudP.hn && lp.hn && lp.hn === cloudP.hn) || 
+              (cloudP.name && lp.name && lp.name === cloudP.name)
+            );
+
+            if (existIdx !== -1) {
+              appState.adminPatients[existIdx] = {
+                ...appState.adminPatients[existIdx],
+                ...cloudP,
+                // คง logs เดิมไว้ถ้ามี
+                logs: (appState.adminPatients[existIdx].logs && appState.adminPatients[existIdx].logs.length > 0)
+                  ? appState.adminPatients[existIdx].logs
+                  : cloudP.logs
+              };
+            } else {
+              appState.adminPatients.push(cloudP);
+            }
+          });
+
+          // บันทึกลง Storage ท้องถิ่นโดยไม่ส่งซ้ำ
+          saveState(true);
+        }
       }
+
+      const nowTime = new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      if (syncNotice) syncNotice.innerText = `อัปเดตล่าสุด: ${nowTime} น.`;
 
       if (spinner) spinner.classList.remove('animate-spin');
       if (originBadge) {
-        originBadge.innerText = `เชื่อมต่อ Sheets แล้ว (${appState.adminPatients.length} ท่าน)`;
+        originBadge.innerText = `ซิงค์สด (${appState.adminPatients.length} ท่าน)`;
         originBadge.className = 'text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-semibold';
       }
 
       renderAdminDashboard();
-      showToast(`ดึงข้อมูลคุณแม่จาก Google Sheets สำเร็จ (พบ ${appState.adminPatients.length} ท่าน)`);
+      if (!silent) {
+        showToast(`อัปเดตรายชื่อคุณแม่จาก Google Sheets ล่าสุดแล้ว (${appState.adminPatients.length} ท่าน)`);
+      }
     }
 
     /* เปิด Modal ดูข้อมูลแบบละเอียดของคุณแม่ */
@@ -4082,6 +4158,8 @@ function doGet(e) {
       renderThaiMedApptUI();
       updateAlarmHintsUI();
       loadDataFromGoogleSheets();
+      // ดึงข้อมูลคุณแม่ทุกคนจาก Google Sheets ทันทีที่เปิดหน้าเว็บ
+      fetchPatientsFromGoogleSheets(true);
     });
   </script>
 </body>

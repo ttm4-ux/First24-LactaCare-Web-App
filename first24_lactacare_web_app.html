@@ -132,12 +132,12 @@
               <div class="grid grid-cols-3 gap-2">
                 <div class="col-span-2">
                   <label class="block text-[11px] font-semibold text-slate-600 mb-1">ชื่อ - นามสกุล คุณแม่ <span class="text-rose-500">*</span></label>
-                  <input type="text" id="patientName" oninput="savePatientInfo()" placeholder="เช่น น.ส. สมใจ รักดี" 
+                  <input type="text" id="patientName" oninput="onPatientFieldInput()" placeholder="เช่น น.ส. สมใจ รักดี" 
                          class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-slate-50/50">
                 </div>
                 <div>
                   <label class="block text-[11px] font-semibold text-slate-600 mb-1">HN <span class="text-[10px] text-slate-400 font-normal">(สามารถดูได้ที่สายรัดข้อมือ)</span> <span class="text-rose-500">*</span></label>
-                  <input type="text" id="patientHn" oninput="savePatientInfo()" placeholder="เช่น 67xxxxx" 
+                  <input type="text" id="patientHn" oninput="onPatientFieldInput()" placeholder="เช่น 67xxxxx" 
                          class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-slate-50/50">
                 </div>
               </div>
@@ -145,7 +145,7 @@
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 <div>
                   <label class="block text-[11px] font-semibold text-slate-600 mb-1">ตึก / หอผู้ป่วย <span class="text-rose-500">*</span></label>
-                  <select id="patientWard" onchange="savePatientInfo()" 
+                  <select id="patientWard" onchange="onPatientFieldInput()" 
                           class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white">
                     <option value="">-- เลือกตึก --</option>
                     <option value="นวมินทร์ 3">นวมินทร์ 3</option>
@@ -156,12 +156,12 @@
                 </div>
                 <div>
                   <label class="block text-[11px] font-semibold text-slate-600 mb-1">เลขเตียง <span class="text-rose-500">*</span></label>
-                  <input type="text" id="patientBed" oninput="savePatientInfo()" placeholder="เช่น 05, 12" 
+                  <input type="text" id="patientBed" oninput="onPatientFieldInput()" placeholder="เช่น 05, 12" 
                          class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-slate-50/50">
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                   <label class="block text-[11px] font-semibold text-slate-600 mb-1">วิธีการคลอด <span class="text-rose-500">*</span></label>
-                  <select id="patientDeliveryType" onchange="savePatientInfo()" 
+                  <select id="patientDeliveryType" onchange="onPatientFieldInput()" 
                           class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white">
                     <option value="">-- วิธีการคลอด --</option>
                     <option value="คลอดปกติ">คลอดปกติ</option>
@@ -172,7 +172,7 @@
 
               <div>
                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">ที่อยู่ (อำเภอใน จ.นราธิวาส) <span class="text-rose-500">*</span></label>
-                <select id="patientDistrict" onchange="savePatientInfo()" 
+                <select id="patientDistrict" onchange="onPatientFieldInput()" 
                         class="w-full text-xs md:text-sm px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white">
                   <option value="">-- เลือกอำเภอใน จ.นราธิวาส --</option>
                   <option value="อำเภอเมืองนราธิวาส">อำเภอเมืองนราธิวาส</option>
@@ -205,36 +205,36 @@
 
             <!-- ข้อ 1 -->
             <div class="space-y-1.5">
-              <label class="block text-xs font-semibold text-slate-700">1. เวลาเริ่มบีบกระตุ้นน้ำนมครั้งแรกหลังคลอด</label>
+              <label class="block text-xs font-semibold text-slate-700">1. เวลาเริ่มบีบกระตุ้นน้ำนมครั้งแรกหลังคลอด <span class="text-rose-500">*</span></label>
               <div class="space-y-1.5 text-xs">
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
-                  <input type="radio" name="q1" value="fast" class="accent-rose-500 mr-2.5" checked>
-                  <span>เริ่มบีบภายใน 1 - 2 ชั่วโมงแรกหลังคลอด (Golden Hour)</span>
+                  <input type="radio" name="q1" value="fast" class="accent-rose-500 mr-2.5">
+                  <span class="text-slate-700">เริ่มบีบภายใน 1 - 2 ชั่วโมงแรกหลังคลอด</span>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q1" value="moderate" class="accent-rose-500 mr-2.5">
-                  <span>เริ่มบีบใน 2 - 6 ชั่วโมงหลังคลอด</span>
+                  <span class="text-slate-700">เริ่มบีบใน 2 - 6 ชั่วโมงหลังคลอด</span>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q1" value="late" class="accent-rose-500 mr-2.5">
-                  <span>เกิน 6 ชั่วโมง หรือยังไม่ได้เริ่มบีบกระตุ้นเลย</span>
+                  <span class="text-slate-700">เกิน 6 ชั่วโมงขึ้นไป หรือยังไม่ได้เริ่มบีบกระตุ้น</span>
                 </label>
               </div>
             </div>
 
             <!-- ข้อ 2 -->
             <div class="space-y-1.5 pt-1">
-              <label class="block text-xs font-semibold text-slate-700">2. ลักษณะและปริมาณน้ำนมที่สังเกตเห็น</label>
+              <label class="block text-xs font-semibold text-slate-700">2. ลักษณะและปริมาณน้ำนมที่สังเกตเห็น <span class="text-rose-500">*</span></label>
               <div class="space-y-1.5 text-xs">
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q2" value="well_flow" class="accent-rose-500 mr-2.5">
                   <div>
-                    <p class="font-medium text-emerald-700 font-semibold">น้ำนมไหลดี</p>
+                    <p class="font-medium text-slate-800">น้ำนมไหลดี</p>
                     <p class="text-[10px] text-slate-500">น้ำนมไหลพุ่ง หรือไหลต่อเนื่องเป็นสาย บีบได้ปริมาณดี</p>
                   </div>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
-                  <input type="radio" name="q2" value="good_flow" class="accent-rose-500 mr-2.5" checked>
+                  <input type="radio" name="q2" value="good_flow" class="accent-rose-500 mr-2.5">
                   <div>
                     <p class="font-medium text-slate-800">หยดสีเหลืองทอง 0.1 - 2 มล. ขึ้นไป</p>
                     <p class="text-[10px] text-slate-500">ซึมเป็นหยด ใช้ปลาย Syringe จ่อดูดได้</p>
@@ -250,15 +250,15 @@
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q2" value="engorged" class="accent-rose-500 mr-2.5">
                   <div>
-                    <p class="font-medium text-amber-700 font-semibold">เต้านมคัดตึง</p>
+                    <p class="font-medium text-slate-800">เต้านมคัดตึง</p>
                     <p class="text-[10px] text-slate-500">เต้านมเริ่มแข็ง แน่น ตึง หรือบีบออกยาก</p>
                   </div>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q2" value="no_milk" class="accent-rose-500 mr-2.5">
                   <div>
-                    <p class="font-medium text-blue-700 font-semibold">ไม่มีน้ำนม</p>
-                    <p class="text-[10px] text-slate-500">ยังไม่มีน้ำนมไหลออกมาเลย หรือแห้งสนิท (ปกติใน 24 ชม. แรก)</p>
+                    <p class="font-medium text-slate-800">ไม่มีน้ำนม</p>
+                    <p class="text-[10px] text-slate-500">ยังไม่มีน้ำนมไหลออกมา หรือแห้งสนิท</p>
                   </div>
                 </label>
               </div>
@@ -266,38 +266,38 @@
 
             <!-- ข้อ 3 -->
             <div class="space-y-1.5 pt-1">
-              <label class="block text-xs font-semibold text-slate-700">3. ความถี่ในการบีบกระตุ้นเต้าในรอบวันนี้</label>
+              <label class="block text-xs font-semibold text-slate-700">3. ความถี่ในการบีบกระตุ้นเต้าในรอบวันนี้ <span class="text-rose-500">*</span></label>
               <div class="space-y-1.5 text-xs">
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
-                  <input type="radio" name="q3" value="frequent" class="accent-rose-500 mr-2.5" checked>
-                  <span>บีบสม่ำเสมอทุก 2 - 3 ชั่วโมง (เป้าหมาย 8 - 10 รอบ/วัน)</span>
+                  <input type="radio" name="q3" value="frequent" class="accent-rose-500 mr-2.5">
+                  <span class="text-slate-700">บีบทุก 2 - 3 ชั่วโมง (8 - 10 รอบต่อวัน)</span>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q3" value="average" class="accent-rose-500 mr-2.5">
-                  <span>บีบได้ 4 - 7 รอบต่อวัน</span>
+                  <span class="text-slate-700">บีบ 4 - 7 รอบต่อวัน</span>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q3" value="low" class="accent-rose-500 mr-2.5">
-                  <span>บีบน้อยกว่า 4 รอบ หรือยังไม่ได้บีบเลย</span>
+                  <span class="text-slate-700">บีบน้อยกว่า 4 รอบต่อวัน หรือยังไม่ได้บีบ</span>
                 </label>
               </div>
             </div>
 
             <!-- ข้อ 4 -->
             <div class="space-y-1.5 pt-1">
-              <label class="block text-xs font-semibold text-slate-700">4. สภาพจิตใจและความรู้สึกของคุณแม่</label>
+              <label class="block text-xs font-semibold text-slate-700">4. สภาพจิตใจและความรู้สึกของคุณแม่ <span class="text-rose-500">*</span></label>
               <div class="space-y-1.5 text-xs">
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
-                  <input type="radio" name="q4" value="relaxed" class="accent-rose-500 mr-2.5" checked>
-                  <span>ผ่อนคลาย มั่นใจ มีกำลังใจดีพร้อมส่งน้ำนมให้ลูก</span>
+                  <input type="radio" name="q4" value="relaxed" class="accent-rose-500 mr-2.5">
+                  <span class="text-slate-700">ผ่อนคลาย มั่นใจ ไม่มีความกังวล</span>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q4" value="mild_anxiety" class="accent-rose-500 mr-2.5">
-                  <span>กังวลเล็กน้อย คิดถึงลูกมาก อยากเจอลูก</span>
+                  <span class="text-slate-700">มีความกังวลเล็กน้อย</span>
                 </label>
                 <label class="flex items-center p-2.5 rounded-xl border border-slate-200 hover:bg-rose-50/50 cursor-pointer has-checked:border-rose-500 has-checked:bg-rose-50/70 transition">
                   <input type="radio" name="q4" value="stressed" class="accent-rose-500 mr-2.5">
-                  <span>เครียด วิตกกังวลมาก กลัวน้ำนมไม่พอ หรือพักผ่อนไม่เพียงพอ</span>
+                  <span class="text-slate-700">มีความเครียดหรือวิตกกังวลมาก</span>
                 </label>
               </div>
             </div>
@@ -443,17 +443,17 @@
 
               <!-- Flow observation selection -->
               <div class="space-y-1.5">
-                <label class="block text-[11px] font-bold text-slate-700">ลักษณะการไหลของน้ำนมที่สังเกตได้:</label>
+                <label class="block text-[11px] font-bold text-slate-700">ลักษณะการไหลของน้ำนมที่สังเกตได้: <span class="text-amber-700">*</span></label>
                 <div class="grid grid-cols-2 gap-1.5 text-xs">
                   <label class="flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
-                    <input type="radio" name="flowResult" value="หยดต่อเนื่อง 0.5-2+ มล." class="accent-amber-600 mr-1.5" checked>
+                    <input type="radio" name="flowResult" value="หยดต่อเนื่อง 0.5-2+ มล." class="accent-amber-600 mr-1.5">
                     <span>หยดต่อเนื่อง (0.5-2+ มล.)</span>
                   </label>
                   <label class="flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
                     <input type="radio" name="flowResult" value="ซึมเป็นหยด 0.1-0.4 มล." class="accent-amber-600 mr-1.5">
                     <span>ซึมเป็นหยด (0.1-0.4 มล.)</span>
                   </label>
-                  <label class="flex items-center p-2 rounded-xl bg-white border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
+                  <label class="flex items-center p-2 rounded-xl border border-slate-200 hover:bg-amber-50/70 has-checked:border-amber-500 has-checked:bg-amber-100/70 transition cursor-pointer text-[11px]">
                     <input type="radio" name="flowResult" value="เคลือบปลายหัวนม/ละออง" class="accent-amber-600 mr-1.5">
                     <span>เคลือบปลายหัวนม/ละออง</span>
                   </label>
@@ -691,36 +691,14 @@
                 <h4 class="text-xs md:text-sm font-bold text-slate-800 leading-snug">ปิดจุก ติดป้ายชื่อ-เวลา และแช่เย็น</h4>
                 <p class="text-[11px] text-slate-600 leading-relaxed">สวมปลอกปิดปลาย Syringe ติดสติกเกอร์ระบุชื่อคุณแม่ ตึก เลขเตียง วันที่และเวลา ส่งต่อให้พยาบาลดูแลทารก</p>
               </div>
-              <div class="pt-1">
+              <div class="pt-1 space-y-1">
                 <span class="inline-flex items-center gap-1 text-[10px] text-blue-700 font-semibold bg-blue-50 px-2 py-1 rounded-lg border border-blue-200/80 w-full">
                   <span>❄️</span>
                   <span class="truncate">แช่เย็นพร้อมส่งต่อทำ Oral Care</span>
                 </span>
+                <p class="text-[10px] text-rose-600 font-semibold">*กรณีลูกแยกกับแม่</p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- กล่องทำไมเพียง 0.1 มล. ก็มีค่ามหาศาล พร้อมภาพประกอบ Colostrum Oral Care จากอินโฟกราฟิก -->
-        <div class="p-3.5 md:p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-xs text-blue-900 space-y-2.5 shadow-2xs">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div class="space-y-1 flex-1">
-              <p class="font-bold flex items-center gap-1.5 md:text-sm text-blue-950">
-                <span class="text-base">🛡️</span>
-                <span>ทำไมเพียง 0.1 มล. ก็มีค่ามหาศาล?</span>
-              </p>
-              <p class="text-[11px] md:text-xs text-blue-800 leading-relaxed">
-                พยาบาลจะนำหัวน้ำนมไปทำ <strong>Colostrum Oral Care</strong> โดยใช้ก้านสำลีป้ายเคลือบกระพุ้งแก้มลูก สารภูมิคุ้มกัน Secretory IgA จะถูกดูดซึมตรงเข้าสู่กระแสเลือด ป้องกันการติดเชื้อในกระแสเลือดและลำไส้เน่าเปื่อยได้โดยตรง
-              </p>
-            </div>
-            <!-- ภาพประกอบ Colostrum Oral Care & Secretory IgA จากส่วนล่างของรูปภาพ -->
-            <a href="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" target="_blank" title="คลิกเพื่อดูรูปภาพขนาดเต็ม" 
-               class="shrink-0 w-full sm:w-56 h-20 rounded-xl overflow-hidden border border-blue-200 bg-white shadow-2xs group/oral hover:border-blue-400 transition flex items-center justify-center relative">
-              <svg viewBox="519 438 476 135" class="w-full h-full object-contain pointer-events-none select-none transition duration-300 group-hover/oral:scale-105" preserveAspectRatio="xMidYMid meet">
-                <image href="https://i.postimg.cc/y6tTJw45/Gemini-Generated-Image-94ayfj94ayfj94ay.jpg" width="1000" height="575" preserveAspectRatio="none" />
-              </svg>
-              <span class="absolute bottom-1 right-1 bg-slate-900/70 text-white text-[8px] px-1 py-0.2 rounded opacity-0 group-hover/oral:opacity-100 transition backdrop-blur-2xs">🔍 ขยาย</span>
-            </a>
           </div>
         </div>
       </div>
@@ -952,8 +930,10 @@
         </div>
 
         <div class="space-y-1.5">
-          <label class="block text-xs font-semibold text-slate-700">รหัส PIN เจ้าหน้าที่ (เริ่มต้น: 1234)</label>
-          <input type="password" id="adminPinInput" placeholder="กรอกรหัส 4 หลัก" class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-700">
+          <label class="block text-xs font-semibold text-slate-700">รหัส PIN เจ้าหน้าที่</label>
+          <input type="password" id="adminPinInput" placeholder="กรอกรหัส PIN เจ้าหน้าที่" 
+                 onkeydown="if(event.key==='Enter') verifyAdminPin()"
+                 class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-700">
         </div>
 
         <button onclick="verifyAdminPin()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition">
@@ -972,6 +952,46 @@
             </div>
           </div>
           <button onclick="closeAdminModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">✕</button>
+        </div>
+
+        <!-- แถบแสดงสถานะการเชื่อมต่อ Google Sheets สำหรับเจ้าหน้าที่ (ย้ายมาแสดงเฉพาะในหน้านี้) -->
+        <div class="bg-emerald-50/90 border border-emerald-200 rounded-2xl p-2.5 px-3.5 flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-950 shadow-2xs">
+          <div class="flex items-center gap-2">
+            <span id="sheetSyncDot" class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+            <span class="font-bold text-emerald-900 flex items-center gap-1">
+              <span>📊</span>
+              <span>Google Sheets Auto-Sync:</span>
+            </span>
+            <span id="sheetSyncStatus" class="text-[11px] text-amber-700 font-semibold">กำลังตรวจสอบการเชื่อมต่อ...</span>
+          </div>
+          <div class="flex items-center gap-1.5 ml-auto">
+            <a href="https://docs.google.com/spreadsheets/d/11eDeAt4QItA1RSFX4dqycp3z0Ha0SnkY_rTqFiRWVIk/edit?gid=0#gid=0" target="_blank" 
+               class="px-2.5 py-1 bg-white hover:bg-emerald-100 text-emerald-800 rounded-lg font-bold text-[11px] border border-emerald-300 shadow-2xs transition flex items-center gap-1">
+              <span>📑</span>
+              <span>เปิด Google Sheets</span>
+            </a>
+            <button onclick="openSheetConfigModal()" title="ตั้งค่า Webhook / Apps Script" 
+                    class="px-2 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-[11px] font-bold shadow-2xs transition flex items-center gap-1">
+              <span>⚙️</span>
+              <span>ตั้งค่ารับข้อมูล</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- กล่องแจ้งเตือนเมื่อยังไม่ได้เชื่อมต่อ Google Apps Script Web App -->
+        <div id="setupNoticeBox" class="hidden p-3 bg-amber-50 border-2 border-amber-300 rounded-2xl text-xs text-amber-950 space-y-1.5 shadow-2xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold flex items-center gap-1.5 text-amber-900">
+              <span class="text-base">⚠️</span>
+              <span>สาเหตุที่ยังไม่บันทึก: ยังไม่ได้ใส่ Web App URL รับข้อมูล</span>
+            </span>
+            <button onclick="openSheetConfigModal()" class="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-[10px] shadow-2xs">
+              คลิกตั้งค่าเชื่อมต่อ (1 นาที)
+            </button>
+          </div>
+          <p class="text-[11px] text-amber-800 leading-relaxed">
+            ลิงก์ Google Sheets (<code class="bg-amber-100 px-1 py-0.5 rounded text-[10px]">https://docs.google.com/spreadsheets/d/...</code>) เป็นเพียงหน้าเปิดดูตารางบนเว็บ <strong>Google ไม่อนุญาตให้หน้าเว็บใดๆ ส่งข้อมูลไปเขียนทับได้โดยตรง</strong> หากยังไม่มี <em>Google Apps Script Web App</em> ทำหน้าที่เป็นประตูรับข้อมูล กรุณากดปุ่ม <strong>"ตั้งค่าเชื่อมต่อ"</strong> เพื่อนำโค้ดไปวางในชีตและนำ Web App URL มาใส่ครับ
+          </p>
         </div>
 
         <!-- Metric Cards -->
@@ -1124,6 +1144,63 @@
     </div>
   </div>
 
+  <!-- Modal: Google Sheets & Apps Script Setup -->
+  <div id="sheetConfigModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-5 space-y-3.5 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📊</span>
+          <h4 class="text-xs md:text-sm font-bold text-slate-800">การเชื่อมต่อ Google Sheets อัตโนมัติ</h4>
+        </div>
+        <button onclick="closeSheetConfigModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">✕</button>
+      </div>
+
+      <div class="text-xs space-y-2 text-slate-600">
+        <p><strong>ลิงก์ Google Sheets ปัจจุบัน:</strong></p>
+        <a href="https://docs.google.com/spreadsheets/d/11eDeAt4QItA1RSFX4dqycp3z0Ha0SnkY_rTqFiRWVIk/edit?gid=0#gid=0" target="_blank" 
+           class="text-[11px] text-emerald-700 underline break-all bg-emerald-50 p-2 rounded-xl block border border-emerald-200">
+          https://docs.google.com/spreadsheets/d/11eDeAt4QItA1RSFX4dqycp3z0Ha0SnkY_rTqFiRWVIk/edit
+        </a>
+
+        <div class="pt-1">
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Google Apps Script Web App URL (ต้องใส่เพื่อให้ข้อมูลเข้าชีต):</label>
+          <input type="text" id="gscriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" 
+                 class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-400 bg-amber-50/50">
+          <p class="text-[10px] text-rose-600 mt-1 font-semibold">
+            * หากยังไม่ใส่ลิงก์นี้ ข้อมูลจะบันทึกในเครื่องเท่านั้น แต่จะไม่วิ่งเข้าไปใน Google Sheets
+          </p>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-1.5 text-[11px]">
+          <p class="font-bold text-slate-800">💡 วิธีเปิดใช้งานให้บันทึกลง Google Sheets (ทำครั้งเดียว 1 นาที):</p>
+          <ol class="list-decimal list-inside space-y-1 text-slate-600 text-[10px] leading-relaxed">
+            <li>เปิดไฟล์ Google Sheets ของคุณ</li>
+            <li>ไปที่เมนูด้านบน <strong>ส่วนขยาย (Extensions) &gt; Apps Script</strong></li>
+            <li>ลบโค้ดเดิมทั้งหมดออก แล้วกดปุ่มด้านล่างเพื่อ <strong>"คัดลอกโค้ด Apps Script"</strong> ไปวาง</li>
+            <li>กดไอคอน <strong>บันทึก (แผ่นดิสก์)</strong></li>
+            <li>กดปุ่มสีน้ำเงิน <strong>ทำให้ใช้งานได้ (Deploy) &gt; การทำให้ใช้งานได้รายการใหม่ (New deployment)</strong></li>
+            <li>เลือกประเภทเป็น <strong>เว็บแอป (Web app)</strong> &gt; เลือกระดับผู้มีสิทธิ์เข้าถึงเป็น <strong>"ทุกคน (Anyone)"</strong> &gt; กด Deploy</li>
+            <li>คัดลอก URL เว็บแอป (ที่ลงท้ายด้วย <code>/exec</code>) นำมาวางในช่องด้านบนนี้แล้วกดบันทึก</li>
+          </ol>
+          <button onclick="copyAppsScriptCode()" class="mt-1 w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 shadow-xs">
+            <span>📋</span>
+            <span>คัดลอกโค้ด Google Apps Script</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 pt-1">
+        <button onclick="testSendToGoogleSheets()" class="py-2.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1 border border-amber-300">
+          <span>🧪</span>
+          <span>ทดสอบส่งข้อมูล</span>
+        </button>
+        <button onclick="saveSheetConfig()" class="py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl shadow-xs transition">
+          บันทึกการตั้งค่า
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toastNotification" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 text-white text-xs px-4 py-2 rounded-full shadow-lg pointer-events-none transition-all duration-300 opacity-0 transform -translate-y-2">
     บันทึกข้อมูลเรียบร้อย
@@ -1131,6 +1208,14 @@
 
   <script>
     /* Application State */
+    const GOOGLE_SHEET_ID = '11eDeAt4QItA1RSFX4dqycp3z0Ha0SnkY_rTqFiRWVIk';
+    const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/' + GOOGLE_SHEET_ID + '/edit?gid=0#gid=0';
+    
+    // ⭐ URL เว็บแอปถาวร: เชื่อมต่อ Google Sheets อัตโนมัติ 100% สำหรับทุกคนที่เปิดแอป
+    const PERMANENT_GSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxelJAvO9rweiKj5nsdamDt-2dXuQ2L1kad5Rt4wh4vDjnPd7Yh2XZRq75Ii6oJf0MM5A/exec';
+    let gscriptWebappUrl = PERMANENT_GSCRIPT_URL;
+    let autoSaveTimer = null;
+
     const appState = {
       userRole: 'mother', // 'mother' (ค่าเริ่มต้นสำหรับคุณแม่) หรือ 'admin' (สำหรับเจ้าหน้าที่)
       activeTab: 'assess',
@@ -1166,7 +1251,7 @@
       nurseNotes: []
     };
 
-    const ADMIN_PIN_DEFAULT = "1234";
+    const ADMIN_PIN_DEFAULT = "09072026";
     let confirmCallback = null;
     let currentThaiMedTargetPatientId = null;
     let currentAdviceTargetPatientId = null;
@@ -1282,145 +1367,93 @@
       syncCurrentPatientToAdminList();
     }
 
+    /* Auto-save trigger when typing */
+    function onPatientFieldInput() {
+      savePatientInfo();
+      debounceSyncToGoogleSheets();
+    }
+
+    /* Debounce Sync to Google Sheets every time user types */
+    function debounceSyncToGoogleSheets() {
+      const statusEl = document.getElementById('sheetSyncStatus');
+      if (statusEl) {
+        statusEl.innerHTML = '<span class="text-amber-600 font-semibold">🔄 กำลังส่งข้อมูล...</span>';
+      }
+
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(() => {
+        syncDataToGoogleSheets();
+      }, 600);
+    }
+
+    /* การประมวลผลแบบประเมินการไหลของน้ำนม 24 ชั่วโมงแรก */
     function calculateAssessment() {
-      const name = document.getElementById('patientName')?.value.trim();
-      const hn = document.getElementById('patientHn')?.value.trim();
-      const ward = document.getElementById('patientWard')?.value;
-      const bed = document.getElementById('patientBed')?.value.trim();
-      const deliveryType = document.getElementById('patientDeliveryType')?.value;
-      const district = document.getElementById('patientDistrict')?.value;
+      savePatientInfo();
 
-      if (!name) {
-        showToast('กรุณากรอกชื่อ - นามสกุล คุณแม่');
-        document.getElementById('patientName')?.focus();
-        return;
-      }
-      if (!hn) {
-        showToast('กรุณากรอก HN คุณแม่');
-        document.getElementById('patientHn')?.focus();
-        return;
-      }
-      if (!ward) {
-        showToast('กรุณาเลือกตึก / หอผู้ป่วย');
-        document.getElementById('patientWard')?.focus();
-        return;
-      }
-      if (!bed) {
-        showToast('กรุณากรอกเลขเตียง');
-        document.getElementById('patientBed')?.focus();
-        return;
-      }
-      if (!deliveryType) {
-        showToast('กรุณาเลือกวิธีการคลอด (คลอดปกติ หรือ ผ่าคลอด)');
-        document.getElementById('patientDeliveryType')?.focus();
-        return;
-      }
-      if (!district) {
-        showToast('กรุณาเลือกที่อยู่ (อำเภอใน จ.นราธิวาส)');
-        document.getElementById('patientDistrict')?.focus();
+      if (!appState.name) {
+        showToast('กรุณาระบุชื่อ-นามสกุลคุณแม่ก่อนทำการประเมิน');
+        const nameEl = document.getElementById('patientName');
+        if (nameEl) {
+          nameEl.focus();
+          nameEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         return;
       }
 
-      appState.name = name;
-      appState.hn = hn;
-      appState.ward = ward;
-      appState.bed = bed;
-      appState.deliveryType = deliveryType;
-      appState.district = district;
+      const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+      const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+      const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+      const q4 = document.querySelector('input[name="q4"]:checked')?.value;
 
-      const q1 = document.querySelector('input[name="q1"]:checked')?.value || 'fast';
-      const q2 = document.querySelector('input[name="q2"]:checked')?.value || 'good_flow';
-      const q3 = document.querySelector('input[name="q3"]:checked')?.value || 'frequent';
-      const q4 = document.querySelector('input[name="q4"]:checked')?.value || 'relaxed';
+      if (!q1 || !q2 || !q3 || !q4) {
+        showToast('กรุณาตอบคำถามแบบประเมินให้ครบทั้ง 4 ข้อ');
+        return;
+      }
 
       let score = 0;
-      let alert = false;
-      let title = '';
-      let desc = '';
-      let adviceHtml = '';
-      let symptomsText = '';
+      // ข้อ 1: เวลาเริ่มบีบกระตุ้นครั้งแรก
+      if (q1 === 'fast') score += 3;
+      else if (q1 === 'moderate') score += 2;
+      else score += 1;
 
-      if (q1 === 'fast') score += 3; else if (q1 === 'moderate') score += 2; else score += 1;
-      if (q3 === 'frequent') score += 3; else if (q3 === 'average') score += 2; else score += 1;
-      if (q4 === 'relaxed') score += 3; else if (q4 === 'mild_anxiety') score += 2; else score += 1;
-
+      // ข้อ 2: ลักษณะและปริมาณน้ำนม
+      let symptomText = '';
       if (q2 === 'well_flow') {
-        symptomsText = 'น้ำนมไหลดี';
-        score += 4;
-        title = 'ยอดเยี่ยมมาก! น้ำนมไหลดีและต่อเนื่อง';
-        desc = 'ต่อมน้ำนมของคุณแม่ตอบสนองได้ดีเยี่ยม มีน้ำนมไหลพุ่งหรือไหลต่อเนื่องเป็นสาย แสดงว่าท่อน้ำนมเปิดกว้างและฮอร์โมนหลั่งสมบูรณ์';
-        adviceHtml = `
-          <p class="font-bold text-emerald-800">คำแนะนำ:</p>
-          <ul class="list-disc list-inside space-y-0.5 text-[11px] text-emerald-900">
-            <li>เก็บน้ำนมใส่ Syringe หรือภาชนะสะอาดแช่เย็นอย่างถูกสุขอนามัย</li>
-            <li>คงความถี่การบีบระบายน้ำนมทุก 2-3 ชม. เพื่อรักษาระดับการผลิตน้ำนมอย่างต่อเนื่อง</li>
-            <li>ดื่มน้ำอุ่นบ่อยๆ และพักผ่อนให้เพียงพอ</li>
-          </ul>
-        `;
-      } else if (q2 === 'good_flow') {
-        symptomsText = 'หยดสีเหลืองทอง 0.1-2 มล.';
         score += 3;
-        title = 'ยอดเยี่ยมมาก! การสร้างหัวน้ำนมสมบูรณ์แบบ';
-        desc = 'คุณแม่เริ่มบีบกระตุ้นได้ดีและมีหัวน้ำนมสีเหลืองทอง (Colostrum) ผุดออกมาตามธรรมชาติ เหมาะสำหรับดูดใส่ Syringe';
-        adviceHtml = `
-          <p class="font-bold text-emerald-800">คำแนะนำ:</p>
-          <ul class="list-disc list-inside space-y-0.5 text-[11px] text-emerald-900">
-            <li>ใช้ปลายกระบอก Syringe 1 มล. จ่อดูดหยดหัวน้ำนมโดยตรง</li>
-            <li>คงความถี่การบีบทุก 2-3 ชม. (8-10 รอบ/วัน) เพื่อเปิดท่อน้ำนมอย่างต่อเนื่อง</li>
-            <li>แช่เย็น Syringe ในกระเป๋าเก็บความเย็น</li>
-          </ul>
-        `;
+        symptomText = 'น้ำนมไหลดี';
+      } else if (q2 === 'good_flow') {
+        score += 3;
+        symptomText = 'หยดสีเหลืองทอง';
       } else if (q2 === 'drop_flow') {
-        symptomsText = 'เคลือบปลายหัวนม/ละออง';
         score += 2;
-        title = 'ปกติมากใน 24 ชั่วโมงแรก: ต่อมน้ำนมเริ่มตอบสนอง';
-        desc = 'การมีน้ำนมซึมเคลือบปลายหัวนมเป็นเม็ดเหงื่อเล็กๆ แสดงว่าระบบฮอร์โมนกำลังเริ่มทำงาน เป็นการเริ่มต้นที่ดีมากสำหรับวันแรก';
-        adviceHtml = `
-          <p class="font-bold text-amber-800">คำแนะนำ:</p>
-          <ul class="list-disc list-inside space-y-0.5 text-[11px] text-amber-900">
-            <li>นวดคลึงเต้าเบาๆ รอบทิศทางก่อนบีบ 1-2 นาที</li>
-            <li>บีบกระตุ้นสม่ำเสมอทุก 2-3 ชม. ไม่ต้องเค้นแรง</li>
-            <li>ใช้ Syringe ปลายตัดค่อยๆ ปาดหยดน้ำนมที่ซึมอยู่เก็บไว้</li>
-          </ul>
-        `;
+        symptomText = 'เคลือบปลายหัวนม';
       } else if (q2 === 'engorged') {
-        symptomsText = 'เต้านมคัดตึง';
         score += 1;
-        alert = true;
-        title = 'เต้านมเริ่มคัดตึง: ควรดูแลคลายท่อน้ำนม';
-        desc = 'เต้านมของคุณแม่เริ่มมีเลือดและของเหลวมาคั่งเพื่อสร้างน้ำนม หากคัดตึงจนแข็งจะทำให้บีบน้ำนมออกยากและอาจเกิดท่อน้ำนมอุดตัน';
-        adviceHtml = `
-          <p class="font-bold text-amber-900">คำแนะนำเฉพาะกรณีเต้านมคัดตึง:</p>
-          <ul class="list-disc list-inside space-y-0.5 text-[11px] text-amber-900">
-            <li><strong>ประคบอุ่นเบาๆ 3-5 นาที</strong> ก่อนบีบน้ำนมเพื่อขยายท่อน้ำนม</li>
-            <li><strong>นวดคลึงเป็นวงกลมเบาๆ</strong> จากฐานเต้าเข้าสู่หัวนม ช่วยลดอาการบวม</li>
-            <li><strong>ห้ามบีบเค้นเต้าอย่างรุนแรง</strong> เพราะอาจทำให้เนื้อเยื่อเต้านมอักเสบ</li>
-            <li>สามารถขอรับการนวดเปิดท่อน้ำนมจากพยาบาลประจำตึกได้</li>
-          </ul>
-        `;
-      } else if (q2 === 'no_milk') {
-        symptomsText = 'ไม่มีน้ำนม';
+        symptomText = 'เต้านมคัดตึง';
+      } else {
         score += 1;
-        title = 'สรีรวิทยาปกติ: ไม่ต้องกังวลเรื่องน้ำนมยังไม่มา';
-        desc = 'ใน 24 ชั่วโมงแรก ร่างกายคุณแม่เพิ่งคลอดและระดับฮอร์โมน Progesterone เพิ่งลดลง การที่ยังไม่มีน้ำนมไหลออกมาถือเป็นเรื่องปกติอย่างยิ่งของธรรมชาติ';
-        adviceHtml = `
-          <p class="font-bold text-blue-900">คำแนะนำสร้างความมั่นใจ:</p>
-          <ul class="list-disc list-inside space-y-0.5 text-[11px] text-blue-950">
-            <li><strong>กระเพาะลูกวันแรกเท่าผลเชอร์รี่ (5 มล.)</strong> ลูกยังมีสารอาหารและน้ำสะสมจากสายสะดือ</li>
-            <li><strong>เน้นการบีบกระตุ้นเปล่าๆ</strong> ทุก 2-3 ชม. รอบละ 10-15 นาที เพื่อส่งสัญญาณปลุกต่อมใต้สมอง</li>
-            <li>มองรูปลูกและเปิดฟังเสียงลูกเพื่อช่วยหลั่งฮอร์โมน Oxytocin</li>
-          </ul>
-        `;
+        symptomText = 'ไม่มีน้ำนม';
       }
 
-      appState.symptoms = symptomsText;
-      appState.assessmentScore = score;
-      appState.assessmentAlert = alert;
-      const now = new Date();
-      appState.lastAssessedTime = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+      // ข้อ 3: ความถี่ในการบีบกระตุ้น
+      if (q3 === 'frequent') score += 3;
+      else if (q3 === 'average') score += 2;
+      else score += 1;
 
-      // Update UI Result Card
-      const resCard = document.getElementById('assessmentResultCard');
+      // ข้อ 4: สภาพจิตใจและความรู้สึก
+      if (q4 === 'relaxed') score += 3;
+      else if (q4 === 'mild_anxiety') score += 2;
+      else score += 1;
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+      appState.assessmentScore = score;
+      appState.symptoms = symptomText;
+      appState.lastAssessedTime = timeStr;
+      appState.assessmentAlert = (score <= 6 || q2 === 'engorged' || q2 === 'no_milk');
+
+      const card = document.getElementById('assessmentResultCard');
       const resName = document.getElementById('resPatientName');
       const resHn = document.getElementById('resPatientHn');
       const resBed = document.getElementById('resPatientBed');
@@ -1429,167 +1462,455 @@
       const resDesc = document.getElementById('resDescription');
       const resAdvice = document.getElementById('resAdviceBox');
 
-      if (resName) resName.innerText = appState.name;
-      if (resHn) resHn.innerText = `HN: ${appState.hn}`;
-      if (resBed) resBed.innerText = `ตึก: ${appState.ward} | เตียง: ${appState.bed} | คลอด: ${appState.deliveryType} | ${appState.district}`;
+      if (resName) resName.innerText = appState.name || '-';
+      if (resHn) resHn.innerText = `HN: ${appState.hn || '-'}`;
+      if (resBed) resBed.innerText = `ตึก: ${appState.ward || '-'} | เตียง: ${appState.bed || '-'}`;
 
-      if (resBadge) {
-        if (alert) {
-          resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800';
-          resBadge.innerText = 'เต้านมคัดตึง';
-        } else if (q2 === 'no_milk') {
-          resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800';
-          resBadge.innerText = 'รอการกระตุ้น';
-        } else if (q2 === 'well_flow') {
-          resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white';
-          resBadge.innerText = 'น้ำนมไหลดี';
-        } else {
-          resBadge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800';
-          resBadge.innerText = 'ปกติ';
+      if (score >= 10) {
+        if (resBadge) {
+          resBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300';
+          resBadge.innerText = `ระดับดีเยี่ยม (${score}/12 คะแนน)`;
+        }
+        if (resTitle) resTitle.innerText = `🌟 การเริ่มต้นสร้างน้ำนมอยู่ในเกณฑ์ดีเยี่ยม`;
+        if (resDesc) resDesc.innerText = `คุณแม่มีวินัยในการกระตุ้นและสภาวะจิตใจพร้อมส่งเสริมการสร้างน้ำนมแม่ได้ดีมาก`;
+        if (resAdvice) {
+          resAdvice.className = 'p-3 rounded-xl bg-emerald-50/90 border border-emerald-200 text-xs text-emerald-950 space-y-1.5 leading-relaxed';
+          resAdvice.innerHTML = `
+            <p class="font-bold text-emerald-900">🌸 ข้อแนะนำการดูแลต่อเนื่อง:</p>
+            <ul class="list-disc list-inside space-y-1 text-[11px] text-emerald-800">
+              <li>รักษารอบการบีบกระตุ้นต่อเนื่องทุก 2-3 ชั่วโมง (8-10 รอบ/วัน) เพื่อคงระดับโปรแลกติน</li>
+              <li>เก็บหยดหัวน้ำนมใส่ Syringe แช่เย็นเพื่อส่งทำ Oral Care ให้ลูกน้อยตามรอบ</li>
+              <li>ดื่มน้ำอุ่นบ่อยๆ และพักผ่อนให้เพียงพอ</li>
+            </ul>
+          `;
+        }
+      } else if (score >= 7) {
+        if (resBadge) {
+          resBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300';
+          resBadge.innerText = `ระดับปานกลาง (${score}/12 คะแนน)`;
+        }
+        if (resTitle) resTitle.innerText = `🌾 การกระตุ้นน้ำนมอยู่ในเกณฑ์ปานกลาง (มีโอกาสพัฒนาได้ดี)`;
+        if (resDesc) resDesc.innerText = `น้ำนมแม่กำลังเริ่มปรับตัวและสร้างขึ้น หัวน้ำนมหยดทองคำมีค่าทุกหยด`;
+        if (resAdvice) {
+          resAdvice.className = 'p-3 rounded-xl bg-amber-50/90 border border-amber-200 text-xs text-amber-950 space-y-1.5 leading-relaxed';
+          resAdvice.innerHTML = `
+            <p class="font-bold text-amber-900">💡 ข้อแนะนำเพื่อเพิ่มประสิทธิภาพ:</p>
+            <ul class="list-disc list-inside space-y-1 text-[11px] text-amber-800">
+              <li>เพิ่มความถี่การบีบกระตุ้นเต้าให้ได้ 8-10 รอบต่อวัน แม้ได้เพียงละอองก็มีประโยชน์มหาศาล</li>
+              <li>ประคบอุ่นเบาๆ 3-5 นาที และนวดคลึงวนเป็นวงกลมก่อนเริ่มบีบน้ำนม</li>
+              <li>มองรูปลูกและสูดลมหายใจลึกๆ เพื่อช่วยคลายความกังวลและกระตุ้นฮอร์โมน Oxytocin</li>
+            </ul>
+          `;
+        }
+      } else {
+        if (resBadge) {
+          resBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
+          resBadge.innerText = `เฝ้าระวังพิเศษ (${score}/12 คะแนน)`;
+        }
+        if (resTitle) resTitle.innerText = `⚠️ แนะนำรับการดูแลกระตุ้นเต้านมเพิ่มเติม`;
+        if (resDesc) resDesc.innerText = `คุณแม่อาจมีความกังวลหรือเต้านมเริ่มคัดตึง/ระบายได้น้อย แนะนำให้เจ้าหน้าที่หรือแพทย์แผนไทยช่วยนวดดูแล`;
+        if (resAdvice) {
+          resAdvice.className = 'p-3 rounded-xl bg-rose-50/90 border border-rose-200 text-xs text-rose-950 space-y-1.5 leading-relaxed';
+          resAdvice.innerHTML = `
+            <p class="font-bold text-rose-900">🌿 ข้อแนะนำการดูแลเร่งด่วน:</p>
+            <ul class="list-disc list-inside space-y-1 text-[11px] text-rose-800">
+              <li>แจ้งพยาบาลหรือเจ้าหน้าที่แพทย์แผนไทยเพื่อช่วยประคบอุ่นและนวดคลายท่อน้ำนม</li>
+              <li>หลีกเลี่ยงการบีบเค้นเต้าแรงๆ เพราะอาจทำให้เนื้อเยื่อเต้านมบอบช้ำ</li>
+              <li>หากต้องการปรึกษาแพทย์แผนไทย โทร <strong class="text-rose-700">073510673</strong> หรือ Line <strong class="text-[#06C755]">@106nlmqm</strong></li>
+            </ul>
+          `;
         }
       }
 
-      if (resTitle) resTitle.innerText = title;
-      if (resDesc) resDesc.innerText = desc;
-      if (resAdvice) resAdvice.innerHTML = adviceHtml;
-
-      if (resCard) {
-        resCard.classList.remove('hidden');
-        resCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (card) {
+        card.classList.remove('hidden');
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
 
       saveState();
       syncCurrentPatientToAdminList();
-      showToast('ประมวลผลการประเมินเรียบร้อย');
+      renderAdminDashboard();
+      showToast(`ประมวลผลการประเมินเรียบร้อย: ${score} คะแนน (${symptomText})`);
     }
 
+    /* ฟังก์ชันส่งข้อมูลคุณแม่แต่ละท่าน (ตามข้อมูลบนหน้าต่าง Admin) เข้าสู่ Google Sheets ให้ตรงกัน 100% */
+    async function syncPatientToSheets(patient, customStatus = null) {
+      if (!patient || (!patient.name && !patient.hn)) return;
+      const targetUrl = gscriptWebappUrl || PERMANENT_GSCRIPT_URL;
+      if (!targetUrl) return;
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+      const dateStr = formatDateThai(patient.recordDate) || formatDateThai(now.toISOString().split('T')[0]);
+
+      // ดึงผลติดตามการไหล 3 ระยะ
+      const imm = patient.flowFollowUps?.find(f => f.stage === 'หลังนวดทันที');
+      const h2 = patient.flowFollowUps?.find(f => f.stage === '2 ชั่วโมงหลังนวด');
+      const h4 = patient.flowFollowUps?.find(f => f.stage === '4 ชั่วโมงหลังนวด');
+
+      const immText = imm ? `${imm.result} (${imm.volume} มล. เวลา ${imm.time})` : 'ยังไม่บันทึก';
+      const h2Text = h2 ? `${h2.result} (${h2.volume} มล. เวลา ${h2.time})` : 'ยังไม่บันทึก';
+      const h4Text = h4 ? `${h4.result} (${h4.volume} มล. เวลา ${h4.time})` : 'ยังไม่บันทึก';
+
+      let status = customStatus || (patient.isDischarged ? `คนไข้กลับบ้านแล้ว (${patient.dischargedTime || ''} น.)` : 'กำลังดูแล');
+
+      // รวบรวมข้อมูลทั้งหมดบนการ์ด Admin ของคุณแม่ท่านนี้
+      const payload = {
+        sheetId: GOOGLE_SHEET_ID,
+        timestamp: now.toISOString(),
+        dateTime: `${dateStr} ${timeStr} น.`,
+        date: dateStr,
+        time: timeStr,
+        hn: patient.hn || '-',
+        name: patient.name || '-',
+        ward: patient.ward || '-',
+        bed: patient.bed || '-',
+        deliveryType: patient.deliveryType || '-',
+        district: patient.district || '-',
+        symptoms: patient.symptoms || 'รอการประเมิน',
+        assessmentScore: (patient.assessmentScore !== null && patient.assessmentScore !== undefined) ? `${patient.assessmentScore} คะแนน` : '-',
+        provider: patient.provider || '-',
+        massagedStimulate: patient.massagedStimulate ? `นวดแล้ว (${patient.massagedStimulate} น.)` : 'ยังไม่ได้นวด',
+        massagedUnclog: patient.massagedUnclog ? `นวดแล้ว (${patient.massagedUnclog} น.)` : 'ยังไม่ได้นวด',
+        pumps: patient.pumps || 0,
+        totalVolume: (patient.totalVolume || 0).toFixed(1),
+        flowImmediate: immText,
+        flow2Hr: h2Text,
+        flow4Hr: h4Text,
+        advice: patient.lastActionMessage ? `${patient.lastActionMessage} (${patient.lastActionTime || ''} น.)` : '-',
+        thaiMedAppt: patient.thaiMedAppt 
+          ? `${formatDateThai(patient.thaiMedAppt.date)} (${patient.thaiMedAppt.timeSlot}) - ${patient.thaiMedAppt.status === 'accepted' ? 'ยอมรับนัด' : patient.thaiMedAppt.status === 'declined' ? 'ปฏิเสธนัด' : 'รอยืนยัน'}` 
+          : 'ไม่มีนัด',
+        status: status
+      };
+
+      try {
+        const dotEl = document.getElementById('sheetSyncDot');
+        const statusEl = document.getElementById('sheetSyncStatus');
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse';
+
+        await fetch(targetUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
+        if (statusEl) {
+          statusEl.innerHTML = `<span class="text-emerald-700 font-bold">✓ บันทึกข้อมูล ${patient.name} ลง Google Sheets เรียบร้อย (${timeStr} น.)</span>`;
+        }
+      } catch (err) {
+        console.warn('Sync error:', err);
+      }
+    }
+
+    /* Send Data to Google Sheets */
+    async function syncDataToGoogleSheets() {
+      // หากยังไม่มีข้อมูลคุณแม่ ไม่ต้องส่งแถวว่าง
+      if (!appState.name && !appState.hn) return;
+
+      const statusEl = document.getElementById('sheetSyncStatus');
+      const dotEl = document.getElementById('sheetSyncDot');
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+      // ดึงข้อมูลการติดตามการไหล 3 ระยะ
+      const imm = appState.flowFollowUps?.find(f => f.stage === 'หลังนวดทันที');
+      const h2 = appState.flowFollowUps?.find(f => f.stage === '2 ชั่วโมงหลังนวด');
+      const h4 = appState.flowFollowUps?.find(f => f.stage === '4 ชั่วโมงหลังนวด');
+
+      const immText = imm ? `${imm.result} (${imm.volume} มล. เวลา ${imm.time})` : 'ยังไม่บันทึก';
+      const h2Text = h2 ? `${h2.result} (${h2.volume} มล. เวลา ${h2.time})` : 'ยังไม่บันทึก';
+      const h4Text = h4 ? `${h4.result} (${h4.volume} มล. เวลา ${h4.time})` : 'ยังไม่บันทึก';
+
+      // Gather current patient payload ครอบคลุมทุกการเปลี่ยนแปลง
+      const payload = {
+        sheetId: GOOGLE_SHEET_ID,
+        timestamp: now.toISOString(),
+        dateTime: `${formatDateThai(appState.recordDate) || formatDateThai(now.toISOString().split('T')[0])} ${timeStr} น.`,
+        date: formatDateThai(appState.recordDate) || formatDateThai(now.toISOString().split('T')[0]),
+        time: timeStr,
+        hn: appState.hn || '-',
+        name: appState.name || '-',
+        ward: appState.ward || '-',
+        bed: appState.bed || '-',
+        deliveryType: appState.deliveryType || '-',
+        district: appState.district || '-',
+        symptoms: appState.symptoms || 'รอการประเมิน',
+        assessmentScore: appState.assessmentScore !== null ? `${appState.assessmentScore} คะแนน` : '-',
+        provider: appState.provider || '-',
+        massagedStimulate: appState.massagedStimulate ? `นวดแล้ว (${appState.massagedStimulate} น.)` : 'ยังไม่ได้นวด',
+        massagedUnclog: appState.massagedUnclog ? `นวดแล้ว (${appState.massagedUnclog} น.)` : 'ยังไม่ได้นวด',
+        pumps: appState.pumps || 0,
+        totalVolume: (appState.totalVolume || 0).toFixed(1),
+        flowImmediate: immText,
+        flow2Hr: h2Text,
+        flow4Hr: h4Text,
+        advice: appState.lastActionMessage ? `${appState.lastActionMessage} (${appState.lastActionTime || ''} น.)` : '-',
+        thaiMedAppt: appState.thaiMedAppt 
+          ? `${formatDateThai(appState.thaiMedAppt.date)} (${appState.thaiMedAppt.timeSlot}) - ${appState.thaiMedAppt.status === 'accepted' ? 'ยอมรับนัด' : appState.thaiMedAppt.status === 'declined' ? 'ปฏิเสธนัด' : 'รอยืนยัน'}` 
+          : 'ไม่มีนัด',
+        status: appState.isDischarged ? `คนไข้กลับบ้านแล้ว (${appState.dischargedTime || ''} น.)` : 'กำลังดูแล',
+        allPatients: appState.adminPatients
+      };
+
+      if (gscriptWebappUrl) {
+        try {
+          if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse';
+          // ใช้ Content-Type: text/plain;charset=utf-8 เพื่อไม่ให้ติดปัญหา CORS กับ Google Apps Script
+          await fetch(gscriptWebappUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+
+          if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
+          if (statusEl) {
+            statusEl.innerHTML = `<span class="text-emerald-700 font-bold">✓ บันทึกลง Google Sheets แล้ว (${timeStr} น.)</span>`;
+          }
+        } catch (err) {
+          console.warn('Sync to Google Sheets script error:', err);
+          if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-rose-500';
+          if (statusEl) {
+            statusEl.innerHTML = `<span class="text-rose-600 font-medium">⚠️ ส่งข้อมูลไม่สำเร็จ ตรวจสอบ Web App URL</span>`;
+          }
+        }
+      } else {
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-500';
+        if (statusEl) {
+          statusEl.innerHTML = `<span class="text-amber-700 font-bold">⚠️ บันทึกในเครื่องแล้ว (ยังไม่ต่อ Google Sheets - คลิก ⚙️ ตั้งค่า)</span>`;
+        }
+      }
+    }
+
+    /* ทดสอบยิงข้อมูลเข้า Google Sheets */
+    async function testSendToGoogleSheets() {
+      const urlInput = document.getElementById('gscriptUrlInput');
+      const testUrl = (urlInput && urlInput.value.trim()) || gscriptWebappUrl || PERMANENT_GSCRIPT_URL;
+      
+      if (!testUrl) {
+        showToast('กรุณาวาง Google Apps Script Web App URL ก่อนทดสอบ');
+        return;
+      }
+
+      showToast('กำลังทดสอบส่งข้อมูลเข้า Google Sheets...');
+      try {
+        const testPayload = {
+          dateTime: new Date().toLocaleString('th-TH'),
+          hn: 'TEST-001',
+          name: 'ทดสอบระบบ นมแม่',
+          ward: 'นวมินทร์ 3',
+          bed: 'T1',
+          deliveryType: 'คลอดปกติ',
+          district: 'อำเภอเมืองนราธิวาส',
+          symptoms: 'ทดสอบการเชื่อมต่อ Google Sheets',
+          assessmentScore: '4 คะแนน',
+          provider: 'เจ้าหน้าที่ทดสอบ',
+          massagedStimulate: 'นวดแล้ว',
+          massagedUnclog: 'นวดแล้ว',
+          pumps: 1,
+          totalVolume: '2.5',
+          flowImmediate: 'ทดสอบผ่านฉลุย',
+          flow2Hr: 'ทดสอบ 2 ชม.',
+          flow4Hr: 'ทดสอบ 4 ชม.',
+          advice: 'ทดสอบเชื่อมต่อสำเร็จ',
+          thaiMedAppt: 'ทดสอบนัด',
+          status: 'ทดสอบเรียบร้อย'
+        };
+
+        await fetch(testUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(testPayload)
+        });
+
+        gscriptWebappUrl = testUrl;
+        showToast('✓ ส่งข้อมูลทดสอบเรียบร้อย! กรุณาเปิดดูใน Google Sheets');
+        loadDataFromGoogleSheets();
+      } catch (e) {
+        showToast('เกิดข้อผิดพลาดในการส่งข้อมูล: ' + e.message);
+      }
+    }
+
+    /* Auto-connect and Fetch data from Google Sheets on app load */
+    async function loadDataFromGoogleSheets() {
+      const statusEl = document.getElementById('sheetSyncStatus');
+      const dotEl = document.getElementById('sheetSyncDot');
+      const noticeBox = document.getElementById('setupNoticeBox');
+      
+      if (PERMANENT_GSCRIPT_URL) {
+        gscriptWebappUrl = PERMANENT_GSCRIPT_URL;
+      }
+
+      if (!gscriptWebappUrl) {
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-500';
+        if (statusEl) {
+          statusEl.innerHTML = '<span class="text-amber-700 font-bold">⚠️ ยังไม่ได้เชื่อมต่อ Google Sheets (คลิก ⚙️ ตั้งค่า)</span>';
+        }
+        if (noticeBox) noticeBox.classList.remove('hidden');
+        return;
+      }
+
+      if (noticeBox) noticeBox.classList.add('hidden');
+      if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse';
+      if (statusEl) {
+        statusEl.innerHTML = '<span class="text-emerald-700 font-medium">✓ เชื่อมต่อ Google Apps Script เรียบร้อย พร้อมบันทึก</span>';
+      }
+    }
+
+    /* บันทึกการติดตามการไหลของน้ำนมหลังนวด 3 ระยะ */
     function saveFlowFollowUp() {
-      const selectedStage = document.querySelector('input[name="flowStage"]:checked')?.value || 'หลังนวดทันที';
-      const selectedRadio = document.querySelector('input[name="flowResult"]:checked');
-      const flowResult = selectedRadio ? selectedRadio.value : 'สังเกตการไหล';
+      const stage = document.querySelector('input[name="flowStage"]:checked')?.value || 'หลังนวดทันที';
+      const result = document.querySelector('input[name="flowResult"]:checked')?.value;
       const volInput = document.getElementById('flowLoggedVol');
       let vol = parseFloat(volInput?.value);
       if (isNaN(vol) || vol < 0) vol = 0.0;
 
+      if (!result) {
+        showToast('กรุณาเลือกลักษณะการไหลของน้ำนมที่สังเกตได้');
+        return;
+      }
+
       const now = new Date();
       const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-      const massageLabel = appState.lastMassageType ? `หลัง${appState.lastMassageType}` : 'หลังดูแลเต้า';
 
-      // Log into pump tracker
-      const newLog = {
-        id: Date.now(),
-        time: timeStr,
-        side: `${massageLabel} [${selectedStage}] (${flowResult})`,
-        volume: vol
-      };
+      if (!appState.flowFollowUps) {
+        appState.flowFollowUps = [];
+      }
 
-      appState.logs.unshift(newLog);
-      appState.pumps += 1;
-      appState.totalVolume += vol;
-
-      if (!appState.flowFollowUps) appState.flowFollowUps = [];
-      
-      const existingIdx = appState.flowFollowUps.findIndex(f => f.stage === selectedStage);
-      const followUpData = {
-        stage: selectedStage,
-        time: timeStr,
-        massageType: appState.lastMassageType || 'นวดกระตุ้น/เปิดท่อ',
-        result: flowResult,
-        volume: vol
+      // ตรวจสอบว่าเคยบันทึกช่วงเวลานี้ไปแล้วหรือไม่ หากมีให้อัปเดต ถ้าไม่มีให้เพิ่มใหม่
+      const existingIdx = appState.flowFollowUps.findIndex(f => f.stage === stage);
+      const followUpRecord = {
+        stage: stage,
+        result: result,
+        volume: vol,
+        time: timeStr
       };
 
       if (existingIdx !== -1) {
-        appState.flowFollowUps[existingIdx] = followUpData;
+        appState.flowFollowUps[existingIdx] = followUpRecord;
       } else {
-        appState.flowFollowUps.push(followUpData);
+        appState.flowFollowUps.push(followUpRecord);
       }
-
-      if (!appState.nurseNotes) appState.nurseNotes = [];
-      appState.nurseNotes.push({
-        time: timeStr,
-        text: `🌊 ติดตามผล [${selectedStage}]: ${flowResult} (${vol.toFixed(1)} มล.)`
-      });
 
       if (volInput) volInput.value = '';
 
       saveState();
       syncCurrentPatientToAdminList();
-      updateTrackerUI();
-      updateFlowMonitoringUI();
-      showToast(`บันทึกผลการติดตาม: ${selectedStage} เรียบร้อย`);
-    }
-
-    function updateStageSelectionUI() {
-      const immediate = appState.flowFollowUps?.find(f => f.stage === 'หลังนวดทันที');
-      const stage2Hr = appState.flowFollowUps?.find(f => f.stage === '2 ชั่วโมงหลังนวด');
-      const stage4Hr = appState.flowFollowUps?.find(f => f.stage === '4 ชั่วโมงหลังนวด');
-
-      const bImm = document.getElementById('badgeStageImmediate');
-      const b2 = document.getElementById('badgeStage2Hr');
-      const b4 = document.getElementById('badgeStage4Hr');
-
-      if (bImm) bImm.innerText = immediate ? `✓ ${immediate.time}` : 'ยังไม่บันทึก';
-      if (b2) b2.innerText = stage2Hr ? `✓ ${stage2Hr.time}` : 'ยังไม่บันทึก';
-      if (b4) b4.innerText = stage4Hr ? `✓ ${stage4Hr.time}` : 'ยังไม่บันทึก';
-    }
-
-    function updateFlowMonitoringUI() {
-      const badge = document.getElementById('massageStatusBadge');
-      const banner = document.getElementById('massageDetailsBanner');
-
       updateStageSelectionUI();
+      renderAdminDashboard();
+      showToast(`บันทึกผลการติดตาม: ${stage} (${vol.toFixed(1)} มล.) เรียบร้อย`);
+    }
 
-      if (appState.lastMassageType && appState.lastMassageTime) {
-        if (badge) {
-          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white shadow-xs';
-          badge.innerText = `✓ ${appState.lastMassageType} (${appState.lastMassageTime} น.)`;
-        }
-        if (banner) {
-          const imm = appState.flowFollowUps?.find(f => f.stage === 'หลังนวดทันที');
-          const h2 = appState.flowFollowUps?.find(f => f.stage === '2 ชั่วโมงหลังนวด');
-          const h4 = appState.flowFollowUps?.find(f => f.stage === '4 ชั่วโมงหลังนวด');
+    /* Google Sheets Config Modal Handlers */
+    function openSheetConfigModal() {
+      const input = document.getElementById('gscriptUrlInput');
+      if (input) input.value = gscriptWebappUrl || '';
+      document.getElementById('sheetConfigModal')?.classList.remove('hidden');
+    }
 
-          banner.innerHTML = `
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between text-slate-800 font-bold">
-                <span>💆‍♀️ ได้รับ${appState.lastMassageType}</span>
-                <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-md border border-emerald-200">เวลา ${appState.lastMassageTime} น.</span>
-              </div>
-              <p class="text-[10px] text-slate-600 leading-relaxed">
-                เป้าหมาย: บันทึกการไหลทั้ง 3 ระยะ เพื่อประเมินการเปิดของท่อน้ำนมอย่างต่อเนื่อง
-              </p>
-              
-              <div class="grid grid-cols-3 gap-1 pt-1 text-[9px] border-t border-amber-200/70">
-                <div class="p-1.5 rounded-lg ${imm ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-white border border-slate-200 text-slate-500'}">
-                  <span class="font-bold block">1. ทันที:</span>
-                  <span>${imm ? `${imm.result.slice(0, 10)}.. (${imm.volume}มล.)` : 'รอประเมิน'}</span>
-                </div>
-                <div class="p-1.5 rounded-lg ${h2 ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-white border border-slate-200 text-slate-500'}">
-                  <span class="font-bold block">2. 2 ชม.:</span>
-                  <span>${h2 ? `${h2.result.slice(0, 10)}.. (${h2.volume}มล.)` : 'รอประเมิน'}</span>
-                </div>
-                <div class="p-1.5 rounded-lg ${h4 ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-white border border-slate-200 text-slate-500'}">
-                  <span class="font-bold block">3. 4 ชม.:</span>
-                  <span>${h4 ? `${h4.result.slice(0, 10)}.. (${h4.volume}มล.)` : 'รอประเมิน'}</span>
-                </div>
-              </div>
-            </div>
-          `;
-        }
-      } else {
-        if (badge) {
-          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-200 text-amber-900';
-          badge.innerText = 'ยังไม่ได้นวด';
-        }
-        if (banner) {
-          banner.innerHTML = 'ยังไม่มีประวัติการนวดเต้านมล่าสุด สามารถให้เจ้าหน้าที่บันทึกการนวดในระบบ Admin หรือประเมินการไหลหลังบีบกระตุ้นได้ที่นี่';
-        }
+    function closeSheetConfigModal() {
+      document.getElementById('sheetConfigModal')?.classList.add('hidden');
+    }
+
+    function saveSheetConfig() {
+      const input = document.getElementById('gscriptUrlInput');
+      if (input) {
+        gscriptWebappUrl = input.value.trim();
+        localStorage.setItem('lacta_gscript_url', gscriptWebappUrl);
+        showToast('บันทึกการตั้งค่า Web App URL เรียบร้อย');
+        closeSheetConfigModal();
+        loadDataFromGoogleSheets();
       }
+    }
+
+    function copyAppsScriptCode() {
+      const code = `// Google Apps Script สำหรับ LactaCare
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    
+    // สร้าง Header อัตโนมัติหากยังไม่มี
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        "วันเวลาบันทึก", "HN", "ชื่อ-นามสกุล", "ตึก/หอผู้ป่วย", "เตียง", 
+        "วิธีการคลอด", "อำเภอ", "อาการ", "คะแนนประเมิน", "แพทย์แผนไทย", 
+        "นวดกระตุ้นน้ำนม", "นวดเปิดท่อน้ำนม", "รอบบีบสะสม", "ปริมาณรวม(มล.)", 
+        "ติดตามทันที", "ติดตาม 2 ชม.", "ติดตาม 4 ชม.", "คำแนะนำ", "นัดแพทย์แผนไทย", "สถานะ"
+      ]);
+    }
+    
+    var rowData = [
+      data.dateTime || new Date().toLocaleString("th-TH"),
+      data.hn || "-",
+      data.name || "-",
+      data.ward || "-",
+      data.bed || "-",
+      data.deliveryType || "-",
+      data.district || "-",
+      data.symptoms || "-",
+      data.assessmentScore || "-",
+      data.provider || "-",
+      data.massagedStimulate || "-",
+      data.massagedUnclog || "-",
+      data.pumps || 0,
+      data.totalVolume || 0,
+      data.flowImmediate || "-",
+      data.flow2Hr || "-",
+      data.flow4Hr || "-",
+      data.advice || "-",
+      data.thaiMedAppt || "-",
+      data.status || "-"
+    ];
+    
+    // ค้นหาเพื่ออัปเดตแถวเดิมตาม HN หรือ ชื่อ
+    var rows = sheet.getDataRange().getValues();
+    var updated = false;
+    for (var i = 1; i < rows.length; i++) {
+      if ((data.hn && data.hn !== "-" && rows[i][1] == data.hn) || 
+          (data.name && data.name !== "-" && rows[i][2] == data.name)) {
+        sheet.getRange(i + 1, 1, 1, rowData.length).setValues([rowData]);
+        updated = true;
+        break;
+      }
+    }
+    
+    if (!updated) {
+      sheet.appendRow(rowData);
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput("LactaCare API is active");
+}`;
+
+      const textArea = document.createElement("textarea");
+      textArea.value = code;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("✓ คัดลอกโค้ด Google Apps Script เรียบร้อย");
+      } catch (err) {
+        showToast("ไม่สามารถคัดลอกได้ กรุณาคัดลอกด้วยตนเอง");
+      }
+      document.body.removeChild(textArea);
     }
 
     /* Normal Pump Logging */
     function addPumpLog() {
-      const side = document.getElementById('pumpSide')?.value || 'สองข้าง';
+      const side = document.getElementById('pumpSide')?.value || 'สองข้างพร้อมกัน';
       const volInput = document.getElementById('pumpVolume');
       let vol = parseFloat(volInput?.value);
       if (isNaN(vol) || vol < 0) vol = 0.0;
@@ -1597,14 +1918,13 @@
       const now = new Date();
       const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
 
-      const newLog = {
+      appState.logs.unshift({
         id: Date.now(),
         time: timeStr,
         side: side,
         volume: vol
-      };
+      });
 
-      appState.logs.unshift(newLog);
       appState.pumps += 1;
       appState.totalVolume += vol;
 
@@ -1613,19 +1933,103 @@
       saveState();
       syncCurrentPatientToAdminList();
       updateTrackerUI();
-      showToast('บันทึกรอบการบีบเรียบร้อย');
+      showToast('บันทึกรอบบีบเรียบร้อย');
     }
 
     function deletePumpLog(id) {
       const idx = appState.logs.findIndex(l => l.id === id);
       if (idx !== -1) {
-        const removed = appState.logs.splice(idx, 1)[0];
         appState.pumps = Math.max(0, appState.pumps - 1);
-        appState.totalVolume = Math.max(0, appState.totalVolume - removed.volume);
+        appState.totalVolume = Math.max(0, appState.totalVolume - appState.logs[idx].volume);
+        appState.logs.splice(idx, 1);
         saveState();
         syncCurrentPatientToAdminList();
         updateTrackerUI();
-        showToast('ลบรายการบันทึกแล้ว');
+        showToast('ลบรอบบีบเรียบร้อย');
+      }
+    }
+
+    function updateStageSelectionUI() {
+      const bImm = document.getElementById('badgeStageImmediate');
+      const b2 = document.getElementById('badgeStage2Hr');
+      const b4 = document.getElementById('badgeStage4Hr');
+
+      const imm = appState.flowFollowUps?.find(f => f.stage === 'หลังนวดทันที');
+      const h2 = appState.flowFollowUps?.find(f => f.stage === '2 ชั่วโมงหลังนวด');
+      const h4 = appState.flowFollowUps?.find(f => f.stage === '4 ชั่วโมงหลังนวด');
+
+      if (bImm) bImm.innerText = imm ? `✓ ${imm.volume} มล.` : 'ยังไม่บันทึก';
+      if (b2) b2.innerText = h2 ? `✓ ${h2.volume} มล.` : 'ยังไม่บันทึก';
+      if (b4) b4.innerText = h4 ? `✓ ${h4.volume} มล.` : 'ยังไม่บันทึก';
+    }
+
+    function updateFlowMonitoringUI() {
+      const badge = document.getElementById('massageStatusBadge');
+      const details = document.getElementById('massageDetailsBanner');
+
+      if (badge) {
+        if (appState.lastMassageType) {
+          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800';
+          badge.innerText = `นวดแล้ว (${appState.lastMassageType})`;
+        } else {
+          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-200 text-amber-900';
+          badge.innerText = 'ยังไม่ได้นวด';
+        }
+      }
+
+      if (details) {
+        if (appState.lastMassageType) {
+          details.innerHTML = `
+            <strong>ประวัติการดูแล:</strong> ได้รับการ${appState.lastMassageType} เมื่อเวลา <strong>${appState.lastMassageTime || '-'} น.</strong> 
+            กรุณาประเมินและบันทึกการไหลของน้ำนมทั้ง 3 ระยะ (ทันที, 2 ชม., และ 4 ชม.) เพื่อติดตามผล
+          `;
+        } else {
+          details.innerHTML = 'ยังไม่มีประวัติการนวดเต้านมล่าสุด สามารถให้เจ้าหน้าที่บันทึกการนวดในระบบ Admin หรือประเมินการไหลหลังบีบกระตุ้นได้ที่นี่';
+        }
+      }
+
+      updateStageSelectionUI();
+    }
+
+    function saveState(skipSync = false) {
+      try {
+        localStorage.setItem('lacta_first24_state_v2', JSON.stringify({
+          userRole: appState.userRole,
+          name: appState.name,
+          hn: appState.hn || '',
+          ward: appState.ward,
+          bed: appState.bed,
+          deliveryType: appState.deliveryType || '',
+          district: appState.district || '',
+          recordDate: appState.recordDate || null,
+          provider: appState.provider || '',
+          symptoms: appState.symptoms,
+          assessmentScore: appState.assessmentScore,
+          assessmentAlert: appState.assessmentAlert,
+          lastAssessedTime: appState.lastAssessedTime,
+          massagedStimulate: appState.massagedStimulate,
+          massagedUnclog: appState.massagedUnclog,
+          lastMassageType: appState.lastMassageType,
+          lastMassageTime: appState.lastMassageTime,
+          lastActionMessage: appState.lastActionMessage || null,
+          lastActionTime: appState.lastActionTime || null,
+          thaiMedAppt: appState.thaiMedAppt || null,
+          isDischarged: appState.isDischarged || false,
+          dischargedTime: appState.dischargedTime || null,
+          pumps: appState.pumps,
+          totalVolume: appState.totalVolume,
+          logs: appState.logs,
+          flowFollowUps: appState.flowFollowUps || [],
+          babyPhoto: appState.babyPhoto,
+          adminPatients: appState.adminPatients
+        }));
+      } catch (e) {
+        console.error('Storage save error:', e);
+      }
+
+      // บันทึกซิงค์ข้อมูลทั้งหมดลง Google Sheets ทันทีที่มีการเปลี่ยนแปลงสถานะ
+      if (!skipSync) {
+        debounceSyncToGoogleSheets();
       }
     }
 
@@ -1729,7 +2133,7 @@
     }
 
     function verifyAdminPin() {
-      const pin = document.getElementById('adminPinInput')?.value;
+      const pin = document.getElementById('adminPinInput')?.value?.trim();
       if (pin === ADMIN_PIN_DEFAULT) {
         appState.isAdminLoggedIn = true;
         appState.userRole = 'admin';
@@ -1738,14 +2142,36 @@
         saveState();
         updateRoleUI();
         renderAdminDashboard();
+        updateDirectSyncStatus();
         showToast('เข้าสู่ระบบเจ้าหน้าที่แพทย์แผนไทยสำเร็จ');
       } else {
-        showToast('รหัส PIN ไม่ถูกต้อง (ค่าเริ่มต้น 1234)');
+        showToast('รหัส PIN ไม่ถูกต้อง');
       }
     }
 
     function logoutAdmin() {
       switchToMotherMode();
+    }
+
+    /* อัปเดตสถานะการเชื่อมต่อ Google Sheets บนหน้าต่างเจ้าหน้าที่ */
+    function updateDirectSyncStatus() {
+      const dotEl = document.getElementById('sheetSyncDot');
+      const statusEl = document.getElementById('sheetSyncStatus');
+      const noticeBox = document.getElementById('setupNoticeBox');
+
+      if (!gscriptWebappUrl) {
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse';
+        if (statusEl) {
+          statusEl.innerHTML = '<span class="text-amber-700 font-bold">⚠️ ยังไม่ได้เชื่อมต่อ Google Sheets (คลิก ⚙️ ตั้งค่า)</span>';
+        }
+        if (noticeBox) noticeBox.classList.remove('hidden');
+      } else {
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
+        if (statusEl) {
+          statusEl.innerHTML = '<span class="text-emerald-700 font-bold">✓ เชื่อมต่อ Google Apps Script เรียบร้อย พร้อมบันทึก</span>';
+        }
+        if (noticeBox) noticeBox.classList.add('hidden');
+      }
     }
 
     function filterAdminWard() {
@@ -1824,6 +2250,7 @@
           appState.provider = providerName;
         }
         saveState();
+        syncPatientToSheets(patient);
         showToast(providerName ? `เลือกแพทย์แผนไทย: ${providerName}` : 'ยกเลิกการเลือกแพทย์แผนไทย');
       }
     }
@@ -1917,6 +2344,7 @@
       renderAdminDashboard();
       updateTrackerUI();
       updateFlowMonitoringUI();
+      syncPatientToSheets(patient);
 
       if (shouldNavigateToTracker) {
         setTimeout(() => {
@@ -2323,14 +2751,14 @@
             <div class="flex items-center gap-2">
               <span class="text-xl">🌿</span>
               <div>
-                <h4 class="font-bold text-emerald-900 text-xs">นัดหมายตรวจ/ประคบแพทย์แผนไทย</h4>
+                <h4 class="font-bold text-emerald-900 text-xs">นัดฟื้นฟูมารดาหลังคลอดด้วยแพทย์แผนไทย</h4>
                 <p class="text-[11px] text-emerald-800">วันที่: <strong>${formatDateThai(appt.date)}</strong> (${appt.timeSlot})</p>
               </div>
             </div>
             <span class="text-[9px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold shrink-0">รอยืนยัน</span>
           </div>
           <p class="text-[11px] text-slate-600 leading-relaxed bg-white/70 p-2 rounded-xl border border-emerald-200">
-            พยาบาลได้จัดเตรียมนัดหมายแพทย์แผนไทยเพื่อช่วยดูแลฟื้นฟูเต้านมและกระตุ้นการไหลของน้ำนม คุณแม่สะดวกรับการดูแลในวันดังกล่าวหรือไม่?
+            ได้จัดเตรียมนัดหมายแพทย์แผนไทยเพื่อช่วยดูแลฟื้นฟูเต้านมและกระตุ้นการไหลของน้ำนม คุณแม่สะดวกรับการดูแลในวันดังกล่าวหรือไม่?
           </p>
           <div class="grid grid-cols-2 gap-2 pt-0.5">
             <button onclick="declineThaiMedAppt()" class="py-2 px-3 rounded-xl bg-white border border-rose-300 text-rose-700 hover:bg-rose-50 font-bold text-xs flex items-center justify-center gap-1 shadow-xs transition active:scale-95">
@@ -2662,9 +3090,12 @@
     }
 
     function deleteAdminPatient(id) {
-      showConfirmModal('ยืนยันลบข้อมูล', 'คุณต้องการลบข้อมูลคุณแม่ท่านนี้ออกจากระบบ Admin หรือไม่?', (confirmed) => {
+      showConfirmModal('ยืนยันลบข้อมูล', 'คุณต้องการลบข้อมูลคุณแม่ท่านนี้ออกจากระบบ Admin หรือไม่?', async (confirmed) => {
         if (confirmed) {
           const patient = appState.adminPatients.find(p => p.id === id);
+          if (patient) {
+            await syncPatientToSheets(patient, 'ลบออกจากระบบติดตาม');
+          }
           if (patient && (patient.name === appState.name && patient.ward === appState.ward)) {
             clearActivePatientData();
           }
@@ -2677,25 +3108,33 @@
     }
 
     /* ฟังก์ชันเสร็จสิ้นการดูแลคุณแม่ */
-    function completePatient(patientId) {
+    async function completePatient(patientId) {
       const patient = appState.adminPatients.find(p => p.id === patientId);
       const patientName = patient ? patient.name : 'คุณแม่';
       
       showConfirmModal(
         'ยืนยันเสร็จสิ้นการดูแล', 
         `คุณต้องการบันทึกเสร็จสิ้นการดูแลคุณแม่ "${patientName}" และนำข้อมูลออกจากรายการติดตามใช่หรือไม่?`, 
-        (confirmed) => {
+        async (confirmed) => {
           if (confirmed) {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+            // 1. ส่งข้อมูลทั้งหมดของคุณแม่ท่านนี้ที่ปรากฏบนหน้า Admin เข้าสู่ Google Sheets ให้ตรงกันครบทุกคอลัมน์
+            if (patient) {
+              await syncPatientToSheets(patient, `เสร็จสิ้นการดูแล (${timeStr} น.)`);
+            }
+
             // หากคุณแม่ที่เสร็จสิ้นตรงกับคุณแม่ที่เปิดอยู่ในปัจจุบัน ให้เคลียร์ข้อมูลหน้าหลักด้วย
             if (patient && (patient.name === appState.name && patient.ward === appState.ward)) {
               clearActivePatientData();
             }
 
-            // ลบออกจากรายการในระบบ Admin
+            // นำออกจากรายการติดตามในระบบ Admin
             appState.adminPatients = appState.adminPatients.filter(p => p.id !== patientId);
             saveState();
             renderAdminDashboard();
-            showToast(`เสร็จสิ้นการดูแลคุณแม่ ${patientName} เรียบร้อยแล้ว`);
+            showToast(`✓ บันทึกข้อมูลทั้งหมดของ ${patientName} ลง Google Sheets และเสร็จสิ้นการดูแลเรียบร้อยแล้ว`);
           }
         }
       );
@@ -2859,43 +3298,6 @@
       }, 2500);
     }
 
-    function saveState() {
-      try {
-        localStorage.setItem('lacta_first24_state_v2', JSON.stringify({
-          userRole: appState.userRole,
-          name: appState.name,
-          hn: appState.hn || '',
-          ward: appState.ward,
-          bed: appState.bed,
-          deliveryType: appState.deliveryType || '',
-          district: appState.district || '',
-          recordDate: appState.recordDate || null,
-          provider: appState.provider || '',
-          symptoms: appState.symptoms,
-          assessmentScore: appState.assessmentScore,
-          assessmentAlert: appState.assessmentAlert,
-          lastAssessedTime: appState.lastAssessedTime,
-          massagedStimulate: appState.massagedStimulate,
-          massagedUnclog: appState.massagedUnclog,
-          lastMassageType: appState.lastMassageType,
-          lastMassageTime: appState.lastMassageTime,
-          lastActionMessage: appState.lastActionMessage || null,
-          lastActionTime: appState.lastActionTime || null,
-          thaiMedAppt: appState.thaiMedAppt || null,
-          isDischarged: appState.isDischarged || false,
-          dischargedTime: appState.dischargedTime || null,
-          pumps: appState.pumps,
-          totalVolume: appState.totalVolume,
-          logs: appState.logs,
-          flowFollowUps: appState.flowFollowUps || [],
-          babyPhoto: appState.babyPhoto,
-          adminPatients: appState.adminPatients
-        }));
-      } catch (e) {
-        console.error('Storage save error:', e);
-      }
-    }
-
     function loadState() {
       try {
         const saved = localStorage.getItem('lacta_first24_state_v2');
@@ -2972,6 +3374,7 @@
       updateFlowMonitoringUI();
       updateCareStatusUI();
       renderThaiMedApptUI();
+      loadDataFromGoogleSheets();
     });
   </script>
 </body>
